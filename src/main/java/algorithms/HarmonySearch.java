@@ -4,7 +4,7 @@ import classes.Model;
 
 /**
  *
- * @author dmorfav
+ * @author geo
  */
 public class HarmonySearch {
     /******* Harmony Memory ******/

@@ -7,7 +7,7 @@ package classes;
 
 /**
  *
- * @author dmorfav
+ * @author geo
  */
 public class Knapsack {
     private float capacity;
