@@ -27,7 +27,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 
 /**
  *
- * @author dmorfav
+ * @author geo
  */
 public class KP_HS {
 
