@@ -31,7 +31,7 @@ import org.apache.poi.ss.usermodel.Workbook;
  */
 public class KP_HS {
 
-    void createKPInstances(int instanceSize){
+    void createKPInstances(int instanceSize,String FileName){
         List<Item> items = new ArrayList<Item>();
         for(int i=0; i<instanceSize; i++){
             Item it = new Item((int)(Math.random()* 30), (int)(Math.random()* 100));
@@ -52,12 +52,12 @@ public class KP_HS {
         }           
         
         try{
-            String filepath = "src//instances//Instance04.xls";
+            String filepath = "src//main//java//instances//"+FileName+".xls";
                 FileOutputStream fileOut = new FileOutputStream(filepath);
                 wb.write(fileOut);
                 fileOut.flush();
         }catch(IOException e){
-            //then I ignore it
+            System.out.println(e.getMessage());
         }          
     }
     
@@ -67,7 +67,7 @@ public class KP_HS {
             case 1: 
                 //Instance of 5 Items
                 try{
-                    FileInputStream ficheroXlsx = new FileInputStream(new File("src//instances//Instance01.xls"));
+                    FileInputStream ficheroXlsx = new FileInputStream(new File("src//main//java//instances//Instance01.xls"));
                     Workbook ficheroWb = new HSSFWorkbook(ficheroXlsx);
                     Sheet sheet = ficheroWb.getSheetAt(0);
                     for(int i=1; i<6; i++){
@@ -82,7 +82,7 @@ public class KP_HS {
             case 2: 
                 //Instance of 15 Items
                 try{
-                    FileInputStream ficheroXlsx = new FileInputStream(new File("src//instances//Instance02.xls"));
+                    FileInputStream ficheroXlsx = new FileInputStream(new File("src//main//java//instances//Instance02.xls"));
                     Workbook ficheroWb = new HSSFWorkbook(ficheroXlsx);
                     Sheet sheet = ficheroWb.getSheetAt(0);
                     for(int i=1; i<16; i++){
@@ -97,7 +97,7 @@ public class KP_HS {
             case 3: 
                 //Instance of 50 Items
                 try{
-                    FileInputStream ficheroXlsx = new FileInputStream(new File("src//instances//Instance03.xls"));
+                    FileInputStream ficheroXlsx = new FileInputStream(new File("src//main//java//instances//Instance03.xls"));
                     Workbook ficheroWb = new HSSFWorkbook(ficheroXlsx);
                     Sheet sheet = ficheroWb.getSheetAt(0);
                     for(int i=1; i<51; i++){
@@ -112,7 +112,7 @@ public class KP_HS {
             case 4: 
                 //Instance of 150 Items
                 try{
-                    FileInputStream ficheroXlsx = new FileInputStream(new File("src//instances//Instance04.xls"));
+                    FileInputStream ficheroXlsx = new FileInputStream(new File("src//main//java//instances//Instance04.xls"));
                     Workbook ficheroWb = new HSSFWorkbook(ficheroXlsx);
                     Sheet sheet = ficheroWb.getSheetAt(0);
                     for(int i=1; i<151; i++){
@@ -127,7 +127,7 @@ public class KP_HS {
             case 5: 
                 //Instance of 10 Items
                 try{
-                    FileInputStream ficheroXlsx = new FileInputStream(new File("src//instances//F1.xls"));
+                    FileInputStream ficheroXlsx = new FileInputStream(new File("src//main//java//instances//F1.xls"));
                     Workbook ficheroWb = new HSSFWorkbook(ficheroXlsx);
                     Sheet sheet = ficheroWb.getSheetAt(0);
                     for(int i=1; i<11; i++){
@@ -142,7 +142,7 @@ public class KP_HS {
             case 6: 
                 //Instance of 15 Items
                 try{
-                    FileInputStream ficheroXlsx = new FileInputStream(new File("src//instances//PC07.xls"));
+                    FileInputStream ficheroXlsx = new FileInputStream(new File("src//main//java//instances//PC07.xls"));
                     Workbook ficheroWb = new HSSFWorkbook(ficheroXlsx);
                     Sheet sheet = ficheroWb.getSheetAt(0);
                     for(int i=1; i<16; i++){
@@ -304,14 +304,15 @@ public class KP_HS {
      */
     public static void main(String[] args) {
         try{
+           /* KP_HS instance = new KP_HS();
+            instance.createKPInstances(25,"Prueba");*/
             //Para instancia 5, KP = 269 y ProblemSize = 11
-            List<Item> items = readKPInstance(3);        
-            Knapsack kp = new Knapsack(354);        
+            List<Item> items = readKPInstance(3);
+            Knapsack kp = new Knapsack(354);
             Model m = new Model(items, kp);
             //executeHarmonySearch(51, m);
             //executeDiscreteBinaryHarmonySearch(51, m);
             //executeImprovedHarmonySearch(51, m);
-            System.out.println("Hiii");
             executeHillClimbingFAJI(51, m);
         }catch (IOException ex) {
            System.out.println(ex.getMessage());
