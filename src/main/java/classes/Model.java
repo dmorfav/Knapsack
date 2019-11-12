@@ -45,7 +45,7 @@ public class Model {
                 weigthsum += items.get(i).getWeight();
             }
         }        
-        return (kp.getCapacity() > weigthsum);
+        return (weigthsum <= kp.getCapacity());
     } 
     
     public float totalWeight(int[] assigment){
