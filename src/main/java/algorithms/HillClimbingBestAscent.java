@@ -58,9 +58,10 @@ public class HillClimbingBestAscent {
     private void SearchBestNeighborhoodSolution(@NotNull int[] solution) {
         for (int i = 0; i < solution.length; i++) {
             solution[i] = (solution[i] == 0) ? 1 : 0;
+            if (i > 0)
+                solution[i - 1] = (solution[i - 1] == 0) ? 1 : 0;
             this.evaluateSolution(solution);
         }
-
     }
 
     public int[] climbTheHill() {
