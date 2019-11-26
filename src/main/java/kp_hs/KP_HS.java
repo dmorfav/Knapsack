@@ -269,7 +269,7 @@ public class KP_HS {
             //executeDiscreteBinaryHarmonySearch(51, m);
             //executeImprovedHarmonySearch(51, m);
             //executeHillClimbingFAJI(51, m);
-            executeHillClimbingBAJI(49, m, 2);
+            executeHillClimbingBAJI(49, m, 2000);
         }catch (IOException ex) {
            System.out.println(ex.getMessage());
         }
