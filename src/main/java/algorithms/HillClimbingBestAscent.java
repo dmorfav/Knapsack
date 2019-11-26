@@ -29,6 +29,7 @@ public class HillClimbingBestAscent {
 
     private void generateInitialSolution() {
         for (int i = 0; i < NVAR; i++) {
+            //this.solution[i] = (int) (Math.random() * 2);
             this.solution[i] = 0;
         }
     }
@@ -71,11 +72,12 @@ public class HillClimbingBestAscent {
 
         boolean band = false;
         int i = 0;
-       /* while (!band) {
+        while (!band) {
             generateInitialSolution();
             if (model.evaluateRestriction(this.solution))
                 band = true;
-        }*/
+        }
+
         while (i < this.iteration) {
             this.evaluateSolution(solution);
             this.SearchBestNeighborhoodSolution(this.solution);
