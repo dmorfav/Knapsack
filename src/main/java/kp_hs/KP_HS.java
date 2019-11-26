@@ -5,10 +5,7 @@
  */
 package kp_hs;
 
-import algorithms.DiscreteBinaryHarmonySearch;
-import algorithms.HarmonySearch;
-import algorithms.HillClimbingFirstAscent;
-import algorithms.ImprovedHarmonySearch;
+import algorithms.*;
 import classes.Item;
 import classes.Knapsack;
 import classes.Model;
@@ -61,102 +58,31 @@ public class KP_HS {
         }          
     }
     
-    static List<Item> readKPInstance(int selection) throws IOException{
+    static List<Item> readKPInstance(String name) throws IOException{
         List<Item> items = new ArrayList<Item>();
-        switch(selection){
-            case 1: 
-                //Instance of 5 Items
-                try{
-                    FileInputStream ficheroXlsx = new FileInputStream(new File("src//main//java//instances//Instance01.xls"));
-                    Workbook ficheroWb = new HSSFWorkbook(ficheroXlsx);
-                    Sheet sheet = ficheroWb.getSheetAt(0);
-                    for(int i=1; i<6; i++){
-                        Row row = sheet.getRow(i);
-                        Item it = new Item((int)row.getCell(1).getNumericCellValue(), (int)row.getCell(0).getNumericCellValue());
-                        items.add(it);
-                    }
-                }catch (IOException ex) {
-                    throw new IOException("File is corrupt or doesn't exist");
-                }                 
-                break;
-            case 2: 
-                //Instance of 15 Items
-                try{
-                    FileInputStream ficheroXlsx = new FileInputStream(new File("src//main//java//instances//Instance02.xls"));
-                    Workbook ficheroWb = new HSSFWorkbook(ficheroXlsx);
-                    Sheet sheet = ficheroWb.getSheetAt(0);
-                    for(int i=1; i<16; i++){
-                        Row row = sheet.getRow(i);
-                        Item it = new Item((int)row.getCell(1).getNumericCellValue(), (int)row.getCell(0).getNumericCellValue());
-                        items.add(it);
-                    }
-                }catch (IOException ex) {
-                    throw new IOException("File is corrupt or doesn't exist");
+        //Instance of 5 Items
+        try{
+            FileInputStream ficheroXlsx = new FileInputStream(new File("src//main//java//instances//"+name+".xls"));
+            Workbook ficheroWb = new HSSFWorkbook(ficheroXlsx);
+            Sheet sheet = ficheroWb.getSheetAt(0);
+            boolean band = false;
+            int i = 1;
+            while (!band){
+                Row row = sheet.getRow(i);
+                if (row != null ){
+                    Item it = new Item((int)row.getCell(1).getNumericCellValue(), (int)row.getCell(0).getNumericCellValue());
+                    items.add(it);
+                    i++;
+                }else {
+                    band = true;
                 }
-                break;                
-            case 3: 
-                //Instance of 50 Items
-                try{
-                    FileInputStream ficheroXlsx = new FileInputStream(new File("src//main//java//instances//Instance03.xls"));
-                    Workbook ficheroWb = new HSSFWorkbook(ficheroXlsx);
-                    Sheet sheet = ficheroWb.getSheetAt(0);
-                    for(int i=1; i<51; i++){
-                        Row row = sheet.getRow(i);
-                        Item it = new Item((int)row.getCell(1).getNumericCellValue(), (int)row.getCell(0).getNumericCellValue());
-                        items.add(it);
-                    }
-                }catch (IOException ex) {
-                    throw new IOException("File is corrupt or doesn't exist");
-                }
-                break;                 
-            case 4: 
-                //Instance of 150 Items
-                try{
-                    FileInputStream ficheroXlsx = new FileInputStream(new File("src//main//java//instances//Instance04.xls"));
-                    Workbook ficheroWb = new HSSFWorkbook(ficheroXlsx);
-                    Sheet sheet = ficheroWb.getSheetAt(0);
-                    for(int i=1; i<151; i++){
-                        Row row = sheet.getRow(i);
-                        Item it = new Item((int)row.getCell(1).getNumericCellValue(), (int)row.getCell(0).getNumericCellValue());
-                        items.add(it);
-                    }
-                }catch (IOException ex) {
-                    throw new IOException("File is corrupt or doesn't exist");
-                }
-                break;  
-            case 5: 
-                //Instance of 10 Items
-                try{
-                    FileInputStream ficheroXlsx = new FileInputStream(new File("src//main//java//instances//F1.xls"));
-                    Workbook ficheroWb = new HSSFWorkbook(ficheroXlsx);
-                    Sheet sheet = ficheroWb.getSheetAt(0);
-                    for(int i=1; i<11; i++){
-                        Row row = sheet.getRow(i);
-                        Item it = new Item((int)row.getCell(1).getNumericCellValue(), (int)row.getCell(0).getNumericCellValue());
-                        items.add(it);
-                    }
-                }catch (IOException ex) {
-                    throw new IOException("File is corrupt or doesn't exist");
-                }
-                break;  
-            case 6: 
-                //Instance of 15 Items
-                try{
-                    FileInputStream ficheroXlsx = new FileInputStream(new File("src//main//java//instances//PC07.xls"));
-                    Workbook ficheroWb = new HSSFWorkbook(ficheroXlsx);
-                    Sheet sheet = ficheroWb.getSheetAt(0);
-                    for(int i=1; i<16; i++){
-                        Row row = sheet.getRow(i);
-                        Item it = new Item((int)row.getCell(1).getNumericCellValue(), (int)row.getCell(0).getNumericCellValue());
-                        items.add(it);
-                    }
-                }catch (IOException ex) {
-                    throw new IOException("File is corrupt or doesn't exist");
-                }
-                break;                 
+            }
+        }catch (IOException ex) {
+            throw new IOException("File is corrupt or doesn't exist");
         }
         return items;
     }
+
     public static void executeHarmonySearch(int instanceSize, Model m){
         //Reference
 //        System.out.print("REFERENCE");
@@ -299,21 +225,51 @@ public class KP_HS {
         System.out.println("");
                 
     }
+
+    private static void executeHillClimbingBAJI(int instanceSize, Model m, int QuantityIteration){
+        HillClimbingBestAscent hc = new HillClimbingBestAscent(instanceSize, m, QuantityIteration);
+        long startTimeHC = System.currentTimeMillis();
+        int[] resultHC = hc.climbTheHill();
+        long currentTimeHC = System.currentTimeMillis();
+        int counter3 = 0;
+        for(int k=0; k<instanceSize; k++){
+            if(resultHC[k] == 1){
+                counter3++;
+            }
+            System.out.print(resultHC[k]);
+        }
+        System.out.println("");
+        System.out.print("HILL CLIMBING BEST ASCENT ACCEPTING EQUALS");
+        System.out.println("");
+        System.out.print("Entraron "+counter3+" elementos en la mochila");
+        System.out.println("");
+        System.out.print("Beneficio máximo: ");
+        System.out.print(m.evaluateOF(resultHC));
+        System.out.println("");
+        System.out.print("Peso máximo: ");
+        System.out.print(m.totalWeight(resultHC));
+        System.out.println("");
+        System.out.print("Tiempo de ejecución: ");
+        System.out.print(((currentTimeHC-startTimeHC)/1000*60)+" milisegundos");
+        System.out.println("");
+
+    }
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         try{
-           /* KP_HS instance = new KP_HS();
-            instance.createKPInstances(25,"Prueba");*/
+            /*KP_HS instance = new KP_HS();
+            instance.createKPInstances(250,"Instances250");*/
             //Para instancia 5, KP = 269 y ProblemSize = 11
-            List<Item> items = readKPInstance(3);
-            Knapsack kp = new Knapsack(354);
+            List<Item> items = readKPInstance("Instances49");
+            Knapsack kp = new Knapsack(254);
             Model m = new Model(items, kp);
             //executeHarmonySearch(51, m);
             //executeDiscreteBinaryHarmonySearch(51, m);
             //executeImprovedHarmonySearch(51, m);
-            executeHillClimbingFAJI(51, m);
+            //executeHillClimbingFAJI(51, m);
+            executeHillClimbingBAJI(49, m, 2000);
         }catch (IOException ex) {
            System.out.println(ex.getMessage());
         }
