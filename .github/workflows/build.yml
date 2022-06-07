@@ -16,14 +16,9 @@ jobs:
         with:
           java-version: '11'
           distribution: 'adopt'
-      - run: mvn cobertura:cobertura
-      - uses: codecov/codecov-action@v2
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
-          flags: unittests # optional
-          name: codecov-umbrella # optional
-          fail_ci_if_error: true # optional (default = false)
-          verbose: true # optional (default = false)    
+      - run: mvn clean test
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v3
       - run: mvn --batch-mode --update-snapshots verify
       - run: mkdir staging && cp target/*.jar staging
       - uses: actions/upload-artifact@v2
