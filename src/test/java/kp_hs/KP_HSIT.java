@@ -47,15 +47,15 @@ public class KP_HSIT {
     public void testCreateKPInstances() {
         System.out.println("createKPInstances");
         int instanceSize = 0;
-        KP_HS instance = new KP_HS();
+        /*KP_HS instance = new KP_HS();
         instance.createKPInstances(instanceSize);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        fail("The test case is a prototype."); */
     }
 
     /**
      * Test of readKPInstance method, of class KP_HS.
-     */
+    
     @Test
     public void testReadKPInstance() throws Exception {
         System.out.println("readKPInstance");
@@ -65,11 +65,11 @@ public class KP_HSIT {
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
-    }
+    } */
 
     /**
      * Test of executeHarmonySearch method, of class KP_HS.
-     */
+     
     @Test
     public void testExecuteHarmonySearch() {
         System.out.println("executeHarmonySearch");
@@ -78,11 +78,11 @@ public class KP_HSIT {
         KP_HS.executeHarmonySearch(instanceSize, m);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
-    }
+    }*/
 
     /**
      * Test of executeImprovedHarmonySearch method, of class KP_HS.
-     */
+     
     @Test
     public void testExecuteImprovedHarmonySearch() {
         System.out.println("executeImprovedHarmonySearch");
@@ -91,11 +91,11 @@ public class KP_HSIT {
         KP_HS.executeImprovedHarmonySearch(instanceSize, m);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
-    }
+    }*/
 
     /**
      * Test of executeHillClimbingFAJI method, of class KP_HS.
-     */
+    
     @Test
     public void testExecuteHillClimbingFAJI() {
         System.out.println("executeHillClimbingFAJI");
@@ -104,11 +104,11 @@ public class KP_HSIT {
         KP_HS.executeHillClimbingFAJI(instanceSize, m);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
-    }
+    } */
 
     /**
      * Test of main method, of class KP_HS.
-     */
+    
     @Test
     public void testMain() {
         System.out.println("main");
@@ -116,6 +116,6 @@ public class KP_HSIT {
         KP_HS.main(args);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
-    }
+    }*/
     
 }
