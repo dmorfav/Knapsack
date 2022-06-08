@@ -5,39 +5,16 @@
  */
 package kp_hs;
 
-import classes.Item;
-import classes.Model;
-import java.util.List;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
  *
- * @author geo
+ * @author dmorfav
  */
 public class KP_HSIT {
     
     public KP_HSIT() {
-    }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
-    @Before
-    public void setUp() {
-    }
-    
-    @After
-    public void tearDown() {
     }
 
     /**
@@ -47,6 +24,7 @@ public class KP_HSIT {
     public void testCreateKPInstances() {
         System.out.println("createKPInstances");
         int instanceSize = 0;
+         assertEquals(2, 2);
         /*KP_HS instance = new KP_HS();
         instance.createKPInstances(instanceSize);
         // TODO review the generated test code and remove the default call to fail.
