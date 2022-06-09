@@ -5,6 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.dmorfav</groupId>
     <artifactId>knapsack</artifactId>
+    <url>https://github.com/dmorfav/Knapsack</url>
     <version>1.0</version>
     <dependencies>
         <dependency>
@@ -67,18 +68,62 @@
             <version>RELEASE</version>
             <scope>compile</scope>
         </dependency>
-        <dependency>
-            <groupId>org.jetbrains</groupId>
-            <artifactId>annotations-java5</artifactId>
-            <version>RELEASE</version>
-            <scope>compile</scope>
-        </dependency>
     </dependencies>
     <build>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId> <!-- surefire plugin version managed by Spring Boot -->
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.6</version>
+                <executions>
+                    <execution>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>resources</goal>
+                            <goal>testResources</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-project-info-reports-plugin</artifactId>
+                <version>3.3.0</version>
+            </plugin>
+             <plugin>
+          <!-- Build an executable JAR -->
+                  <groupId>org.apache.maven.plugins</groupId>
+                  <artifactId>maven-jar-plugin</artifactId>
+                  <version>3.1.0</version>
+                  <configuration>
+                    <archive>
+                      <manifest>
+                        <addClasspath>true</addClasspath>
+                        <classpathPrefix>lib/</classpathPrefix>
+                        <mainClass>kp_hs.KP_HS</mainClass>
+                      </manifest>
+                    </archive>
+                  </configuration>
+            </plugin>
+            <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-site-plugin</artifactId>
+              <version>4.0.0-M1</version>
+                <configuration>
+                    <locales>en</locales>
+                    <outputDirectory>docs/</outputDirectory>
+                </configuration>
+              <dependencies>
+                <dependency>
+                  <groupId>org.apache.maven.doxia</groupId>
+                  <artifactId>doxia-module-markdown</artifactId>
+                  <version>1.11.1</version>
+                </dependency>
+              </dependencies>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
                     <skipTests>true</skipTests>
                 </configuration>
@@ -141,7 +186,7 @@
                                 <rule>
                                     <element>CLASS</element>
                                     <excludes>
-                                            <exclude></exclude>
+                                            <!--<exclude></exclude>-->
                                     </excludes>
                                     <limits>
                                         <limit>
@@ -159,8 +204,9 @@
         </plugins>
         </build>
     <properties>
-        <maven.compiler.source>1.6</maven.compiler.source>
-        <maven.compiler.target>1.6</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 </project>
