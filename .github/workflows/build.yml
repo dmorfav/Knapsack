@@ -19,9 +19,12 @@ jobs:
       - run: mvn clean verify
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v3
-      - run: mvn --batch-mode --update-snapshots verify
-      - run: mkdir staging && cp target/*.jar staging
-      - uses: actions/upload-artifact@v2
+      - name: Build Package  
+        run: |
+          mvn --batch-mode --update-snapshots verify
+          mkdir staging && cp target/*.jar staging
+      - name: Upload package
+        uses: actions/upload-artifact@v2
         with:
           name: Package
           path: staging
