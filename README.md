@@ -3,6 +3,7 @@
 [![codecov](https://codecov.io/gh/dmorfav/Knapsack/branch/main/graph/badge.svg?token=NTCYS1ATLB)](https://codecov.io/gh/dmorfav/Knapsack)
 ![Testing Suite](https://github.com/dmorfav/knapsack/actions/workflows/build.yml/badge.svg)
 ![Testing Suite](https://github.com/dmorfav/knapsack/actions/workflows/qa.yml/badge.svg)
+[![Open Source? Siii!](https://badgen.net/badge/Open%20Source%20%3F/Siii%21/blue?icon=github)](https://github.com/dmorfav/Knapsack)
 
 ## Suite de prueba de algoritmos metaheurísticos basando en el problema de la [mochila](https://en.wikipedia.org/wiki/Knapsack_problem)
 
