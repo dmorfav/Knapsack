@@ -1,6 +1,6 @@
 package algorithms;
 
-import classes.Model;
+import model.Knapsack;
 
 /**
  *
@@ -11,7 +11,7 @@ public class HillClimbingFirstAscent{
     //Instance size
     private final int NVAR;   
     //Problem instance
-    private final Model model;
+    private final Knapsack model;
     //Solution vector
     private final int[] solution;
     //Best global vector solution
@@ -19,7 +19,7 @@ public class HillClimbingFirstAscent{
     //Best value of OF
     private float globalBest;   
 
-    public HillClimbingFirstAscent(int NVAR, Model model) {
+    public HillClimbingFirstAscent(int NVAR, Knapsack model) {
         this.NVAR = NVAR;
         this.model = model;
         solution = new int[NVAR];   

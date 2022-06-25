@@ -1,14 +1,13 @@
 package algorithms;
 
-import classes.Model;
-import org.jetbrains.annotations.NotNull;
+import model.Knapsack;
 
 public class HillClimbingBestAscent {
     /*************** Instance ******************/
     //Instance size
     private final int NVAR;
     //Problem instance
-    private final Model model;
+    private final Knapsack model;
     //Solution vector
     private final int[] solution;
     //Quantity of iteration
@@ -18,7 +17,7 @@ public class HillClimbingBestAscent {
     //Best profit find
     private float bestProfit;
 
-    public HillClimbingBestAscent(int NVAR, Model model, int QuantityIteration) {
+    public HillClimbingBestAscent(int NVAR, Knapsack model, int QuantityIteration) {
         this.NVAR = NVAR;
         this.model = model;
         this.solution = new int[NVAR];
@@ -56,7 +55,7 @@ public class HillClimbingBestAscent {
         }
     }
 
-    private void SearchBestNeighborhoodSolution(@NotNull int[] solution) {
+    private void SearchBestNeighborhoodSolution(int[] solution) {
         for (int i = 0; i < solution.length; i++) {
             solution[i] = (solution[i] == 0) ? 1 : 0;
             if (i > 0)

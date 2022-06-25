@@ -1,6 +1,6 @@
 package algorithms;
 
-import classes.Model;
+import model.Knapsack;
 
 /**
  *
@@ -28,9 +28,9 @@ public class DiscreteBinaryHarmonySearch {
     //Instance size
     private final int NVAR;
     //Problem instance
-    private final Model model;  
+    private final Knapsack model;
 
-    public DiscreteBinaryHarmonySearch(int instSize, Model m) {
+    public DiscreteBinaryHarmonySearch(int instSize, Knapsack m) {
         //Setting parameters        
         HMS = 30;
         HMCR = 0.8;

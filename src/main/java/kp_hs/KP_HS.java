@@ -5,85 +5,15 @@
  */
 package kp_hs;
 
-import algorithms.*;
-import classes.Item;
-import classes.Knapsack;
-import classes.Model;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
-import org.apache.poi.hssf.usermodel.HSSFRow;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
 
-/**
- *
- * @author geo
- */
+import algorithms.*;
+import model.Item;
+import model.Knapsack;
+
 public class KP_HS {
 
-    void createKPInstances(int instanceSize,String FileName){
-        List<Item> items = new ArrayList<Item>();
-        for(int i=0; i<instanceSize; i++){
-            Item it = new Item((int)(Math.random()* 30), (int)(Math.random()* 100));
-            items.add(it);
-        }
-        
-        Workbook wb = new HSSFWorkbook(); 
-        HSSFSheet sheet = (HSSFSheet) wb.createSheet("Items for Knapsack"); 
-        //HSSFRow rowhead = sheet.createRow((short) 2); 
-        HSSFRow rowheadmain = sheet.createRow(0);
-        rowheadmain.createCell(0).setCellValue("WEIGHT");
-        rowheadmain.createCell(1).setCellValue("PROFIT");        
-        
-        for(int i=1; i<instanceSize; i++){
-            HSSFRow rowhead = sheet.createRow(i);
-            rowhead.createCell(0).setCellValue(items.get(i).getWeight());
-            rowhead.createCell(1).setCellValue(items.get(i).getProfit());
-        }           
-        
-        try{
-            String filepath = "src//main//java//instances//"+FileName+".xls";
-                FileOutputStream fileOut = new FileOutputStream(filepath);
-                wb.write(fileOut);
-                fileOut.flush();
-        }catch(IOException e){
-            System.out.println(e.getMessage());
-        }          
-    }
-    
-    static List<Item> readKPInstance(String name) throws IOException{
-        List<Item> items = new ArrayList<Item>();
-        //Instance of 5 Items
-        try{
-            FileInputStream ficheroXlsx = new FileInputStream(new File("src//main//java//instances//"+name+".xls"));
-            Workbook ficheroWb = new HSSFWorkbook(ficheroXlsx);
-            Sheet sheet = ficheroWb.getSheetAt(0);
-            boolean band = false;
-            int i = 1;
-            while (!band){
-                Row row = sheet.getRow(i);
-                if (row != null ){
-                    Item it = new Item((int)row.getCell(1).getNumericCellValue(), (int)row.getCell(0).getNumericCellValue());
-                    items.add(it);
-                    i++;
-                }else {
-                    band = true;
-                }
-            }
-        }catch (IOException ex) {
-            throw new IOException("File is corrupt or doesn't exist");
-        }
-        return items;
-    }
-
-    public static void executeHarmonySearch(int instanceSize, Model m){
+    public static void executeHarmonySearch(int instanceSize, Knapsack m){
         //Reference
 //        System.out.print("REFERENCE");
 //        int[] tmp = {1,0,1,0,1,0,1,1,1,0,0,0,0,1,1};
@@ -118,7 +48,7 @@ public class KP_HS {
         System.out.println("");        
     }
     
-    public static void executeImprovedHarmonySearch(int instanceSize, Model m){
+    public static void executeImprovedHarmonySearch(int instanceSize, Knapsack m){
         //Reference
 //        System.out.println("REFERENCE");
 //        int[] tmp = {1,0,1,0,1,0,1,1,1,0,0,0,0,1,1};
@@ -154,7 +84,7 @@ public class KP_HS {
         System.out.println("");        
     }
     
-    public static void executeDiscreteBinaryHarmonySearch(int instanceSize, Model m){
+    public static void executeDiscreteBinaryHarmonySearch(int instanceSize, Knapsack m){
         //Reference
 //        System.out.print("REFERENCE: ");
 //        int[] tmp = {1,0,1,0,1,0,1,1,1,0,0,0,0,1,1};
@@ -189,7 +119,7 @@ public class KP_HS {
         System.out.println("");        
     }
     
-    public static void executeHillClimbingFAJI(int instanceSize, Model m){
+    public static void executeHillClimbingFAJI(int instanceSize, Knapsack m){
         //temporary
 //        int[] tmp = {1,0,1,0,1,0,1,1,1,0,0,0,0,1,1};
 //        System.out.println(m.evaluateOF(tmp));        
@@ -226,7 +156,7 @@ public class KP_HS {
                 
     }
 
-    private static void executeHillClimbingBAJI(int instanceSize, Model m, int QuantityIteration){
+    private static void executeHillClimbingBAJI(int instanceSize, Knapsack m, int QuantityIteration){
         HillClimbingBestAscent hc = new HillClimbingBestAscent(instanceSize, m, QuantityIteration);
         long startTimeHC = System.currentTimeMillis();
         int[] resultHC = hc.climbTheHill();
@@ -254,23 +184,16 @@ public class KP_HS {
         System.out.println("");
 
     }
+
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         try{
-            /*KP_HS instance = new KP_HS();
-            instance.createKPInstances(250,"Instances250");*/
-            //Para instancia 5, KP = 269 y ProblemSize = 11
-            List<Item> items = readKPInstance("Instances49");
-            Knapsack kp = new Knapsack(254);
-            Model m = new Model(items, kp);
-            //executeHarmonySearch(51, m);
-            //executeDiscreteBinaryHarmonySearch(51, m);
-            //executeImprovedHarmonySearch(51, m);
-            //executeHillClimbingFAJI(51, m);
-            executeHillClimbingBAJI(49, m, 2000);
-        }catch (IOException ex) {
+            ArrayList<Item> items =  Reader.readKPInstance("src//main//resources//test_instance.json");
+            Knapsack kp = new Knapsack(254, items);
+          executeHarmonySearch(9, kp);
+        }catch (Exception ex) {
            System.out.println(ex.getMessage());
         }
     }

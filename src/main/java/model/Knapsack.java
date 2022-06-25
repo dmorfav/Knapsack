@@ -3,29 +3,31 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package classes;
+package model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  *
- * @author geo
+ * @author dmorfav
  */
-public class Model {
-    private List<Item> items;
-    private final Knapsack kp;
+public class Knapsack {
+    private final float capacity;
+    private final List<Item> items;
 
-    public Model(List<Item> items, Knapsack kp) {
-        this.items = items;
-        this.kp = kp;
+    public Knapsack() {
+    	this.capacity = 0;
+		this.items = null;
     }
 
-    public List<Item> getItems() {
-        return items;
+    public Knapsack(float capacity, ArrayList<Item> items) {
+        this.capacity = capacity;
+		this.items = items;
     }
 
-    public void setItems(List<Item> items) {
-        this.items = items;
+    public float getCapacity() {
+        return capacity;
     }
     
     public float evaluateOF(int[] assigment){
@@ -45,7 +47,7 @@ public class Model {
                 weigthsum += items.get(i).getWeight();
             }
         }        
-        return (weigthsum <= kp.getCapacity());
+        return (weigthsum <= this.getCapacity());
     } 
     
     public float totalWeight(int[] assigment){
@@ -57,5 +59,5 @@ public class Model {
         }  
         return totalprofit;
     }      
-    
+
 }

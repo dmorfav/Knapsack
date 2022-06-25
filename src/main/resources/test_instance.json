@@ -1,0 +1,38 @@
+[
+	{
+		"weight": 10,
+		"profit": 11
+	},
+	{
+		"weight": 20,
+		"profit": 21
+	},
+	{
+		"weight": 30,
+		"profit": 31
+	},
+	{
+		"weight": 40,
+		"profit": 41
+	},
+	{
+		"weight": 50,
+		"profit": 41
+	},
+	{
+		"weight": 60,
+		"profit": 61
+	},
+	{
+		"weight": 70,
+		"profit": 71
+	},
+	{
+		"weight": 80,
+		"profit": 81
+	},
+	{
+		"weight": 90,
+		"profit": 91
+	}
+]

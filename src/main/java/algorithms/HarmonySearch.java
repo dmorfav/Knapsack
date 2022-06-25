@@ -1,6 +1,6 @@
 package algorithms;
 
-import classes.Model;
+import model.Knapsack;
 
 /**
  *
@@ -28,9 +28,9 @@ public class HarmonySearch {
     //Instance size
     private final int NVAR;
     //Problem instance
-    private final Model model;  
+    private final Knapsack model;  
     
-    public HarmonySearch(int instSize, Model m) {
+    public HarmonySearch(int instSize, Knapsack m) {
         //Setting parameters        
         HMS = 30;
         HMCR = 0.8;

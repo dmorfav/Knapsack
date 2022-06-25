@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package classes;
+package model;
 
 /**
  *
- * @author geo
+ * @author dmorfav
  */
 public class Item {
     private float profit;
@@ -54,10 +54,7 @@ public class Item {
             return false;
         }
         final Item other = (Item) obj;
-        if (Float.floatToIntBits(this.profit) != Float.floatToIntBits(other.profit)) {
-            return false;
-        }
-        if (Float.floatToIntBits(this.weight) != Float.floatToIntBits(other.weight)) {
+        if (Float.floatToIntBits(this.profit) != Float.floatToIntBits(other.profit) || Float.floatToIntBits(this.weight) != Float.floatToIntBits(other.weight)) {
             return false;
         }
         return true;

@@ -1,2 +1,6 @@
 .idea/
 target/
+.classpath
+.metadata/
+.project
+.settings/
