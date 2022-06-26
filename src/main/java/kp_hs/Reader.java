@@ -17,9 +17,6 @@ import model.Item;
 
 public class Reader {
 
-	public Reader() {
-	}
-
 	@SuppressWarnings("unchecked")
 	public static boolean createRandomInstance(String instanceName, int length, int min, int max) {
 		boolean status = false;

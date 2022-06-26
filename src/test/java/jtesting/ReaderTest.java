@@ -15,16 +15,14 @@ import model.Item;
 class ReaderTest {
 
 	@BeforeEach
-	void setUp() throws Exception {
-		Reader reader = new Reader();
-	}
+	void setUp() throws Exception {}
 
 	@Test
 	void testWriteInstance() {
-		String instanceName = "instance.json";
-		int instanceLength= 10;
-		assertTrue(Reader.createRandomInstance(instanceName, instanceLength, 1, 100));
 		try { 
+			String instanceName = "instance.json";
+			int instanceLength= 10;
+			assertTrue(Reader.createRandomInstance(instanceName, instanceLength, 1, 100));
 			String path = "src//main//resources//instances//"+instanceLength+"_"+instanceName;
 			ArrayList<Item> list = Reader.readKPInstance(path);
 			assertEquals(10, list.size()); 
