@@ -29,7 +29,7 @@ class ReaderTest {
 			ArrayList<Item> list = Reader.readKPInstance(path);
 			assertEquals(10, list.size()); 
 			File file= new File(path);   
-			assertTrue(file.delete());
+			file.delete();
 		}
 		catch (IOException e) { 
 			assertEquals("err",e.getMessage());
