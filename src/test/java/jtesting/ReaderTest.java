@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 import kp_hs.Reader;
 import model.Item;
 
-class TestReader {
+class ReaderTest {
 
 	@BeforeEach
 	void setUp() throws Exception {

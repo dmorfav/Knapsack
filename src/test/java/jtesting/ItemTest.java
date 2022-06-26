@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import model.Item;
 
-class TestItem {
+class ItemTest {
 
 	Item item = new Item();
 

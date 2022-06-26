@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import model.Item;
 import model.Knapsack;
 
-class TestKnapsack {
+class KnapsackTest {
 
 	Knapsack knapsack = new Knapsack();
 	ArrayList<Item> items = new ArrayList<>();
