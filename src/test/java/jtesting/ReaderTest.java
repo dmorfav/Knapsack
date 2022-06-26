@@ -39,7 +39,7 @@ class ReaderTest {
 	@Test
 	void testReadInstance() {
 		try {
-			ArrayList<Item> list = Reader.readKPInstance("src//main//resources//test_instance.json");
+			ArrayList<Item> list = Reader.readKPInstance("src//main//resources//instances//test_instance.json");
 			assertEquals(9, list.size());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

@@ -18,7 +18,7 @@ public class KP_HS {
 	 */
 	public static void main(String[] args) {
 		try{
-			ArrayList<Item> items =  Reader.readKPInstance("src//main//resources//test_instance.json");
+			ArrayList<Item> items =  Reader.readKPInstance("src//main//resources//instances//test_instance.json");
 			Knapsack kp = new Knapsack(100, items);
 			int[] result = new int[kp.instanceSize()];
 			long startTime = 0;
