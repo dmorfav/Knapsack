@@ -2,6 +2,7 @@ package jtesting;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -24,8 +25,12 @@ class ReaderTest {
 		int instanceLength= 10;
 		assertTrue(Reader.createRandomInstance(instanceName, instanceLength, 1, 100));
 		try { 
-			ArrayList<Item> list = Reader.readKPInstance("src//main//resources//instances//"+instanceLength+"_"+instanceName);
-			assertEquals(10, list.size()); }
+			String path = "src//main//resources//instances//"+instanceLength+"_"+instanceName;
+			ArrayList<Item> list = Reader.readKPInstance(path);
+			assertEquals(10, list.size()); 
+			File file= new File(path);   
+			assertTrue(file.delete());
+		}
 		catch (IOException e) { 
 			assertEquals("err",e.getMessage());
 		}

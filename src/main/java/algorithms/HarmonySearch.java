@@ -125,9 +125,9 @@ public class HarmonySearch {
                     float tmp = (int)result[i];
                     double cmp = probabilityRand();
                     if(cmp < 0.5){                        
-                        tmp += cmp*BW;
+                        tmp = (float) ((float) tmp + cmp*BW);
                     }else{
-                        tmp -= cmp*BW;                      
+                    	 tmp = (float) ((float) tmp - cmp*BW);                   
                     }
                     if(tmp != 0){
                        result[i] = (int)Math.round(tmp/(tmp*(probabilityRand()+1))); 
