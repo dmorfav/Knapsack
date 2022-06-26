@@ -16,7 +16,7 @@ jobs:
         with:
           java-version: '11'
           distribution: 'adopt'
-      - run: mvn clean verify
+      - run: mvn clean verify site test
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v3
       - name: Build Package  
