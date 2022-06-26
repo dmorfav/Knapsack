@@ -1,5 +1,6 @@
 package algorithms;
 
+import kp_hs.Constants;
 import model.Knapsack;
 
 public class HillClimbingBestAscent {
@@ -17,12 +18,12 @@ public class HillClimbingBestAscent {
     //Best profit find
     private float bestProfit;
 
-    public HillClimbingBestAscent(int NVAR, Knapsack model, int QuantityIteration) {
-        this.NVAR = NVAR;
+    public HillClimbingBestAscent(Knapsack model) {
+        this.NVAR = model.instanceSize();
         this.model = model;
         this.solution = new int[NVAR];
         this.global = new int[NVAR];
-        this.iteration = QuantityIteration;
+        this.iteration = Constants.Iterations;
         this.bestProfit = 0f;
     }
 
@@ -83,6 +84,11 @@ public class HillClimbingBestAscent {
             i++;
         }
         return this.global;
+    }
+    
+    @Override
+    public String toString() {
+    	return "HillClimbingBestAscent";
     }
 
 }

@@ -1,5 +1,6 @@
 package algorithms;
 
+import kp_hs.Constants;
 import model.Knapsack;
 
 /**
@@ -34,7 +35,7 @@ public class ImprovedHarmonySearch {
     //Problem instance
     private final Knapsack model; 
 
-    public ImprovedHarmonySearch(int instSize, Knapsack m) {
+    public ImprovedHarmonySearch(Knapsack m) {
         //Setting parameters        
         HMS = 30;
         HMCR = 0.8;
@@ -42,8 +43,8 @@ public class ImprovedHarmonySearch {
         PARmax = 0.8;
         BWmin = 0.02;
         BWmax = 0.09;
-        maxIter = 20000;
-        NVAR = instSize;
+        maxIter = Constants.Iterations;
+        NVAR = m.instanceSize();
         //Just 2 decision variables with 0|1 min and max values
         HM = new int[HMS][NVAR];
         
@@ -174,5 +175,10 @@ public class ImprovedHarmonySearch {
         }
         return HM[0];
     }    
+    
+    @Override
+    public String toString() {
+    	return "ImprovedHarmonySearch";
+    }
     
 }

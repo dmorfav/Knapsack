@@ -1,5 +1,6 @@
 package algorithms;
 
+import kp_hs.Constants;
 import model.Knapsack;
 
 /**
@@ -30,14 +31,14 @@ public class DiscreteBinaryHarmonySearch {
     //Problem instance
     private final Knapsack model;
 
-    public DiscreteBinaryHarmonySearch(int instSize, Knapsack m) {
+    public DiscreteBinaryHarmonySearch(Knapsack m) {
         //Setting parameters        
         HMS = 30;
         HMCR = 0.8;
         PAR = 0.4;
         BW = 0.08;
-        maxIter = 20000;
-        NVAR = instSize;
+        maxIter = Constants.Iterations;
+        NVAR = m.instanceSize();
         //Just 2 decision variables with 0|1 min and max values
         HM = new int[HMS][NVAR];
         
@@ -153,6 +154,11 @@ public class DiscreteBinaryHarmonySearch {
             i++;          
         }
         return HM[0];
-    }    
+    }
+    
+    @Override
+    public String toString() {
+    	return "DiscreteBinaryHarmonySearch";
+    }
     
 }

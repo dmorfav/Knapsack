@@ -1,5 +1,6 @@
 package algorithms;
 
+import kp_hs.Constants;
 import model.Knapsack;
 
 /**
@@ -19,8 +20,8 @@ public class HillClimbingFirstAscent{
     //Best value of OF
     private float globalBest;   
 
-    public HillClimbingFirstAscent(int NVAR, Knapsack model) {
-        this.NVAR = NVAR;
+    public HillClimbingFirstAscent(Knapsack model) {
+        this.NVAR = model.instanceSize();
         this.model = model;
         solution = new int[NVAR];   
     }
@@ -56,7 +57,7 @@ public class HillClimbingFirstAscent{
         float bestProfit = model.evaluateOF(solution); 
         globalBest = bestProfit;
         int iteration = 0;
-        while(iteration < 20000){
+        while(iteration < Constants.Iterations){
             generateChildSolution();
             if(model.evaluateRestriction(solution)){
                 float current = model.evaluateOF(solution);
@@ -89,5 +90,10 @@ public class HillClimbingFirstAscent{
     public void setGlobalBest(float globalBest) {
         this.globalBest = globalBest;
     }     
+    
+    @Override
+    public String toString() {
+    	return "HillClimbingFirstAscent";
+    }
     
 }

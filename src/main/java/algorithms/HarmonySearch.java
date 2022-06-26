@@ -1,5 +1,6 @@
 package algorithms;
 
+import kp_hs.Constants;
 import model.Knapsack;
 
 /**
@@ -36,7 +37,7 @@ public class HarmonySearch {
         HMCR = 0.8;
         PAR = 0.4;
         BW = 0.08;
-        maxIter = 20000;
+        maxIter = Constants.Iterations;
         NVAR = m.instanceSize();
         HM = new int[HMS][NVAR];
         
