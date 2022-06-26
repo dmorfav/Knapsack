@@ -27,7 +27,7 @@ class ReaderTest {
 			ArrayList<Item> list = Reader.readKPInstance(path);
 			assertEquals(10, list.size()); 
 			File file= new File(path);   
-			file.delete();
+			assertTrue(file.delete());
 		}
 		catch (IOException e) { 
 			assertEquals("err",e.getMessage());
