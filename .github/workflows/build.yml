@@ -18,12 +18,15 @@ jobs:
           distribution: 'adopt'
       - run: mvn clean verify test
       - name: Upload coverage reports to Codecov
+        if: always()
         uses: codecov/codecov-action@v3
-      - name: Build Package  
+      - name: Build Package
+        if: always()
         run: |
           mvn --batch-mode --update-snapshots verify
           mkdir staging && cp target/*.jar staging
       - name: Upload package
+        if: always()
         uses: actions/upload-artifact@v2
         with:
           name: Package
