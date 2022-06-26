@@ -139,9 +139,9 @@ public class ImprovedHarmonySearch {
                     double c = Math.log(BWmin/BWmax)/maxIter;
                     double BW = BWmax*Math.exp(c*iteration);
                     if(cmp < 0.5){
-                        tmp += cmp*BW;
+                    	  tmp = (int) ((int) tmp + cmp*BW);
                     }else{
-                        tmp -= cmp*BW;                     
+                    	tmp = (int) ((int) tmp - cmp*BW);       
                     }
                     if(tmp != 0){
                        result[i] = (int)Math.round(tmp/(tmp*(probabilityRand()+1))); 
