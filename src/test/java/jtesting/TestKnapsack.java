@@ -3,8 +3,6 @@ package jtesting;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -30,6 +28,12 @@ class TestKnapsack {
 		Knapsack kp = new Knapsack(100, items);
 		assertEquals(100, kp.getCapacity());
 		assertEquals(60, kp.totalWeight(this.allow));
+	}
+	
+	@Test
+	void testKnapSackSize() {
+		Knapsack kp = new Knapsack(100, items);
+		assertEquals(4, kp.instanceSize());
 	}
 	
 	@Test

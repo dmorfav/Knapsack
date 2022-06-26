@@ -38,7 +38,11 @@ public class Knapsack {
             }
         }  
         return totalprofit;
-    }  
+    } 
+    
+    public int instanceSize() {
+		return items.size();
+	}
     
     public boolean evaluateRestriction(int[] assigment){
         float weigthsum = 0;

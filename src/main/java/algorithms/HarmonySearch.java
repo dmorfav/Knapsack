@@ -30,14 +30,14 @@ public class HarmonySearch {
     //Problem instance
     private final Knapsack model;  
     
-    public HarmonySearch(int instSize, Knapsack m) {
+    public HarmonySearch(Knapsack m) {
         //Setting parameters        
         HMS = 30;
         HMCR = 0.8;
         PAR = 0.4;
         BW = 0.08;
         maxIter = 20000;
-        NVAR = instSize;
+        NVAR = m.instanceSize();
         HM = new int[HMS][NVAR];
         
         model = m;      
@@ -154,5 +154,11 @@ public class HarmonySearch {
             i++;          
         }
         return HM[0];
-    }        
+    }   
+    
+    @Override
+    public String toString() {
+    	// TODO Auto-generated method stub
+    	return "HarmonySearch";
+    }
 }
