@@ -14,3 +14,6 @@ Comúnmente abreviado por KP (del inglés Knapsack problem) es un problema de op
 
 ## Formulación matemática
 ![image](https://user-images.githubusercontent.com/10134910/172630156-2a734b26-367c-4206-9976-a511c33a3057.png)
+
+## Ejecutando el proyecto
+En la consola ejecutar: ```mvn clean compile exec:java -Dexec.mainClass="kp_hs.KP_HS"```
