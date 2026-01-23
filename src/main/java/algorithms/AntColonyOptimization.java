@@ -83,7 +83,7 @@ public class AntColonyOptimization {
      */
     private int[] constructSolution() {
         int[] solution = new int[NVAR];
-        double currentWeight = 0.0;
+        float currentWeight = 0.0f;
         
         // Get items sorted by heuristic (value/weight ratio)
         List<Integer> availableItems = getItemsSortedByHeuristic();
@@ -119,7 +119,7 @@ public class AntColonyOptimization {
      * @param currentWeight The current total weight
      * @return Probability of selecting the item (0.0 to 1.0)
      */
-    private double calculateSelectionProbability(int itemIndex, int[] currentSolution, double currentWeight) {
+    private double calculateSelectionProbability(int itemIndex, int[] currentSolution, float currentWeight) {
         // Get item
         Item item = model.getItem(itemIndex);
         
@@ -130,6 +130,11 @@ public class AntColonyOptimization {
         
         // If already selected, probability = 0
         if (currentSolution[itemIndex] == 1) {
+            return 0.0;
+        }
+        
+        // Guard against division by zero
+        if (item.getWeight() == 0) {
             return 0.0;
         }
         
@@ -147,7 +152,7 @@ public class AntColonyOptimization {
         for (int j = 0; j < NVAR; j++) {
             if (currentSolution[j] == 0) {
                 Item otherItem = model.getItem(j);
-                if (currentWeight + otherItem.getWeight() <= model.getCapacity()) {
+                if (currentWeight + otherItem.getWeight() <= model.getCapacity() && otherItem.getWeight() > 0) {
                     double otherEta = otherItem.getProfit() / otherItem.getWeight();
                     double otherTau = pheromoneMatrix[j];
                     denominator += Math.pow(otherTau, alpha) * Math.pow(otherEta, beta);
@@ -179,8 +184,9 @@ public class AntColonyOptimization {
         indices.sort((a, b) -> {
             Item itemA = model.getItem(a);
             Item itemB = model.getItem(b);
-            double ratioA = itemA.getProfit() / itemA.getWeight();
-            double ratioB = itemB.getProfit() / itemB.getWeight();
+            // Guard against division by zero
+            double ratioA = itemA.getWeight() > 0 ? itemA.getProfit() / itemA.getWeight() : 0.0;
+            double ratioB = itemB.getWeight() > 0 ? itemB.getProfit() / itemB.getWeight() : 0.0;
             return Double.compare(ratioB, ratioA);
         });
         
@@ -311,7 +317,8 @@ public class AntColonyOptimization {
             for (int i = 0; i < NVAR; i++) {
                 if (solution[i] == 1) {
                     Item item = model.getItem(i);
-                    double ratio = item.getProfit() / item.getWeight();
+                    // Guard against division by zero
+                    double ratio = item.getWeight() > 0 ? item.getProfit() / item.getWeight() : Double.MAX_VALUE;
                     if (ratio < worstRatio) {
                         worstRatio = ratio;
                         worstItem = i;
