@@ -62,6 +62,14 @@ public class Knapsack {
             }
         }  
         return totalprofit;
-    }      
+    }
+    
+    public Item getItem(int index) {
+        return items.get(index);
+    }
+    
+    public List<Item> getItems() {
+        return items;
+    }
 
 }

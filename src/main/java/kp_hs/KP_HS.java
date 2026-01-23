@@ -69,6 +69,14 @@ public class KP_HS {
 					finishTime = System.currentTimeMillis();
 					break;
 				}
+				case 6: {
+					AntColonyOptimization aco = new AntColonyOptimization(kp);
+					algorithmName = aco.toString();
+					startTime = System.currentTimeMillis();
+					result = aco.antColonyOptimizationAlgorithm();
+					finishTime = System.currentTimeMillis();
+					break;
+				}
 				default: {
 					HarmonySearch hs = new HarmonySearch(kp);
 					algorithmName = hs.toString();
@@ -106,6 +114,14 @@ public class KP_HS {
 					algorithmName = hcbas.toString();
 					startTime = System.currentTimeMillis();
 					result = hcbas.climbTheHill();
+					finishTime = System.currentTimeMillis();
+					Summary.print(algorithmName, result, kp, startTime, finishTime);
+					System.out.println();
+				
+					AntColonyOptimization aco = new AntColonyOptimization(kp);
+					algorithmName = aco.toString();
+					startTime = System.currentTimeMillis();
+					result = aco.antColonyOptimizationAlgorithm();
 					finishTime = System.currentTimeMillis();
 					Summary.print(algorithmName, result, kp, startTime, finishTime);
 					System.out.println();
