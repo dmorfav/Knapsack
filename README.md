@@ -13,8 +13,30 @@ Si bien la formulación del problema es sencilla, su resolución es más complej
 
 Comúnmente abreviado por KP (del inglés Knapsack problem) es un problema de optimización combinatoria que intenta encontrar la mejor solución entre un conjunto finito de posibles soluciones a un problema. Modela la situación de llenar una mochila que puede soportar un peso máximo, cada uno de los objetos introducidos en la mochila cuentan con un peso y valor específicos. Los objetos colocados en la mochila deben maximizar el valor total sin exceder el peso máximo.
 
+## Sobre el uso de IA en este proyecto
+
+Este es un **proyecto académico de investigación**. Su objetivo es ejercitar el cerebro: entender, diseñar e implementar metaheurísticas a mano, equivocarse y corregir.
+
+- **Los algoritmos** (paquete `algorithms`) se escriben **sin herramientas de IA generativa**. Nada de generación, corrección ni sugerencias de código.
+- **El ecosistema** que los rodea, es decir, el runner de experimentos, las métricas, los baselines (voraz y exacto), la generación de instancias, la documentación, el CI y la arquitectura, se desarrolla con ayuda de [Claude](https://claude.com/claude-code).
+
+Sabemos que una IA nos superaría con creces implementando estos algoritmos. Justo por eso no se usa ahí: el valor está en el proceso de pensarlos, no en tenerlos hechos.
+
 ## Formulación matemática
 ![image](https://user-images.githubusercontent.com/10134910/172630156-2a734b26-367c-4206-9976-a511c33a3057.png)
 
 ## Ejecutando el proyecto
-En la consola ejecutar: ```mvn clean compile exec:java -Dexec.mainClass="kp_hs.KP_HS"```
+Requiere **Java 25**. Desde la raíz del repositorio:
+
+```bash
+./mvnw verify               # compila y ejecuta los tests
+./mvnw compile exec:java    # ejecuta todos los algoritmos
+```
+
+## Estructura
+| Módulo | Contenido | Autoría |
+|---|---|---|
+| `knapsack-core` | Modelo del problema y lectura de instancias | Ecosistema |
+| `knapsack-algorithms` | Implementaciones metaheurísticas | Humana, sin IA |
+| `knapsack-bench` | Ejecución y comparación | Ecosistema |
+| `instances/` | Instancias del problema en JSON | — |
