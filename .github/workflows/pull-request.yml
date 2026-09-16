@@ -1,0 +1,48 @@
+name: Pull request
+
+on:
+  pull_request:
+    branches: [ main ]
+    types: [ opened, edited, reopened, synchronize ]
+
+permissions:
+  contents: read
+
+jobs:
+  scope:
+    name: Scope and authorship
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Check scope and authorship declaration
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          PR_BODY: ${{ github.event.pull_request.body }}
+        run: |
+          changed="$(git diff --name-only "$BASE_SHA...$HEAD_SHA")"
+          algorithms="$(grep '^knapsack-algorithms/src/' <<<"$changed" || true)"
+          others="$(grep -v '^knapsack-algorithms/src/' <<<"$changed" || true)"
+
+          if [ -z "$algorithms" ]; then
+            echo "PR de ecosistema: no toca knapsack-algorithms/src."
+            exit 0
+          fi
+
+          if [ -n "$others" ]; then
+            echo "::error::Una PR de algoritmo solo puede tocar knapsack-algorithms/src. Separa en otra PR estos ficheros:"
+            echo "$others"
+            exit 1
+          fi
+
+          if ! grep -Eiq '^[[:space:]]*-[[:space:]]*\[x\][[:space:]]*Declaro que el código' <<<"$PR_BODY"; then
+            echo "::error::Marca la declaración de autoría de la plantilla de PR: el código de knapsack-algorithms se escribe sin IA generativa."
+            exit 1
+          fi
+
+          echo "PR de algoritmo con la declaración de autoría marcada:"
+          echo "$algorithms"
