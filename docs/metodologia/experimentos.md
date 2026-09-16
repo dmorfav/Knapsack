@@ -21,11 +21,25 @@ budget:
 
 ## Ejecución
 
-Las ejecuciones corren en secuencia en una sola JVM:
+Las ejecuciones corren en secuencia, de una en una:
 
-1. **Calentamiento:** cada solver hace `warmupRuns` ejecuciones que no se guardan, para que el compilador JIT no penalice al primero.
-2. **Orden barajado:** las combinaciones de instancia, solver y semilla se ejecutan en un orden aleatorio reproducible con `firstSeed`. Así ningún solver se beneficia siempre de ir primero o después.
-3. **Validación:** cada ejecución se valida. Es fallida si lanza una excepción, agota el presupuesto o devuelve una solución nula, de otro tamaño, no factible o mejor que el óptimo conocido.
+1. **Aislamiento:** cada solver corre en **su propia JVM**, que se reutiliza entre sus ejecuciones para conservar el calentamiento. El banco solo le envía la instancia, la semilla y el presupuesto, y valida lo que devuelve.
+2. **Calentamiento:** cada solver hace `warmupRuns` ejecuciones que no se guardan, para que el compilador JIT no penalice al primero.
+3. **Orden barajado:** las combinaciones de instancia, solver y semilla se ejecutan en un orden aleatorio reproducible con `firstSeed`. Así ningún solver se beneficia siempre de ir primero o después.
+4. **Validación:** cada ejecución se valida. Es fallida si lanza una excepción, agota el presupuesto o devuelve una solución nula, de otro tamaño, no factible o mejor que el óptimo conocido.
+
+### Límite duro
+
+El presupuesto solo detiene a un solver cuando consulta el contexto. Para que un solver que no termina no bloquee el experimento, el banco aplica un **límite duro de `maxSeconds` + 5 s** a cada ejecución:
+
+| Qué pasa | Resultado |
+|---|---|
+| La ejecución supera el límite duro | Se destruye el proceso y la ejecución falla con "no terminó en el límite duro" |
+| El proceso muere (`System.exit`, fallo de la JVM) | La ejecución falla indicando el código de salida |
+| `StackOverflowError` u `OutOfMemoryError` | La ejecución falla como una excepción y el proceso sigue |
+| Tercer fallo de proceso del mismo solver | El solver queda **descalificado**: sus ejecuciones restantes fallan sin lanzarse |
+
+Tras un fallo de proceso, la siguiente ejecución arranca una JVM nueva, sin calentar. El manifiesto registra el modo de ejecución en `execution`. `run` y `experiment` aceptan `--in-process` para depurar en la misma JVM, sin límite duro.
 
 Cada experimento escribe en `results/<nombre>/<fecha UTC>/`:
 
@@ -69,4 +83,4 @@ Las pruebas están validadas contra scipy en los tests.
     - **Los tiempos dependen de la máquina.** Solo son comparables dentro de una misma ejecución. Los runners de GitHub Actions son compartidos y cambian de CPU, así que la medida principal de esfuerzo son las evaluaciones.
     - **Las evaluaciones se pueden eludir.** Un algoritmo puede leer pesos y beneficios y sumar por su cuenta sin llamar a `evaluate`. El contador mide lo que declara el algoritmo, no lo que hace.
     - **Los algoritmos `legacy` no son reproducibles**, porque ignoran la semilla. Además cuentan evaluaciones de otra forma: ver [Añadir un algoritmo](../guia/anadir-un-algoritmo.md#algoritmos-originales).
-    - **Todo corre en la misma JVM.** Un algoritmo que no termina solo se detiene si evalúa. Uno que no evalúa nunca bloquearía el experimento.
+    - **Un solver que no respeta el presupuesto de tiempo consume hasta 5 s de más** por ejecución antes de que lo detenga el límite duro. Tras tres fallos de proceso queda descalificado, así que sus resultados en ese experimento están incompletos.
