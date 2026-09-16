@@ -1,0 +1,86 @@
+{
+  "name": "legacy-20",
+  "capacity": 100,
+  "items": [
+    {
+      "profit": 79,
+      "weight": 48
+    },
+    {
+      "profit": 74,
+      "weight": 87
+    },
+    {
+      "profit": 13,
+      "weight": 34
+    },
+    {
+      "profit": 14,
+      "weight": 85
+    },
+    {
+      "profit": 54,
+      "weight": 12
+    },
+    {
+      "profit": 12,
+      "weight": 81
+    },
+    {
+      "profit": 86,
+      "weight": 75
+    },
+    {
+      "profit": 40,
+      "weight": 83
+    },
+    {
+      "profit": 13,
+      "weight": 14
+    },
+    {
+      "profit": 74,
+      "weight": 84
+    },
+    {
+      "profit": 33,
+      "weight": 58
+    },
+    {
+      "profit": 83,
+      "weight": 57
+    },
+    {
+      "profit": 1,
+      "weight": 65
+    },
+    {
+      "profit": 91,
+      "weight": 72
+    },
+    {
+      "profit": 84,
+      "weight": 75
+    },
+    {
+      "profit": 51,
+      "weight": 86
+    },
+    {
+      "profit": 52,
+      "weight": 53
+    },
+    {
+      "profit": 42,
+      "weight": 90
+    },
+    {
+      "profit": 28,
+      "weight": 81
+    },
+    {
+      "profit": 56,
+      "weight": 58
+    }
+  ]
+}
