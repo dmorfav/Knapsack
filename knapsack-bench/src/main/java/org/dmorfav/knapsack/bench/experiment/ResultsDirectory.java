@@ -40,14 +40,30 @@ public final class ResultsDirectory {
         Files.writeString(path.resolve(MANIFEST), PRETTY.writeValueAsString(manifest) + System.lineSeparator());
     }
 
+    public Manifest readManifest() throws IOException {
+        return MAPPER.readValue(Files.readString(existing(MANIFEST)), Manifest.class);
+    }
+
     public List<RunRecord> readRuns() throws IOException {
-        Path runs = path.resolve(RUNS);
-        if (!Files.isRegularFile(runs)) {
-            throw new IOException("no existe " + runs);
+        return readJsonLines(RUNS, RunRecord.class);
+    }
+
+    public List<TraceRecord> readTraces() throws IOException {
+        return readJsonLines(TRACES, TraceRecord.class);
+    }
+
+    private <T> List<T> readJsonLines(String fileName, Class<T> type) throws IOException {
+        try (Stream<String> lines = Files.lines(existing(fileName))) {
+            return lines.filter(line -> !line.isBlank()).map(line -> MAPPER.readValue(line, type)).toList();
         }
-        try (Stream<String> lines = Files.lines(runs)) {
-            return lines.filter(line -> !line.isBlank()).map(line -> MAPPER.readValue(line, RunRecord.class)).toList();
+    }
+
+    private Path existing(String fileName) throws IOException {
+        Path file = path.resolve(fileName);
+        if (!Files.isRegularFile(file)) {
+            throw new IOException("no existe " + file);
         }
+        return file;
     }
 
     JsonLinesWriter openJsonLines(String fileName) throws IOException {

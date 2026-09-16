@@ -14,6 +14,7 @@ import java.util.Locale;
 
 import org.dmorfav.knapsack.bench.BudgetText;
 import org.dmorfav.knapsack.bench.SolverRun;
+import org.dmorfav.knapsack.bench.stats.Comparison;
 import org.dmorfav.knapsack.bench.stats.Summarizer;
 import org.dmorfav.knapsack.bench.stats.SummaryOutput;
 import org.dmorfav.knapsack.bench.stats.SummaryRow;
@@ -68,9 +69,11 @@ public final class ExperimentRunner {
 
         results.writeManifest(Manifest.of(plan, startedAt.toString(),
                 clock.instant().truncatedTo(ChronoUnit.SECONDS).toString(), environment));
-        List<SummaryRow> summary = Summarizer.summarize(results.readRuns());
+        List<RunRecord> records = results.readRuns();
+        List<SummaryRow> summary = Summarizer.summarize(records);
         SummaryOutput.writeCsv(summary, results.path().resolve(ResultsDirectory.SUMMARY));
         SummaryOutput.printTable(summary, out);
+        SummaryOutput.printComparison(Comparison.of(records), out);
         return results;
     }
 
