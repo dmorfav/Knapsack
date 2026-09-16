@@ -1,0 +1,42 @@
+{
+  "name": "small-9",
+  "capacity": 100,
+  "items": [
+    {
+      "profit": 11,
+      "weight": 10
+    },
+    {
+      "profit": 21,
+      "weight": 20
+    },
+    {
+      "profit": 31,
+      "weight": 30
+    },
+    {
+      "profit": 41,
+      "weight": 40
+    },
+    {
+      "profit": 51,
+      "weight": 50
+    },
+    {
+      "profit": 61,
+      "weight": 60
+    },
+    {
+      "profit": 71,
+      "weight": 70
+    },
+    {
+      "profit": 81,
+      "weight": 80
+    },
+    {
+      "profit": 91,
+      "weight": 90
+    }
+  ]
+}
