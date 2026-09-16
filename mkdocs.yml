@@ -64,6 +64,7 @@ nav:
   - Guía:
       - Ejecutar el proyecto: guia/ejecutar.md
       - Añadir un algoritmo: guia/anadir-un-algoritmo.md
+      - Contribuir: guia/contribuir.md
   - Metodología:
       - Instancias: metodologia/instancias.md
       - Referencias y GAP: metodologia/referencias.md

@@ -105,7 +105,7 @@
       "purpose": "Document the picocli command line with the run, experiment, summarize, report, generate and optimum subcommands, solver validation and the reported metrics",
       "page_notes": [
         {
-          "content": "Cover Main, the cli package, SolverCatalog, SolverRun, Reference and the legacy adapters CountingKnapsack and LegacySolvers, which route every legacy model query through the counted, budgeted context."
+          "content": "Cover Main, the cli package, SolverCatalog, SolverRun, Reference and the legacy adapters CountingKnapsack and LegacySolvers, which route every legacy model query through the counted, budgeted context. Solvers run isolated by default: the execution package (SolverExecutor, IsolatedExecutor, WorkerProtocol, SolverWorker and the hidden worker subcommand) starts one JVM per solver, talks JSON Lines over stdin/stdout and enforces a hard limit of the time budget plus 5 s; --in-process runs in the same JVM for debugging."
         }
       ]
     },
@@ -115,7 +115,7 @@
       "parent": "Bench CLI",
       "page_notes": [
         {
-          "content": "Cover Experiment, ExperimentPlan, ExperimentRunner, RunRecord, TraceRecord, Manifest, EnvironmentInfo and the stats package. runs.jsonl is the source of truth; summary.csv is derived and can be regenerated with the summarize command. Convergence traces are recorded by RunContext on each feasible improvement."
+          "content": "Cover Experiment, ExperimentPlan, ExperimentRunner, RunRecord, TraceRecord, Manifest, EnvironmentInfo and the stats package. runs.jsonl is the source of truth; summary.csv is derived and can be regenerated with the summarize command. Convergence traces are recorded by RunContext on each feasible improvement. A run that exceeds the hard limit or whose process dies is recorded as failed; after three process failures the solver is disqualified for the rest of the experiment. The manifest records the execution mode."
         }
       ]
     },
@@ -134,7 +134,7 @@
       "purpose": "Document the build configuration, test suites, the GitHub Actions workflows (build, CodeQL, docs, weekly benchmark) and the authorship guardrails",
       "page_notes": [
         {
-          "content": "Include the Maven enforcer rules, JaCoCo coverage, build.yml, qa.yml, docs.yml (MkDocs build and GitHub Pages deploy), benchmark.yml (weekly experiment stored in the results branch) and the Claude Code hooks in .claude/hooks that protect knapsack-algorithms/src and reserve commits for the author."
+          "content": "Include the Maven enforcer rules, JaCoCo coverage, build.yml, qa.yml, docs.yml (MkDocs build and GitHub Pages deploy), benchmark.yml (weekly experiment stored in the results branch) and the Claude Code hooks in .claude/hooks that protect knapsack-algorithms/src and reserve commits for the author. Contributor guarantees: ArchitectureTest (ArchUnit rules on knapsack-algorithms bytecode), SolverContractTest (contract for every registered solver, run isolated), CODEOWNERS, the pull request template with the authorship declaration, and pull-request.yml, which rejects PRs mixing knapsack-algorithms/src with other files or lacking the declaration. The canonical page is docs/guia/contribuir.md."
         }
       ]
     }

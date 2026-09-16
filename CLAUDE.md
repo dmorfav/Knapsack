@@ -20,10 +20,11 @@ El autor hace todos los commits. Deja los cambios en el working tree, sin stage,
 
 ## Build
 
-- Java 25 obligatorio (el enforcer falla con otra versión). El `JAVA_HOME` por defecto de esta máquina es JDK 21; exporta `JAVA_HOME=/opt/homebrew/opt/openjdk@25/libexec/openjdk.jdk/Contents/Home` antes de `./mvnw`.
+- Java 25 o superior (el enforcer falla con menos; el CI usa 25). El `JAVA_HOME` por defecto de esta máquina es JDK 21; exporta `JAVA_HOME=/opt/homebrew/opt/openjdk/libexec/openjdk.jdk/Contents/Home` (JDK de Homebrew) antes de `./mvnw`.
 - Lanza la CLI desde la raíz con `./mvnw -q compile exec:java -Dexec.args="<subcomando> ..."` (`run`, `experiment`, `summarize`, `report`, `generate`, `optimum`): las rutas son relativas a la raíz y el reactor compila todos los módulos. Los tests leen sus instancias del classpath.
 - `runs.jsonl` es la fuente de verdad de un experimento; todo resumen, comparación o informe se deriva de ella. `results/` está ignorado: los resultados oficiales viven en la rama `results`, que escribe el workflow `benchmark.yml`.
 - Toda prueba estadística nueva se valida en tests contra valores de referencia de scipy, citados en el test.
+- `ArchitectureTest` y `SolverContractTest` (en `knapsack-bench`) son las garantías para colaboradores. Si fallan por un algoritmo, no relajes la regla ni el contrato: describe el fallo al autor. `run` y `experiment` aíslan cada solver en su JVM; `--in-process` solo para depurar.
 
 ## Documentación
 
