@@ -7,3 +7,8 @@ target/
 
 # Resultados de experimentos locales (los oficiales se publican desde CI)
 /results/
+
+# Páginas de resultados generadas por el subcomando report y sitio construido por MkDocs
+/docs/resultados/
+/site/
+/.venv/

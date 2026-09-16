@@ -1,0 +1,74 @@
+site_name: Knapsack
+site_description: Banco de pruebas de metaheurísticas escritas a mano para el problema de la mochila 0/1
+site_url: https://dmorfav.github.io/Knapsack/
+repo_url: https://github.com/dmorfav/Knapsack
+repo_name: dmorfav/Knapsack
+edit_uri: edit/main/docs/
+strict: true
+
+theme:
+  name: material
+  language: es
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.sections
+    - navigation.top
+    - content.code.copy
+    - search.highlight
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      toggle:
+        icon: material/weather-night
+        name: Modo oscuro
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      toggle:
+        icon: material/weather-sunny
+        name: Modo claro
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+
+extra_javascript:
+  - https://cdn.jsdelivr.net/npm/vega@6.4.0
+  - https://cdn.jsdelivr.net/npm/vega-lite@6.4.3
+  - https://cdn.jsdelivr.net/npm/vega-embed@7.2.0
+  - javascripts/charts.js
+  - javascripts/katex.js
+  - https://cdn.jsdelivr.net/npm/katex@0.18.7/dist/katex.min.js
+  - https://cdn.jsdelivr.net/npm/katex@0.18.7/dist/contrib/auto-render.min.js
+
+extra_css:
+  - https://cdn.jsdelivr.net/npm/katex@0.18.7/dist/katex.min.css
+  - stylesheets/extra.css
+
+nav:
+  - Inicio: index.md
+  - Uso de IA: uso-de-ia.md
+  - Guía:
+      - Ejecutar el proyecto: guia/ejecutar.md
+      - Añadir un algoritmo: guia/anadir-un-algoritmo.md
+  - Metodología:
+      - Instancias: metodologia/instancias.md
+      - Referencias y GAP: metodologia/referencias.md
+      - Experimentos y estadística: metodologia/experimentos.md
+  - Arquitectura: arquitectura.md
+  - Resultados:
+      - Ejecuciones: resultados/index.md
+      - Evolución: resultados/evolucion/index.md

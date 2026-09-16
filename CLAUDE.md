@@ -21,7 +21,14 @@ El autor hace todos los commits. Deja los cambios en el working tree, sin stage,
 ## Build
 
 - Java 25 obligatorio (el enforcer falla con otra versión). El `JAVA_HOME` por defecto de esta máquina es JDK 21; exporta `JAVA_HOME=/opt/homebrew/opt/openjdk@25/libexec/openjdk.jdk/Contents/Home` antes de `./mvnw`.
-- Lanza la CLI desde la raíz con `./mvnw -q compile exec:java -Dexec.args="<subcomando> ..."` (`run`, `experiment`, `summarize`, `generate`, `optimum`): las rutas son relativas a la raíz y el reactor compila todos los módulos. Los tests leen sus instancias del classpath.
-- `runs.jsonl` es la fuente de verdad de un experimento; todo resumen o informe se deriva de ella. `results/` está ignorado: los resultados oficiales se publicarán desde CI.
+- Lanza la CLI desde la raíz con `./mvnw -q compile exec:java -Dexec.args="<subcomando> ..."` (`run`, `experiment`, `summarize`, `report`, `generate`, `optimum`): las rutas son relativas a la raíz y el reactor compila todos los módulos. Los tests leen sus instancias del classpath.
+- `runs.jsonl` es la fuente de verdad de un experimento; todo resumen, comparación o informe se deriva de ella. `results/` está ignorado: los resultados oficiales viven en la rama `results`, que escribe el workflow `benchmark.yml`.
+- Toda prueba estadística nueva se valida en tests contra valores de referencia de scipy, citados en el test.
+
+## Documentación
+
+- La documentación de uso y metodología vive en `docs/` (MkDocs Material) y el README es solo portada: cambia la página de `docs/` y enlázala, sin duplicar contenido en el README.
+- `docs/resultados/` lo genera `report` y está ignorado; `report` se niega a borrar una carpeta que no generó.
+- Comprueba cada cambio visible con `mkdocs build --strict` y revisa en el navegador las páginas con gráficas: las especificaciones Vega-Lite pueden ser JSON válido y aun así no dibujarse.
 - Todo óptimo que se escriba en una instancia sale de `optimum --write` o `generate`, nunca a mano: `run` da por buenos los óptimos declarados.
 - Todo solver se ejecuta con presupuesto de tiempo: los algoritmos originales pueden no terminar en instancias ajustadas.
