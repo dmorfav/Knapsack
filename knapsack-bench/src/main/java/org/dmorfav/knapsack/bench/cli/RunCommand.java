@@ -8,7 +8,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.Callable;
 
-import org.dmorfav.knapsack.baselines.UpperBounds;
+import org.dmorfav.knapsack.bench.BudgetText;
+import org.dmorfav.knapsack.bench.Reference;
 import org.dmorfav.knapsack.bench.SolverCatalog;
 import org.dmorfav.knapsack.bench.SolverRun;
 import org.dmorfav.knapsack.core.Instance;
@@ -48,16 +49,16 @@ public final class RunCommand implements Callable<Integer> {
         Instance instance = InstanceFiles.read(instancePath);
         Budget budget = budget();
         List<KnapsackSolver> solvers = SolverCatalog.discover();
-        long upperBound = UpperBounds.dantzig(instance);
+        Reference reference = Reference.of(instance);
 
         out.printf(Locale.ROOT, "Instancia %s: %d objetos, capacidad %d, %s%n", instance.name(), instance.size(),
-                instance.capacity(), instance.knownOptimum().isPresent()
-                        ? "óptimo " + instance.knownOptimum().getAsLong()
-                        : "óptimo desconocido (cota de Dantzig " + upperBound + ")");
-        out.printf(Locale.ROOT, "Semilla %d, presupuesto por solver: %s%n%n", seed, describe(budget));
+                instance.capacity(), reference.kind() == Reference.Kind.OPTIMUM
+                        ? "óptimo " + reference.value()
+                        : "óptimo desconocido (cota de Dantzig " + reference.value() + ")");
+        out.printf(Locale.ROOT, "Semilla %d, presupuesto por solver: %s%n%n", seed, BudgetText.describe(budget));
 
         for (KnapsackSolver solver : solvers) {
-            print(out, SolverRun.execute(solver, instance, budget, seed), instance, upperBound);
+            print(out, SolverRun.execute(solver, instance, budget, seed), instance, reference);
         }
         out.flush();
         return 0;
@@ -68,34 +69,20 @@ public final class RunCommand implements Callable<Integer> {
         return maxEvaluations == null ? budget : budget.withMaxEvaluations(maxEvaluations);
     }
 
-    private static void print(PrintWriter out, SolverRun run, Instance instance, long upperBound) {
+    private static void print(PrintWriter out, SolverRun run, Instance instance, Reference reference) {
         out.printf(Locale.ROOT, "%s (%s)%n", run.info().id(), run.info().author());
         if (run.evaluation() != null) {
+            long profit = run.evaluation().profit();
+            String gap = String.format(Locale.ROOT, reference.kind() == Reference.Kind.OPTIMUM ? "gap %.2f %%" : "gap ≤ %.2f %% (cota)",
+                    reference.gapPercent(profit));
             out.printf(Locale.ROOT, "  %s%n  beneficio %d · peso %d/%d · %d objetos · %s%n",
-                    run.solution(), run.evaluation().profit(), run.evaluation().weight(), instance.capacity(),
-                    run.solution().selectedCount(), gap(run.evaluation().profit(), instance, upperBound));
+                    run.solution(), profit, run.evaluation().weight(), instance.capacity(),
+                    run.solution().selectedCount(), gap);
         }
         out.printf(Locale.ROOT, "  %d evaluaciones · %.2f ms%n", run.evaluations(), run.elapsed().toNanos() / 1_000_000.0);
         if (!run.succeeded()) {
             out.printf("  FALLO: %s%n", run.failure());
         }
         out.println();
-    }
-
-    private static String gap(long profit, Instance instance, long upperBound) {
-        if (instance.knownOptimum().isPresent()) {
-            return String.format(Locale.ROOT, "gap %.2f %%", percentBelow(profit, instance.knownOptimum().getAsLong()));
-        }
-        return String.format(Locale.ROOT, "gap ≤ %.2f %% (cota)", percentBelow(profit, upperBound));
-    }
-
-    private static double percentBelow(long profit, long reference) {
-        return reference == 0 ? 0 : 100.0 * (reference - profit) / reference;
-    }
-
-    private static String describe(Budget budget) {
-        String evaluations = budget.limitsEvaluations() ? budget.maxEvaluations() + " evaluaciones" : "evaluaciones sin límite";
-        String time = budget.limitsTime() ? budget.maxTime().toSeconds() + " s" : "tiempo sin límite";
-        return evaluations + ", " + time;
     }
 }

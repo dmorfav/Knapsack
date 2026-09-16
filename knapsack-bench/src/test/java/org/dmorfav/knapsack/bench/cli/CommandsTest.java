@@ -102,6 +102,39 @@ class CommandsTest {
         assertThat(checked.out()).contains("coincide", "DISCREPANCIA, declara 99 y el óptimo es 11");
     }
 
+    @Test
+    void experimentThenSummarizeProduceTheSameSummary() throws IOException {
+        Path instance = write(new Instance("exp", 10, List.of(new Item(6, 5), new Item(5, 5), new Item(9, 8)))
+                .withKnownOptimum(11));
+        Path yaml = tempDir.resolve("exp.yaml");
+        Files.writeString(yaml, """
+                name: cli-exp
+                instances: ["%s"]
+                solvers: ["greedy/*", "exact/*"]
+                runs: 2
+                warmupRuns: 0
+                budget:
+                  maxSeconds: 5
+                """.formatted(instance.toString().replace('\\', '/')));
+        Path output = tempDir.resolve("results");
+
+        CliResult experiment = CliResult.execute("experiment", yaml.toString(), "--output=" + output);
+        Path resultsDir;
+        try (var dirs = Files.list(output.resolve("cli-exp"))) {
+            resultsDir = dirs.findFirst().orElseThrow();
+        }
+        String firstSummary = Files.readString(resultsDir.resolve("summary.csv"));
+        Files.delete(resultsDir.resolve("summary.csv"));
+        CliResult summarize = CliResult.execute("summarize", resultsDir.toString());
+
+        assertThat(experiment.exitCode()).isZero();
+        assertThat(experiment.out()).contains("1 instancias × 3 solvers × 2 ejecuciones = 6", "[6/6]", "exp (óptimo 11)");
+        assertThat(Files.readAllLines(resultsDir.resolve("runs.jsonl"))).hasSize(6);
+        assertThat(summarize.exitCode()).isZero();
+        assertThat(Files.readString(resultsDir.resolve("summary.csv"))).isEqualTo(firstSummary);
+        assertThat(summarize.out()).contains("exact/dynamic-programming", "2/2");
+    }
+
     private Path write(Instance instance) throws IOException {
         Path file = tempDir.resolve(instance.name() + ".json");
         Files.createDirectories(file.getParent());
