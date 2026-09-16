@@ -1,0 +1,73 @@
+name: Benchmark
+
+on:
+  schedule:
+    # Lunes a las 03:00 UTC. GitHub desactiva los workflows programados tras 60 días sin actividad en el repo.
+    - cron: '0 3 * * 1'
+  workflow_dispatch:
+    inputs:
+      experiment:
+        description: Fichero YAML del experimento
+        default: experiments/weekly.yaml
+        required: true
+
+permissions:
+  contents: read
+
+concurrency:
+  group: benchmark
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Set up JDK 25
+        uses: actions/setup-java@v6
+        with:
+          java-version: '25'
+          distribution: 'temurin'
+          cache: 'maven'
+
+      - name: Run experiment
+        env:
+          EXPERIMENT: ${{ inputs.experiment || 'experiments/weekly.yaml' }}
+        run: |
+          case "$EXPERIMENT" in
+            experiments/*.yaml) ;;
+            *) echo "El experimento debe ser un fichero experiments/*.yaml" >&2; exit 1 ;;
+          esac
+          test -f "$EXPERIMENT"
+          ./mvnw -B -q compile exec:java -Dexec.args="experiment $EXPERIMENT --output=new-results"
+
+      - name: Store results in the results branch
+        env:
+          EXPERIMENT: ${{ inputs.experiment || 'experiments/weekly.yaml' }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git fetch origin results; then
+            git worktree add -B results results-branch FETCH_HEAD
+          else
+            git worktree add --orphan -b results results-branch
+          fi
+          mkdir -p results-branch/results
+          cp -R new-results/. results-branch/results/
+          cd results-branch
+          git add results
+          git commit -m "Resultados de $EXPERIMENT en ${GITHUB_SHA::7}"
+          git push origin results
+
+  publish:
+    needs: run
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    uses: ./.github/workflows/docs.yml
