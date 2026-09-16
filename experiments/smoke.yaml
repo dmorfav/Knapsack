@@ -1,0 +1,14 @@
+# Prueba rápida: todos los solvers sobre las instancias legacy-20 y Pisinger de 100 objetos.
+name: smoke
+description: Comprobación rápida de extremo a extremo del runner con todos los solvers.
+instances:
+  - instances/legacy-20.json
+  - instances/pisinger/*.json
+solvers:
+  - "*"
+runs: 5
+firstSeed: 1
+warmupRuns: 1
+budget:
+  maxEvaluations: 100000
+  maxSeconds: 5
