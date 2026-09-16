@@ -25,6 +25,7 @@ flowchart LR
 | `knapsack-baselines` | `org.dmorfav.knapsack.baselines` | Voraces, programación dinámica y cota de Dantzig |
 | `knapsack-bench` | `…bench.cli` | Subcomandos de la línea de comandos (picocli) |
 | | `…bench.experiment` | Definición, planificación y ejecución de experimentos, y formato de resultados |
+| | `…bench.execution` | Ejecución aislada: un proceso por solver, protocolo JSON Lines y límite duro |
 | | `…bench.stats` | Resúmenes y pruebas estadísticas |
 | | `…bench.report` | Páginas de resultados para esta web |
 | | `…bench.legacy` | Adaptadores de los algoritmos originales al contrato |
@@ -37,7 +38,8 @@ flowchart LR
 flowchart TD
     yaml[experiments/*.yaml] --> plan[ExperimentPlan<br/>resuelve instancias y solvers, baraja]
     services[META-INF/services] --> plan
-    plan --> run[ExperimentRunner<br/>RunContext por ejecución]
+    plan --> run[ExperimentRunner<br/>valida y registra cada ejecución]
+    run <-->|JSON Lines<br/>límite duro| worker[JVM por solver<br/>RunContext por ejecución]
     run --> files[results/nombre/fecha<br/>manifest · runs.jsonl · traces.jsonl]
     files --> summary[summarize<br/>summary.csv + estadística]
     files --> report[report<br/>docs/resultados]

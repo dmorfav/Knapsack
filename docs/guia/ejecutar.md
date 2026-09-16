@@ -14,6 +14,8 @@ Requiere **Java 25**. Todos los comandos se lanzan desde la raíz del repositori
 
 Los subcomandos se pasan con `-Dexec.args="..."`, por ejemplo `./mvnw -q compile exec:java -Dexec.args="experiment experiments/smoke.yaml"`. `help <subcomando>` muestra todas sus opciones.
 
+`run` y `experiment` ejecutan cada solver en su propia JVM, con un [límite duro](../metodologia/experimentos.md#limite-duro). Para depurar un algoritmo en la misma JVM, por ejemplo con puntos de interrupción, añade `--in-process`.
+
 | Subcomando | Qué hace | Ejemplo |
 |---|---|---|
 | `run` | Ejecuta una vez cada solver registrado y muestra beneficio, GAP, evaluaciones y tiempo | `run --instance=instances/pisinger/subset-sum-n100-r1000-h50of100-s1.json --seed=7 --max-seconds=5` |

@@ -11,9 +11,9 @@ public interface KnapsackSolver {
 
 ## Pasos
 
-1. **Implementa `KnapsackSolver`** en `knapsack-algorithms`, con un constructor público sin argumentos.
+1. **Implementa `KnapsackSolver`** en `knapsack-algorithms`, en una clase pública con constructor público sin argumentos. Por convención, en el paquete `org.dmorfav.knapsack.algorithms.<familia>`.
 2. **Regístralo** añadiendo su nombre completo de clase, una por línea, a `knapsack-algorithms/src/main/resources/META-INF/services/org.dmorfav.knapsack.core.solver.KnapsackSolver`. El banco de pruebas lo descubre con `ServiceLoader`.
-3. **Compruébalo** con `./mvnw -q compile exec:java`, que lo ejecuta junto a las referencias.
+3. **Compruébalo** con `./mvnw verify`, que le aplica las [reglas de arquitectura y el contrato](contribuir.md#que-se-comprueba-automaticamente), y con `./mvnw -q compile exec:java`, que lo ejecuta junto a las referencias.
 
 ## Identidad: `SolverInfo`
 
