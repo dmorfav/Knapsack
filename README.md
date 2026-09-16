@@ -33,11 +33,13 @@ Requiere **Java 25**. Desde la raíz del repositorio:
 ./mvnw compile exec:java    # ejecuta todos los solvers sobre instances/legacy-20.json
 ```
 
-La línea de comandos tiene tres subcomandos, que se pasan con `-Dexec.args="..."`:
+La línea de comandos tiene estos subcomandos, que se pasan con `-Dexec.args="..."`:
 
 | Subcomando | Qué hace | Ejemplo |
 |---|---|---|
 | `run` | Ejecuta una vez cada solver registrado y muestra beneficio, GAP, evaluaciones y tiempo | `run --instance=instances/pisinger/subset-sum-n100-r1000-h50of100-s1.json --seed=7 --max-seconds=5` |
+| `experiment` | Ejecuta un experimento definido en YAML y guarda sus resultados | `experiment experiments/smoke.yaml` |
+| `summarize` | Regenera el resumen de una carpeta de resultados | `summarize results/smoke/20260916-180840` |
 | `generate` | Genera una instancia de Pisinger y calcula su óptimo | `generate --class=strongly-correlated --items=200 --range=1000 --seed=3` |
 | `optimum` | Calcula el óptimo exacto de instancias existentes y lo contrasta con el declarado | `optimum --write instances/legacy-20.json` |
 
@@ -63,6 +65,35 @@ El **GAP** es `(referencia − beneficio) / referencia`, donde la referencia es 
 ## Instancias
 - **`instances/legacy-*`**: las del proyecto original, con la capacidad de 100 que usaba su `main` y el óptimo ya calculado.
 - **`instances/pisinger/`**: una instancia de cada clase de Pisinger (*Where are the hard knapsack problems?*, 2005), con 100 objetos y R = 1000. Clases: `uncorrelated`, `weakly-correlated`, `strongly-correlated`, `inverse-strongly-correlated`, `almost-strongly-correlated`, `subset-sum` y `uncorrelated-similar-weights`. La capacidad de la instancia h de una serie de H es `⌊h·Σw/(H+1)⌋`. Se reproducen las distribuciones, no los ficheros exactos de Pisinger, porque el generador aleatorio es otro.
+
+## Experimentos
+Un experimento ejecuta varias veces cada solver sobre cada instancia, con semillas distintas y el mismo presupuesto:
+
+```yaml
+name: smoke                        # kebab-case; da nombre a la carpeta de resultados
+description: Comprobación rápida
+instances:                         # rutas desde la raíz; * no cruza carpetas, ** sí
+  - instances/legacy-20.json
+  - instances/pisinger/*.json
+solvers: ["*"]                     # ids familia/variante; p. ej. "greedy/*" o "*/legacy"
+runs: 5                            # semillas firstSeed, firstSeed+1, ...
+firstSeed: 1
+warmupRuns: 1                      # ejecuciones de calentamiento por solver, no se guardan
+budget:
+  maxEvaluations: 100000           # opcional
+  maxSeconds: 5                    # obligatorio: ningún solver puede bloquear el experimento
+```
+
+Las ejecuciones corren en secuencia, en un orden barajado con `firstSeed` que es reproducible. Así ningún solver se beneficia siempre de ir primero o después. Cada experimento escribe en `results/<nombre>/<fecha UTC>/`, carpeta ignorada por git:
+
+| Fichero | Contenido |
+|---|---|
+| `manifest.json` | Configuración, instancias con su SHA-256, solvers con autor, entorno (JDK, SO, CPU) y commit de git |
+| `runs.jsonl` | Una línea por ejecución: estado, beneficio, peso, GAP, evaluaciones, tiempo, evaluaciones hasta el mejor valor y solución. Es la fuente de verdad |
+| `traces.jsonl` | Curva de convergencia de cada ejecución: `[evaluación, nanosegundos, beneficio]` en cada mejora factible |
+| `summary.csv` | Por instancia y solver: mejor, media, mediana, desviación y peor beneficio; GAP mejor, medio y mediano; aciertos del óptimo; evaluaciones y tiempo medianos |
+
+Las métricas de calidad del resumen solo usan las ejecuciones correctas; las fallidas se cuentan aparte, en `succeeded`.
 
 ## Formato de instancia
 ```json

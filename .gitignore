@@ -4,3 +4,6 @@ target/
 .metadata/
 .project
 .settings/
+
+# Resultados de experimentos locales (los oficiales se publican desde CI)
+/results/

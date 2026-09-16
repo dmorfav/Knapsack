@@ -110,6 +110,16 @@
       ]
     },
     {
+      "title": "Experiments",
+      "purpose": "Document the YAML experiment definition, the sequential shuffled execution, the results directory files and the summary metrics",
+      "parent": "Bench CLI",
+      "page_notes": [
+        {
+          "content": "Cover Experiment, ExperimentPlan, ExperimentRunner, RunRecord, TraceRecord, Manifest, EnvironmentInfo and the stats package. runs.jsonl is the source of truth; summary.csv is derived and can be regenerated with the summarize command. Convergence traces are recorded by RunContext on each feasible improvement."
+        }
+      ]
+    },
+    {
       "title": "Development Workflow",
       "purpose": "Document the build configuration, test suites, continuous integration and the authorship guardrails",
       "page_notes": [
