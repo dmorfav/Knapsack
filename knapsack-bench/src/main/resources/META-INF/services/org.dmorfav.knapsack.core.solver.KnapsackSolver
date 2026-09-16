@@ -1,0 +1,5 @@
+org.dmorfav.knapsack.bench.legacy.LegacySolvers$LegacyHarmonySearch
+org.dmorfav.knapsack.bench.legacy.LegacySolvers$LegacyImprovedHarmonySearch
+org.dmorfav.knapsack.bench.legacy.LegacySolvers$LegacyDiscreteBinaryHarmonySearch
+org.dmorfav.knapsack.bench.legacy.LegacySolvers$LegacyHillClimbingFirstAscent
+org.dmorfav.knapsack.bench.legacy.LegacySolvers$LegacyHillClimbingBestAscent
