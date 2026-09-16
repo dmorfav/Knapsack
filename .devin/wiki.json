@@ -25,10 +25,10 @@
     },
     {
       "title": "System Architecture",
-      "purpose": "Explain the three Maven modules, their dependency direction and how a solver is discovered, executed and validated",
+      "purpose": "Explain the four Maven modules, their dependency direction and how a solver is discovered, executed and validated",
       "page_notes": [
         {
-          "content": "Dependency direction: knapsack-algorithms depends only on knapsack-core; knapsack-bench depends on both. Solvers are discovered with java.util.ServiceLoader."
+          "content": "Dependency direction: knapsack-algorithms and knapsack-baselines depend only on knapsack-core; knapsack-bench depends on all three. Solvers are discovered with java.util.ServiceLoader."
         }
       ]
     },
@@ -53,12 +53,21 @@
       ]
     },
     {
-      "title": "Instance Format",
-      "purpose": "Document the JSON instance format, validation rules and the instances shipped in the instances directory",
+      "title": "Instances",
+      "purpose": "Document the JSON instance format, the Pisinger instance generator and the instances shipped in the instances directory",
       "parent": "System Architecture",
       "page_notes": [
         {
-          "content": "Source of truth is InstanceFiles.java. The legacy-* instances come from the original project and use capacity 100."
+          "content": "Sources of truth: InstanceFiles.java for the format, PisingerGenerator.java and InstanceClass.java for generation. The legacy-* instances come from the original project and use capacity 100. Capacity of generated instances is floor(h * sum(w) / (H + 1)). Declared optima are computed by the optimum and generate commands and verified in CI."
+        }
+      ]
+    },
+    {
+      "title": "Baselines",
+      "purpose": "Document the reference solvers and bounds used to measure algorithms: greedy by ratio, greedy with best single item, exact dynamic programming and the Dantzig upper bound",
+      "page_notes": [
+        {
+          "content": "Cover the guarantees each baseline gives (half-optimum for greedy/ratio-best-item, exactness and the n*(C+1) cell limit for dynamic programming, upper bound for Dantzig) and how the GAP is computed against the known optimum or the bound."
         }
       ]
     },
@@ -92,11 +101,11 @@
       ]
     },
     {
-      "title": "Bench",
-      "purpose": "Document how the bench runs every discovered solver, validates its solution and reports profit, weight, evaluations and time",
+      "title": "Bench CLI",
+      "purpose": "Document the picocli command line with the run, generate and optimum subcommands, solver validation and the reported metrics",
       "page_notes": [
         {
-          "content": "Cover Main, SolverRun and the legacy adapters CountingKnapsack and LegacySolvers, which route every legacy model query through the counted, budgeted context."
+          "content": "Cover Main, RunCommand, GenerateCommand, OptimumCommand, SolverCatalog, SolverRun and the legacy adapters CountingKnapsack and LegacySolvers, which route every legacy model query through the counted, budgeted context."
         }
       ]
     },

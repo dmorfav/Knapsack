@@ -30,19 +30,39 @@ Requiere **Java 25**. Desde la raíz del repositorio:
 
 ```bash
 ./mvnw verify               # compila y ejecuta los tests
-./mvnw compile exec:java    # ejecuta todos los algoritmos sobre instances/legacy-20.json
-./mvnw compile exec:java -Dexec.args="--instance=instances/legacy-100.json --seed=7 --max-seconds=5"
+./mvnw compile exec:java    # ejecuta todos los solvers sobre instances/legacy-20.json
 ```
 
-Opciones: `--instance`, `--seed`, `--max-evaluations` y `--max-seconds` (60 s por defecto, por algoritmo).
+La línea de comandos tiene tres subcomandos, que se pasan con `-Dexec.args="..."`:
+
+| Subcomando | Qué hace | Ejemplo |
+|---|---|---|
+| `run` | Ejecuta una vez cada solver registrado y muestra beneficio, GAP, evaluaciones y tiempo | `run --instance=instances/pisinger/subset-sum-n100-r1000-h50of100-s1.json --seed=7 --max-seconds=5` |
+| `generate` | Genera una instancia de Pisinger y calcula su óptimo | `generate --class=strongly-correlated --items=200 --range=1000 --seed=3` |
+| `optimum` | Calcula el óptimo exacto de instancias existentes y lo contrasta con el declarado | `optimum --write instances/legacy-20.json` |
+
+`help <subcomando>` muestra todas las opciones.
 
 ## Estructura
 | Módulo | Contenido | Autoría |
 |---|---|---|
-| `knapsack-core` | Modelo del problema, formato de instancia y contrato `KnapsackSolver` | Ecosistema |
+| `knapsack-core` | Modelo del problema, formato de instancia, contrato `KnapsackSolver` y generador de instancias | Ecosistema |
 | `knapsack-algorithms` | Implementaciones metaheurísticas | Humana, sin IA |
-| `knapsack-bench` | Ejecución, validación y comparación | Ecosistema |
+| `knapsack-baselines` | Referencias: voraz, óptimo exacto y cota superior | Ecosistema |
+| `knapsack-bench` | Línea de comandos: ejecución, validación y comparación | Ecosistema |
 | `instances/` | Instancias del problema en JSON | — |
+
+## Referencias para medir
+- **`greedy/ratio`**: recorre los objetos por ratio beneficio/peso decreciente y mete cada uno que quepa.
+- **`greedy/ratio-best-item`**: el mejor entre el voraz y el objeto más valioso que cabe solo. Garantiza al menos la mitad del óptimo.
+- **`exact/dynamic-programming`**: óptimo exacto en O(n·C). Solo es viable si n·(C+1) ≤ 10⁹.
+- **Cota de Dantzig** (relajación lineal): ninguna solución la supera. Cuando no se conoce el óptimo, el GAP se da contra ella y se muestra como `gap ≤`.
+
+El **GAP** es `(referencia − beneficio) / referencia`, donde la referencia es el óptimo conocido o, si falta, la cota.
+
+## Instancias
+- **`instances/legacy-*`**: las del proyecto original, con la capacidad de 100 que usaba su `main` y el óptimo ya calculado.
+- **`instances/pisinger/`**: una instancia de cada clase de Pisinger (*Where are the hard knapsack problems?*, 2005), con 100 objetos y R = 1000. Clases: `uncorrelated`, `weakly-correlated`, `strongly-correlated`, `inverse-strongly-correlated`, `almost-strongly-correlated`, `subset-sum` y `uncorrelated-similar-weights`. La capacidad de la instancia h de una serie de H es `⌊h·Σw/(H+1)⌋`. Se reproducen las distribuciones, no los ficheros exactos de Pisinger, porque el generador aleatorio es otro.
 
 ## Formato de instancia
 ```json
@@ -53,7 +73,7 @@ Opciones: `--instance`, `--seed`, `--max-evaluations` y `--max-seconds` (60 s po
   "items": [ { "profit": 9, "weight": 7 }, { "profit": 4, "weight": 5 } ]
 }
 ```
-`optimum` es opcional. Las instancias `legacy-*` son las del proyecto original, con la capacidad de 100 que usaba su `main`.
+`optimum` es opcional; si está presente, `run` marca como fallo cualquier beneficio que lo supere.
 
 ## Añadir un algoritmo
 1. Implementa `org.dmorfav.knapsack.core.solver.KnapsackSolver` en `knapsack-algorithms`, con un constructor público sin argumentos.
