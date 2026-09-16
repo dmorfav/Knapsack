@@ -27,6 +27,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v7
+        with:
+          # Historial completo: el manifiesto guarda los autores en git de las fuentes de cada solver
+          fetch-depth: 0
 
       - name: Set up JDK 25
         uses: actions/setup-java@v6
