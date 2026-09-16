@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HexFormat;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.dmorfav.knapsack.bench.experiment.Manifest;
@@ -53,6 +55,22 @@ record StoredExperiment(ResultsDirectory directory, Manifest manifest, List<RunR
 
     Instant startedAt() {
         return Instant.parse(manifest.startedAt());
+    }
+
+    /**
+     * Solvers presentes en ambas ejecuciones cuya huella de código difiere. Los manifiestos sin huella no cuentan:
+     * no se puede saber si cambiaron.
+     */
+    List<String> codeChangedSince(StoredExperiment previous) {
+        Map<String, String> before = previous.manifest.solvers().stream()
+                .filter(solver -> solver.codeHash() != null)
+                .collect(Collectors.toMap(Manifest.SolverEntry::id, Manifest.SolverEntry::codeHash));
+        return manifest.solvers().stream()
+                .filter(solver -> solver.codeHash() != null && before.containsKey(solver.id()))
+                .filter(solver -> !solver.codeHash().equals(before.get(solver.id())))
+                .map(Manifest.SolverEntry::id)
+                .sorted()
+                .toList();
     }
 
     /** Huella corta del conjunto de instancias: solo es comparable la evolución entre ejecuciones con la misma. */

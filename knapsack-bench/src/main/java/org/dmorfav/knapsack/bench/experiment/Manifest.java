@@ -1,6 +1,7 @@
 package org.dmorfav.knapsack.bench.experiment;
 
 import java.util.List;
+import java.util.Map;
 
 import org.dmorfav.knapsack.core.solver.Budget;
 
@@ -14,12 +15,14 @@ public record Manifest(String experiment, String description, String startedAt, 
                                 String referenceKind) {
     }
 
-    public record SolverEntry(String id, String family, String variant, String author) {
+    /** Los campos de procedencia (ver {@link SolverProvenance}) son null en manifiestos anteriores a ellos. */
+    public record SolverEntry(String id, String family, String variant, String author, String codeHash,
+                              List<String> sources, List<String> gitAuthors, Boolean uncommittedChanges) {
     }
 
     /** {@code execution} describe cómo se aislaron las ejecuciones; los manifiestos antiguos sin el campo leen null. */
     static Manifest of(ExperimentPlan plan, String startedAt, String finishedAt, EnvironmentInfo environment,
-                       String execution) {
+                       String execution, Map<String, SolverProvenance> provenance) {
         Experiment experiment = plan.experiment();
         Budget budget = experiment.budget();
         List<InstanceEntry> instances = plan.instances().stream()
@@ -28,8 +31,12 @@ public record Manifest(String experiment, String description, String startedAt, 
                         planned.reference().kind().name()))
                 .toList();
         List<SolverEntry> solvers = plan.solvers().stream()
-                .map(solver -> new SolverEntry(solver.info().id(), solver.info().family(), solver.info().variant(),
-                        solver.info().author()))
+                .map(solver -> {
+                    SolverProvenance origin = provenance.get(solver.info().id());
+                    return new SolverEntry(solver.info().id(), solver.info().family(), solver.info().variant(),
+                            solver.info().author(), origin.codeHash(), origin.sources(), origin.gitAuthors(),
+                            origin.uncommittedChanges());
+                })
                 .toList();
         return new Manifest(experiment.name(), experiment.description(), startedAt, finishedAt, experiment.runs(),
                 experiment.firstSeed(), experiment.warmupRuns(),

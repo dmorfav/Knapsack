@@ -11,6 +11,8 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.dmorfav.knapsack.bench.BudgetText;
 import org.dmorfav.knapsack.bench.SolverRun;
@@ -49,12 +51,22 @@ public final class ExperimentRunner {
         Instant startedAt = clock.instant().truncatedTo(ChronoUnit.SECONDS);
         ResultsDirectory results = new ResultsDirectory(createDirectory(outputBase.resolve(experiment.name()), startedAt));
         EnvironmentInfo environment = EnvironmentInfo.capture(root);
-        results.writeManifest(Manifest.of(plan, startedAt.toString(), null, environment, executor.description()));
+        Map<String, SolverProvenance> provenance = plan.solvers().stream().collect(Collectors.toMap(
+                solver -> solver.info().id(), solver -> SolverProvenance.of(solver.getClass(), root)));
+        results.writeManifest(Manifest.of(plan, startedAt.toString(), null, environment, executor.description(),
+                provenance));
 
         out.printf(Locale.ROOT, "Experimento %s: %d instancias × %d solvers × %d ejecuciones = %d%n",
                 experiment.name(), plan.instances().size(), plan.solvers().size(), experiment.runs(), plan.tasks().size());
         out.printf(Locale.ROOT, "Presupuesto por ejecución: %s · resultados en %s%n",
                 BudgetText.describe(experiment.budget()), results.path());
+        List<String> uncommitted = provenance.entrySet().stream()
+                .filter(entry -> Boolean.TRUE.equals(entry.getValue().uncommittedChanges()))
+                .map(Map.Entry::getKey).sorted().toList();
+        if (!uncommitted.isEmpty()) {
+            out.printf(Locale.ROOT, "Aviso: código sin commitear en %s; su huella no corresponde a ningún commit%n",
+                    String.join(", ", uncommitted));
+        }
         out.flush();
 
         warmUp(plan);
@@ -72,7 +84,8 @@ public final class ExperimentRunner {
         }
 
         results.writeManifest(Manifest.of(plan, startedAt.toString(),
-                clock.instant().truncatedTo(ChronoUnit.SECONDS).toString(), environment, executor.description()));
+                clock.instant().truncatedTo(ChronoUnit.SECONDS).toString(), environment, executor.description(),
+                provenance));
         List<RunRecord> records = results.readRuns();
         List<SummaryRow> summary = Summarizer.summarize(records);
         SummaryOutput.writeCsv(summary, results.path().resolve(ResultsDirectory.SUMMARY));

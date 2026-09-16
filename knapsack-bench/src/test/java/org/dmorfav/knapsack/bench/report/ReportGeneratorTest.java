@@ -31,6 +31,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 import tools.jackson.databind.JsonNode;
 import tools.jackson.databind.json.JsonMapper;
+import tools.jackson.databind.node.ObjectNode;
 
 class ReportGeneratorTest {
 
@@ -112,6 +113,35 @@ class ReportGeneratorTest {
         JsonNode values = spec.get("data").get("values");
         assertThat(values.size()).isEqualTo(4);
         assertThat(values.get(0).get("suite").asString()).hasSize(8);
+    }
+
+    @Test
+    void listsSolversWithTheirCodeFingerprint() throws IOException {
+        new ReportGenerator(null).generate(results, output);
+
+        String markdown = Files.readString(output.resolve("report-test/20260921-100000/index.md"));
+        assertThat(markdown).contains("## Solvers", "| Solver | Autor declarado | Autores en git | Código |")
+                .containsPattern("\\| `fake/fill` \\| Test \\| .* \\| `[0-9a-f]{8}`")
+                .doesNotContain("Código cambiado");
+    }
+
+    @Test
+    void warnsWhenAPublishedVariantChangesItsCode() throws IOException {
+        Path newest = results.resolve("report-test/20260921-100000/manifest.json");
+        ObjectNode manifest = (ObjectNode) JSON.readTree(Files.readString(newest));
+        ((ObjectNode) manifest.get("solvers").get(0)).put("codeHash", "f".repeat(64));
+        Files.writeString(newest, JSON.writeValueAsString(manifest));
+        String changedId = manifest.get("solvers").get(0).get("id").asString();
+
+        new ReportGenerator(null).generate(results, output);
+
+        assertThat(Files.readString(output.resolve("report-test/20260921-100000/index.md")))
+                .contains("!!! warning \"Código cambiado desde la ejecución anterior (2026-09-14 10:00 UTC)\"")
+                .contains("`" + changedId + "` cambió de huella", "`ffffffff` cambió");
+        assertThat(Files.readString(output.resolve("report-test/20260914-100000/index.md")))
+                .doesNotContain("Código cambiado");
+        assertThat(Files.readString(output.resolve("evolucion/index.md")))
+                .contains("- **2026-09-21 10:00 UTC**: `" + changedId + "`");
     }
 
     @Test

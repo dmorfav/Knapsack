@@ -57,7 +57,8 @@ public final class ReportGenerator {
         prepareOutput(output);
         List<StoredExperiment> experiments = StoredExperiment.discover(resultsRoot);
         for (StoredExperiment experiment : experiments) {
-            writeExperimentPage(experiment, output.resolve(experiment.name()).resolve(experiment.runId()));
+            writeExperimentPage(experiment, previousRun(experiments, experiment),
+                    output.resolve(experiment.name()).resolve(experiment.runId()));
         }
         writeIndex(experiments, output);
         writeEvolution(experiments, output.resolve("evolucion"));
@@ -65,7 +66,8 @@ public final class ReportGenerator {
         return experiments.size();
     }
 
-    private void writeExperimentPage(StoredExperiment experiment, Path directory) throws IOException {
+    private void writeExperimentPage(StoredExperiment experiment, StoredExperiment previous, Path directory)
+            throws IOException {
         Files.createDirectories(directory.resolve("charts"));
         Files.createDirectories(directory.resolve("datos"));
         Manifest manifest = experiment.manifest();
@@ -87,6 +89,7 @@ public final class ReportGenerator {
             line(md, "%s", manifest.description());
         }
         writeDetails(md, experiment);
+        writeSolvers(md, experiment, previous);
         md.append("""
                 !!! note "Cómo leer esta página"
                     El **GAP** es `100 · (referencia − beneficio) / referencia`: la referencia es el óptimo conocido o, si falta, \
@@ -135,6 +138,53 @@ public final class ReportGenerator {
         row(md, "Conjunto de instancias", "`" + experiment.suite() + "`");
         row(md, "Datos", "[manifest.json](datos/manifest.json) · [runs.jsonl](datos/runs.jsonl) · [summary.csv](datos/summary.csv)");
         md.append('\n');
+    }
+
+    private void writeSolvers(StringBuilder md, StoredExperiment experiment, StoredExperiment previous) {
+        List<String> changed = previous == null ? List.of() : experiment.codeChangedSince(previous);
+        line(md, "## Solvers");
+        if (!changed.isEmpty()) {
+            md.append(String.format(Locale.ROOT, """
+                    !!! warning "Código cambiado desde la ejecución anterior (%s)"
+                        %s cambió de huella con la misma variante: sus resultados no son comparables con los anteriores. \
+                    Un cambio de comportamiento debería publicarse como variante nueva.
+
+                    """, HUMAN_DATE.format(previous.startedAt()),
+                    changed.stream().map(id -> "`" + id + "`").collect(Collectors.joining(", "))));
+        }
+        line(md, "| Solver | Autor declarado | Autores en git | Código |");
+        line(md, "|---|---|---|---|");
+        for (Manifest.SolverEntry solver : experiment.manifest().solvers()) {
+            String code;
+            if (solver.codeHash() == null) {
+                code = "no registrado";
+            } else {
+                code = "`" + solver.codeHash().substring(0, 8) + "`";
+                if (changed.contains(solver.id())) {
+                    code += " cambió";
+                }
+                if (Boolean.TRUE.equals(solver.uncommittedChanges())) {
+                    code += " (sin commitear)";
+                }
+            }
+            String gitAuthors = solver.gitAuthors() == null ? "desconocidos"
+                    : solver.gitAuthors().isEmpty() ? "—" : String.join(", ", solver.gitAuthors());
+            md.append(String.format(Locale.ROOT, "| `%s` | %s | %s | %s |%n", solver.id(), escape(solver.author()),
+                    escape(gitAuthors), code));
+        }
+        md.append('\n');
+        line(md, "La huella es el SHA-256 de las fuentes de las que depende cada solver; la lista completa está en "
+                + "[manifest.json](datos/manifest.json). Los autores en git son los de sus fuentes, sin knapsack-core "
+                + "ni knapsack-bench.");
+    }
+
+    private static StoredExperiment previousRun(List<StoredExperiment> experiments, StoredExperiment experiment) {
+        // experiments va de la más reciente a la más antigua
+        return experiments.stream()
+                .filter(candidate -> candidate.name().equals(experiment.name()))
+                .filter(candidate -> candidate.startedAt().isBefore(experiment.startedAt()))
+                .findFirst()
+                .orElse(null);
     }
 
     private void writeRanking(StringBuilder md, StoredExperiment experiment, Comparison comparison, Path directory)
@@ -281,6 +331,20 @@ public final class ReportGenerator {
                                 "gap", Arrays.stream(finite).average().orElseThrow(), "suite", experiment.suite()));
                     }
                 }
+            }
+            List<StoredExperiment> runs = entry.getValue();
+            List<String> changes = new ArrayList<>();
+            for (int i = 0; i + 1 < runs.size(); i++) {
+                List<String> changed = runs.get(i).codeChangedSince(runs.get(i + 1));
+                if (!changed.isEmpty()) {
+                    changes.add(String.format(Locale.ROOT, "- **%s**: %s", HUMAN_DATE.format(runs.get(i).startedAt()),
+                            changed.stream().map(id -> "`" + id + "`").collect(Collectors.joining(", "))));
+                }
+            }
+            if (!changes.isEmpty()) {
+                line(md, "Cambios de código en variantes ya publicadas; sus puntos antes y después no son comparables:");
+                changes.forEach(change -> md.append(change).append('\n'));
+                md.append('\n');
             }
             if (entry.getValue().size() == 1) {
                 line(md, "Solo hay una ejecución de este experimento; la evolución aparecerá con la siguiente.");
