@@ -45,10 +45,25 @@ Cada experimento escribe en `results/<nombre>/<fecha UTC>/`:
 
 | Fichero | Contenido |
 |---|---|
-| `manifest.json` | Configuración, instancias con su SHA-256, solvers con autor, entorno (JDK, SO, CPU, núcleos, memoria) y commit de git, indicando si había cambios sin commitear |
+| `manifest.json` | Configuración, instancias con su SHA-256, solvers con su [procedencia](#procedencia-del-codigo), entorno (JDK, SO, CPU, núcleos, memoria) y commit de git, indicando si había cambios sin commitear |
 | `runs.jsonl` | Una línea por ejecución: estado, beneficio, peso, GAP, evaluaciones, tiempo, evaluaciones y tiempo hasta alcanzar su resultado final, y la solución. **Es la fuente de verdad**: todo lo demás se deriva de ella |
 | `traces.jsonl` | Curva de convergencia de cada ejecución: `[evaluación, nanosegundos, beneficio]` en cada mejora del mejor beneficio factible evaluado |
 | `summary.csv` | Resumen por instancia y solver |
+
+### Procedencia del código
+
+Para cada solver, el manifiesto guarda de qué código salieron sus resultados:
+
+| Campo | Qué es |
+|---|---|
+| `sources` | Ficheros fuente del proyecto de los que depende: se recorre el bytecode desde la clase del solver siguiendo las clases que usa de verdad (herencia, campos, firmas e instrucciones) |
+| `codeHash` | SHA-256 de esas fuentes. No cambia con el compilador ni con los finales de línea |
+| `gitAuthors` | Autores en git de esas fuentes, sin contar `knapsack-core` ni `knapsack-bench` |
+| `uncommittedChanges` | Si alguna de esas fuentes tenía cambios sin commitear. `experiment` lo avisa al empezar |
+
+Las páginas de resultados muestran la tabla de solvers con autor declarado, autores en git y huella. Si la huella de una variante cambia respecto a la ejecución anterior del mismo experimento, lo avisan, y la página de evolución lo lista: los puntos de antes y después no son comparables.
+
+La huella de un algoritmo original incluye su adaptador (`LegacySolvers.java`), así que tocar el adaptador cambia la de los cinco.
 
 ## Métricas del resumen
 

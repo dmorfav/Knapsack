@@ -115,7 +115,7 @@
       "parent": "Bench CLI",
       "page_notes": [
         {
-          "content": "Cover Experiment, ExperimentPlan, ExperimentRunner, RunRecord, TraceRecord, Manifest, EnvironmentInfo and the stats package. runs.jsonl is the source of truth; summary.csv is derived and can be regenerated with the summarize command. Convergence traces are recorded by RunContext on each feasible improvement. A run that exceeds the hard limit or whose process dies is recorded as failed; after three process failures the solver is disqualified for the rest of the experiment. The manifest records the execution mode."
+          "content": "Cover Experiment, ExperimentPlan, ExperimentRunner, RunRecord, TraceRecord, Manifest, EnvironmentInfo and the stats package. runs.jsonl is the source of truth; summary.csv is derived and can be regenerated with the summarize command. Convergence traces are recorded by RunContext on each feasible improvement. A run that exceeds the hard limit or whose process dies is recorded as failed; after three process failures the solver is disqualified for the rest of the experiment. The manifest records the execution mode. SolverProvenance records, per solver, the project source files it depends on (traced through bytecode with java.lang.classfile), a SHA-256 codeHash of those sources, their git authors outside knapsack-core and knapsack-bench, and whether any had uncommitted changes; reports warn when a published variant changes its codeHash."
         }
       ]
     },

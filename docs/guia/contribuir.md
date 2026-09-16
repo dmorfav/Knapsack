@@ -20,6 +20,7 @@ Los cambios de ecosistema (core, baselines, bench, instancias, CI o documentaci�
 | Reglas de arquitectura | `ArchitectureTest` | Ver la tabla siguiente |
 | Contrato de solvers | `SolverContractTest` | Ver [Contrato](#contrato) |
 | Aislamiento | Ejecutor de experimentos | Un algoritmo que no termina, tumba su JVM o agota la memoria solo falla sus propias ejecuciones; ver [Ejecución](../metodologia/experimentos.md#ejecucion) |
+| Procedencia | Manifiesto de cada experimento | Huella de las fuentes de cada solver y sus autores en git; el informe avisa si una variante publicada cambia de código |
 | Revisión | `CODEOWNERS` y protección de rama | Ningún cambio entra en `main` sin aprobación del autor del proyecto |
 
 ### Reglas de arquitectura
@@ -59,7 +60,7 @@ Tampoco se comprueba automáticamente:
 
 - **Que el algoritmo sea el que dice ser.** Un "recocido simulado" que en realidad es una búsqueda aleatoria pasa todas las reglas. Eso lo valora la revisión.
 - **Que las evaluaciones sean honestas.** Un algoritmo puede sumar pesos y beneficios por su cuenta sin llamar a `evaluate`. Por eso las comparaciones de esfuerzo también muestran tiempos.
-- **Que una variante publicada no cambie.** Si cambias el comportamiento de una variante con resultados, crea una variante nueva: la revisión lo exige.
+- **Que una variante publicada no cambie.** Nada impide modificarla, pero la [huella del código](../metodologia/experimentos.md#procedencia-del-codigo) de cada solver delata el cambio en las páginas de resultados. Si cambias el comportamiento de una variante con resultados, crea una variante nueva: la revisión lo exige.
 
 ## Revisión
 
