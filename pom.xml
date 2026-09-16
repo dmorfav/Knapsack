@@ -30,6 +30,7 @@
         <assertj.version>3.27.7</assertj.version>
         <jackson.version>3.2.2</jackson.version>
         <picocli.version>4.7.7</picocli.version>
+        <archunit.version>1.5.0</archunit.version>
 
         <maven-clean-plugin.version>3.5.0</maven-clean-plugin.version>
         <maven-resources-plugin.version>3.5.0</maven-resources-plugin.version>
@@ -63,6 +64,11 @@
                 <groupId>org.assertj</groupId>
                 <artifactId>assertj-core</artifactId>
                 <version>${assertj.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.tngtech.archunit</groupId>
+                <artifactId>archunit</artifactId>
+                <version>${archunit.version}</version>
             </dependency>
             <dependency>
                 <groupId>info.picocli</groupId>
