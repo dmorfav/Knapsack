@@ -15,6 +15,7 @@ import java.time.ZoneOffset;
 import java.util.List;
 import java.util.stream.Stream;
 
+import org.dmorfav.knapsack.bench.execution.SolverExecutor;
 import org.dmorfav.knapsack.bench.experiment.Experiment;
 import org.dmorfav.knapsack.bench.experiment.ExperimentRunner;
 import org.dmorfav.knapsack.core.Instance;
@@ -54,8 +55,10 @@ class ReportGeneratorTest {
         List<KnapsackSolver> solvers = List.of(solver("fake", "fill"), solver("fake", "empty"));
         PrintWriter quiet = new PrintWriter(new StringWriter());
 
-        new ExperimentRunner(solvers, quiet, clock("2026-09-14T10:00:00Z")).run(experiment, root, results);
-        new ExperimentRunner(solvers, quiet, clock("2026-09-21T10:00:00Z")).run(experiment, root, results);
+        new ExperimentRunner(solvers, new SolverExecutor.InProcessExecutor(), quiet, clock("2026-09-14T10:00:00Z"))
+                .run(experiment, root, results);
+        new ExperimentRunner(solvers, new SolverExecutor.InProcessExecutor(), quiet, clock("2026-09-21T10:00:00Z"))
+                .run(experiment, root, results);
     }
 
     @Test

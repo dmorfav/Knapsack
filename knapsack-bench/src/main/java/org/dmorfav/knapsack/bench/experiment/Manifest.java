@@ -7,7 +7,7 @@ import org.dmorfav.knapsack.core.solver.Budget;
 /** manifest.json: todo lo necesario para interpretar y repetir un experimento. */
 public record Manifest(String experiment, String description, String startedAt, String finishedAt, int runs,
                        long firstSeed, int warmupRuns, Long maxEvaluations, long maxSeconds, String runOrder,
-                       int totalRuns, List<InstanceEntry> instances, List<SolverEntry> solvers,
+                       String execution, int totalRuns, List<InstanceEntry> instances, List<SolverEntry> solvers,
                        EnvironmentInfo environment) {
 
     public record InstanceEntry(String name, String file, String sha256, int items, long capacity, long reference,
@@ -17,7 +17,9 @@ public record Manifest(String experiment, String description, String startedAt, 
     public record SolverEntry(String id, String family, String variant, String author) {
     }
 
-    static Manifest of(ExperimentPlan plan, String startedAt, String finishedAt, EnvironmentInfo environment) {
+    /** {@code execution} describe cómo se aislaron las ejecuciones; los manifiestos antiguos sin el campo leen null. */
+    static Manifest of(ExperimentPlan plan, String startedAt, String finishedAt, EnvironmentInfo environment,
+                       String execution) {
         Experiment experiment = plan.experiment();
         Budget budget = experiment.budget();
         List<InstanceEntry> instances = plan.instances().stream()
@@ -32,6 +34,7 @@ public record Manifest(String experiment, String description, String startedAt, 
         return new Manifest(experiment.name(), experiment.description(), startedAt, finishedAt, experiment.runs(),
                 experiment.firstSeed(), experiment.warmupRuns(),
                 budget.limitsEvaluations() ? budget.maxEvaluations() : null, budget.maxTime().toSeconds(),
-                "barajado con semilla " + experiment.firstSeed(), plan.tasks().size(), instances, solvers, environment);
+                "barajado con semilla " + experiment.firstSeed(), execution, plan.tasks().size(), instances, solvers,
+                environment);
     }
 }

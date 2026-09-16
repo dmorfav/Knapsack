@@ -14,6 +14,7 @@ import java.time.ZoneOffset;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import org.dmorfav.knapsack.bench.execution.SolverExecutor;
 import org.dmorfav.knapsack.core.Instance;
 import org.dmorfav.knapsack.core.Item;
 import org.dmorfav.knapsack.core.Solution;
@@ -59,7 +60,8 @@ class ExperimentRunnerTest {
                 Budget.ofTime(Duration.ofSeconds(5)), 2);
         StringWriter out = new StringWriter();
 
-        ResultsDirectory results = new ExperimentRunner(List.of(stepper, broken), new PrintWriter(out), CLOCK)
+        ResultsDirectory results = new ExperimentRunner(List.of(stepper, broken),
+                new SolverExecutor.InProcessExecutor(), new PrintWriter(out), CLOCK)
                 .run(experiment, root, root.resolve("results"));
 
         assertThat(results.path()).isEqualTo(root.resolve("results/runner-test/20260916-101530"));
@@ -82,7 +84,7 @@ class ExperimentRunnerTest {
         assertThat(manifest.get("finishedAt").asString()).isEqualTo("2026-09-16T10:15:30Z");
         assertThat(manifest.get("totalRuns").asInt()).isEqualTo(6);
         assertThat(manifest.get("instances").get(0).get("sha256").asString()).hasSize(64);
-        assertThat(manifest.get("environment").get("javaVersion").asString()).startsWith("25");
+        assertThat(manifest.get("environment").get("javaVersion").asString()).startsWith(String.valueOf(Runtime.version().feature()));
 
         List<String> traces = Files.readAllLines(results.path().resolve("traces.jsonl"));
         assertThat(traces).hasSize(6);
@@ -97,7 +99,8 @@ class ExperimentRunnerTest {
         InstanceFiles.write(new Instance("tiny", 5, List.of(new Item(3, 2))), root.resolve("tiny.json"));
         Experiment experiment = new Experiment("twice", "", List.of("tiny.json"), List.of("fake/stepper"), 1, 1,
                 Budget.ofTime(Duration.ofSeconds(5)), 0);
-        ExperimentRunner runner = new ExperimentRunner(List.of(stepper), new PrintWriter(new StringWriter()), CLOCK);
+        ExperimentRunner runner = new ExperimentRunner(List.of(stepper), new SolverExecutor.InProcessExecutor(),
+                new PrintWriter(new StringWriter()), CLOCK);
 
         Path first = runner.run(experiment, root, root.resolve("results")).path();
         Path second = runner.run(experiment, root, root.resolve("results")).path();

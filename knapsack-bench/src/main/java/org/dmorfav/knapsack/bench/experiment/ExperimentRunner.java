@@ -14,6 +14,7 @@ import java.util.Locale;
 
 import org.dmorfav.knapsack.bench.BudgetText;
 import org.dmorfav.knapsack.bench.SolverRun;
+import org.dmorfav.knapsack.bench.execution.SolverExecutor;
 import org.dmorfav.knapsack.bench.stats.Comparison;
 import org.dmorfav.knapsack.bench.stats.Summarizer;
 import org.dmorfav.knapsack.bench.stats.SummaryOutput;
@@ -21,8 +22,8 @@ import org.dmorfav.knapsack.bench.stats.SummaryRow;
 import org.dmorfav.knapsack.core.solver.KnapsackSolver;
 
 /**
- * Ejecuta un experimento de forma secuencial en esta JVM: calentamiento por solver, tareas en orden barajado y una
- * línea de resultados por ejecución.
+ * Ejecuta un experimento de forma secuencial: calentamiento por solver, tareas en orden barajado y una línea de
+ * resultados por ejecución. Dónde corre cada solver lo decide el {@link SolverExecutor}, que crea y cierra quien llama.
  */
 public final class ExperimentRunner {
 
@@ -30,11 +31,14 @@ public final class ExperimentRunner {
             DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss").withZone(ZoneOffset.UTC);
 
     private final List<KnapsackSolver> availableSolvers;
+    private final SolverExecutor executor;
     private final PrintWriter out;
     private final Clock clock;
 
-    public ExperimentRunner(List<KnapsackSolver> availableSolvers, PrintWriter out, Clock clock) {
+    public ExperimentRunner(List<KnapsackSolver> availableSolvers, SolverExecutor executor, PrintWriter out,
+                            Clock clock) {
         this.availableSolvers = availableSolvers;
+        this.executor = executor;
         this.out = out;
         this.clock = clock;
     }
@@ -45,7 +49,7 @@ public final class ExperimentRunner {
         Instant startedAt = clock.instant().truncatedTo(ChronoUnit.SECONDS);
         ResultsDirectory results = new ResultsDirectory(createDirectory(outputBase.resolve(experiment.name()), startedAt));
         EnvironmentInfo environment = EnvironmentInfo.capture(root);
-        results.writeManifest(Manifest.of(plan, startedAt.toString(), null, environment));
+        results.writeManifest(Manifest.of(plan, startedAt.toString(), null, environment, executor.description()));
 
         out.printf(Locale.ROOT, "Experimento %s: %d instancias × %d solvers × %d ejecuciones = %d%n",
                 experiment.name(), plan.instances().size(), plan.solvers().size(), experiment.runs(), plan.tasks().size());
@@ -58,7 +62,7 @@ public final class ExperimentRunner {
              ResultsDirectory.JsonLinesWriter traces = results.openJsonLines(ResultsDirectory.TRACES)) {
             int done = 0;
             for (ExperimentPlan.Task task : plan.tasks()) {
-                SolverRun run = SolverRun.execute(task.solver(), task.instance().instance(), experiment.budget(), task.seed());
+                SolverRun run = executor.execute(task.solver(), task.instance().instance(), experiment.budget(), task.seed());
                 RunRecord record = RunRecord.of(task.instance(), run);
                 runs.append(record);
                 traces.append(TraceRecord.of(task.instance(), run));
@@ -68,7 +72,7 @@ public final class ExperimentRunner {
         }
 
         results.writeManifest(Manifest.of(plan, startedAt.toString(),
-                clock.instant().truncatedTo(ChronoUnit.SECONDS).toString(), environment));
+                clock.instant().truncatedTo(ChronoUnit.SECONDS).toString(), environment, executor.description()));
         List<RunRecord> records = results.readRuns();
         List<SummaryRow> summary = Summarizer.summarize(records);
         SummaryOutput.writeCsv(summary, results.path().resolve(ResultsDirectory.SUMMARY));
@@ -85,7 +89,7 @@ public final class ExperimentRunner {
         ExperimentPlan.PlannedInstance first = plan.instances().getFirst();
         for (KnapsackSolver solver : plan.solvers()) {
             for (int i = 0; i < experiment.warmupRuns(); i++) {
-                SolverRun.execute(solver, first.instance(), experiment.budget(), experiment.firstSeed() - 1 - i);
+                executor.execute(solver, first.instance(), experiment.budget(), experiment.firstSeed() - 1 - i);
             }
         }
     }

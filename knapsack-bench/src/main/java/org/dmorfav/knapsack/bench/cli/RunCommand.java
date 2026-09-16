@@ -12,6 +12,7 @@ import org.dmorfav.knapsack.bench.BudgetText;
 import org.dmorfav.knapsack.bench.Reference;
 import org.dmorfav.knapsack.bench.SolverCatalog;
 import org.dmorfav.knapsack.bench.SolverRun;
+import org.dmorfav.knapsack.bench.execution.SolverExecutor;
 import org.dmorfav.knapsack.core.Instance;
 import org.dmorfav.knapsack.core.io.InstanceFiles;
 import org.dmorfav.knapsack.core.solver.Budget;
@@ -43,6 +44,10 @@ public final class RunCommand implements Callable<Integer> {
             description = "Segundos máximos por solver (por defecto: ${DEFAULT-VALUE}).")
     long maxSeconds;
 
+    @Option(names = "--in-process",
+            description = "Ejecuta los solvers en esta misma JVM, sin límite duro (para depurar).")
+    boolean inProcess;
+
     @Override
     public Integer call() throws IOException {
         PrintWriter out = spec.commandLine().getOut();
@@ -55,10 +60,13 @@ public final class RunCommand implements Callable<Integer> {
                 instance.capacity(), reference.kind() == Reference.Kind.OPTIMUM
                         ? "óptimo " + reference.value()
                         : "óptimo desconocido (cota de Dantzig " + reference.value() + ")");
-        out.printf(Locale.ROOT, "Semilla %d, presupuesto por solver: %s%n%n", seed, BudgetText.describe(budget));
+        out.printf(Locale.ROOT, "Semilla %d, presupuesto por solver: %s%n", seed, BudgetText.describe(budget));
 
-        for (KnapsackSolver solver : solvers) {
-            print(out, SolverRun.execute(solver, instance, budget, seed), instance, reference);
+        try (SolverExecutor executor = SolverExecutor.create(inProcess)) {
+            out.printf(Locale.ROOT, "Ejecución: %s%n%n", executor.description());
+            for (KnapsackSolver solver : solvers) {
+                print(out, executor.execute(solver, instance, budget, seed), instance, reference);
+            }
         }
         out.flush();
         return 0;

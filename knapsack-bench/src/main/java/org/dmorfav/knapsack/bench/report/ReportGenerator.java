@@ -121,6 +121,7 @@ public final class ReportGenerator {
                 : manifest.maxEvaluations() + " evaluaciones") + ", " + manifest.maxSeconds() + " s");
         row(md, "Calentamiento por solver", manifest.warmupRuns() + " (no se registran)");
         row(md, "Orden", manifest.runOrder());
+        row(md, "Ejecución", manifest.execution() == null ? "no registrada (manifiesto anterior)" : manifest.execution());
         row(md, "Entorno", String.join(" · ", Stream.of(
                         environment.cpuModel(),
                         environment.availableProcessors() + " núcleos",

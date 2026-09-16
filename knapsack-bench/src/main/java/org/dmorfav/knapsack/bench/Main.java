@@ -6,6 +6,7 @@ import org.dmorfav.knapsack.bench.cli.OptimumCommand;
 import org.dmorfav.knapsack.bench.cli.ReportCommand;
 import org.dmorfav.knapsack.bench.cli.RunCommand;
 import org.dmorfav.knapsack.bench.cli.SummarizeCommand;
+import org.dmorfav.knapsack.bench.cli.WorkerCommand;
 import picocli.CommandLine;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Model.CommandSpec;
@@ -16,7 +17,7 @@ import picocli.CommandLine.Spec;
         description = "Banco de pruebas de metaheurísticas para la mochila 0/1.",
         mixinStandardHelpOptions = true,
         subcommands = {RunCommand.class, ExperimentCommand.class, SummarizeCommand.class, ReportCommand.class,
-                GenerateCommand.class, OptimumCommand.class, CommandLine.HelpCommand.class})
+                GenerateCommand.class, OptimumCommand.class, WorkerCommand.class, CommandLine.HelpCommand.class})
 public final class Main implements Runnable {
 
     @Spec

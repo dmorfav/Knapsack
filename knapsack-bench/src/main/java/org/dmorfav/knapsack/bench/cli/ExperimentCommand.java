@@ -7,6 +7,7 @@ import java.time.Clock;
 import java.util.concurrent.Callable;
 
 import org.dmorfav.knapsack.bench.SolverCatalog;
+import org.dmorfav.knapsack.bench.execution.SolverExecutor;
 import org.dmorfav.knapsack.bench.experiment.Experiment;
 import org.dmorfav.knapsack.bench.experiment.ExperimentRunner;
 import org.dmorfav.knapsack.bench.experiment.ResultsDirectory;
@@ -30,13 +31,19 @@ public final class ExperimentCommand implements Callable<Integer> {
             description = "Carpeta base de resultados (por defecto: ${DEFAULT-VALUE}).")
     Path output;
 
+    @Option(names = "--in-process",
+            description = "Ejecuta los solvers en esta misma JVM, sin límite duro (para depurar).")
+    boolean inProcess;
+
     @Override
     public Integer call() throws IOException {
         PrintWriter out = spec.commandLine().getOut();
         Experiment experiment = Experiment.read(experimentFile);
-        ResultsDirectory results = new ExperimentRunner(SolverCatalog.discover(), out, Clock.systemUTC())
-                .run(experiment, Path.of("").toAbsolutePath(), output);
-        out.printf("%nResultados: %s%n", results.path());
+        try (SolverExecutor executor = SolverExecutor.create(inProcess)) {
+            ResultsDirectory results = new ExperimentRunner(SolverCatalog.discover(), executor, out, Clock.systemUTC())
+                    .run(experiment, Path.of("").toAbsolutePath(), output);
+            out.printf("%nResultados: %s%n", results.path());
+        }
         out.flush();
         return 0;
     }
