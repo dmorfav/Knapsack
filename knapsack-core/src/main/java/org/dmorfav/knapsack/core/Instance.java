@@ -25,6 +25,10 @@ public record Instance(String name, long capacity, List<Item> items, OptionalLon
         this(name, capacity, items, OptionalLong.empty());
     }
 
+    public Instance withKnownOptimum(long optimum) {
+        return new Instance(name, capacity, items, OptionalLong.of(optimum));
+    }
+
     public int size() {
         return items.size();
     }

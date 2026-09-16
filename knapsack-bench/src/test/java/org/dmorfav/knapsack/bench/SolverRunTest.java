@@ -43,6 +43,16 @@ class SolverRunTest {
     }
 
     @Test
+    void flagsProfitAboveTheKnownOptimum() {
+        Instance wrongOptimum = instance.withKnownOptimum(10);
+
+        SolverRun run = SolverRun.execute(solver((instance, context) -> Solution.fromBits(1, 1, 0)),
+                wrongOptimum, Budget.unlimited(), 1);
+
+        assertThat(run.failure()).startsWith("beneficio 11 supera el óptimo conocido 10");
+    }
+
+    @Test
     void flagsNullAndWrongSizedSolutions() {
         assertThat(execute((instance, context) -> null).failure()).contains("null");
         assertThat(execute((instance, context) -> Solution.empty(2)).failure()).contains("2 posiciones");
