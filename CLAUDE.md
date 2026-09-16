@@ -9,9 +9,10 @@ Proyecto académico de investigación: metaheurísticas para el problema de la m
 - Tu terreno es el ecosistema: `knapsack-core`, `knapsack-bench`, POMs, instancias, CI, docs y arquitectura.
 - Ante un bug dentro de un algoritmo, descríbelo en texto con fichero y línea; el autor decide y lo corrige.
 - Los baselines de referencia (voraz, exacto) son ecosistema, no autoría humana.
-- Los algoritmos importan `model.*` y `kp_hs.Constants`: esas clases viven en `knapsack-core` y conservan paquete y firma públicos, porque renombrarlas obligaría a editar autoría humana.
+- El registro `META-INF/services` de `knapsack-algorithms` también es autoría humana: el autor da de alta sus propios algoritmos.
+- Los algoritmos originales importan `model.*` y `kp_hs.Constants`: esas clases viven en `knapsack-core` y conservan paquete y firma públicos, porque renombrarlas obligaría a editar autoría humana. Se ejecutan mediante los adaptadores de `knapsack-bench/.../legacy`.
 
-El hook `.claude/hooks/guard.sh` bloquea la escritura en esa ruta.
+El hook `.claude/hooks/guard.sh` bloquea la escritura en esa ruta; `.claude/hooks/guard_test.sh` es su batería de pruebas y se ejecuta tras cualquier cambio del hook.
 
 ## Git
 
@@ -20,5 +21,5 @@ El autor hace todos los commits. Deja los cambios en el working tree, sin stage,
 ## Build
 
 - Java 25 obligatorio (el enforcer falla con otra versión). El `JAVA_HOME` por defecto de esta máquina es JDK 21; exporta `JAVA_HOME=/opt/homebrew/opt/openjdk@25/libexec/openjdk.jdk/Contents/Home` antes de `./mvnw`.
-- Lanza Maven siempre desde la raíz: tests y app resuelven `instances/` relativo a ella.
-- `kp_hs.KP_HS` regenera `instances/20_instance.json` con datos aleatorios en cada ejecución; guarda una copia y restáurala tras ejecutarla.
+- Lanza `exec:java` desde la raíz: las rutas de `--instance` son relativas a ella. Los tests leen sus instancias del classpath.
+- Todo solver se ejecuta con presupuesto de tiempo: los algoritmos originales pueden no terminar en instancias ajustadas.

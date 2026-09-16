@@ -33,7 +33,8 @@ case "$tool" in
       deny "$GIT_MSG"
     fi
     if grep -q 'knapsack-algorithms/src' <<<"$cmd"; then
-      stripped="$(sed -E 's#[0-9]?>{1,2}[[:space:]]*/dev/null##g; s#[0-9]>&[0-9]##g' <<<"$cmd")"
+      # Sin literales entre comillas: un '>' dentro de un patrón de sed/grep no es una redirección
+      stripped="$(sed -E "s/'[^']*'//g; s/\"[^\"]*\"//g; s#[0-9]?>{1,2}[[:space:]]*/dev/null##g; s#[0-9]>&[0-9]##g" <<<"$cmd")"
       if grep -Eq '>|(^|[^[:alnum:]_-])(tee|mv|cp|rm|touch|ln|truncate|patch|install|rsync)([[:space:]]|$)|sed[[:space:]]+(-[[:alnum:]]*[[:space:]]+)*-i|perl[[:space:]]+-[[:alnum:]]*i|git[[:space:]]+(mv|rm|checkout|restore|apply|stash|reset|clean)' <<<"$stripped"; then
         deny "$ALGORITHMS_MSG"
       fi

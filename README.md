@@ -30,13 +30,37 @@ Requiere **Java 25**. Desde la raíz del repositorio:
 
 ```bash
 ./mvnw verify               # compila y ejecuta los tests
-./mvnw compile exec:java    # ejecuta todos los algoritmos
+./mvnw compile exec:java    # ejecuta todos los algoritmos sobre instances/legacy-20.json
+./mvnw compile exec:java -Dexec.args="--instance=instances/legacy-100.json --seed=7 --max-seconds=5"
 ```
+
+Opciones: `--instance`, `--seed`, `--max-evaluations` y `--max-seconds` (60 s por defecto, por algoritmo).
 
 ## Estructura
 | Módulo | Contenido | Autoría |
 |---|---|---|
-| `knapsack-core` | Modelo del problema y lectura de instancias | Ecosistema |
+| `knapsack-core` | Modelo del problema, formato de instancia y contrato `KnapsackSolver` | Ecosistema |
 | `knapsack-algorithms` | Implementaciones metaheurísticas | Humana, sin IA |
-| `knapsack-bench` | Ejecución y comparación | Ecosistema |
+| `knapsack-bench` | Ejecución, validación y comparación | Ecosistema |
 | `instances/` | Instancias del problema en JSON | — |
+
+## Formato de instancia
+```json
+{
+  "name": "ejemplo",
+  "capacity": 10,
+  "optimum": 9,
+  "items": [ { "profit": 9, "weight": 7 }, { "profit": 4, "weight": 5 } ]
+}
+```
+`optimum` es opcional. Las instancias `legacy-*` son las del proyecto original, con la capacidad de 100 que usaba su `main`.
+
+## Añadir un algoritmo
+1. Implementa `org.dmorfav.knapsack.core.solver.KnapsackSolver` en `knapsack-algorithms`, con un constructor público sin argumentos.
+2. Regístralo añadiendo su nombre completo a `knapsack-algorithms/src/main/resources/META-INF/services/org.dmorfav.knapsack.core.solver.KnapsackSolver`.
+3. Respeta el contrato del `SolverContext`:
+   - toda la aleatoriedad sale de `context.random()`, para que la semilla haga reproducible la ejecución;
+   - cada solución se evalúa con `context.evaluate(...)`, que cuenta evaluaciones;
+   - el algoritmo termina en cuanto `context.budgetExhausted()` es cierto.
+
+`SolverInfo` identifica la implementación como `familia/variante` (p. ej. `harmony-search/improved-v2`), así que puede haber varias implementaciones del mismo algoritmo. Los algoritmos originales se ejecutan sin modificar a través de adaptadores en `knapsack-bench` y aparecen con la variante `legacy`. Como usan `Math.random`, sus resultados no son reproducibles.
