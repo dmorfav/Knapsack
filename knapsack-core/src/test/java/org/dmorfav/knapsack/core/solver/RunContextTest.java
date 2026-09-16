@@ -60,6 +60,34 @@ class RunContextTest {
     }
 
     @Test
+    void traceRecordsOnlyFeasibleImprovements() {
+        AtomicLong nanos = new AtomicLong();
+        RunContext context = new RunContext(instance, Budget.unlimited(), 1, nanos::get);
+
+        nanos.set(10);
+        context.evaluate(Solution.fromBits(1, 0));
+        nanos.set(20);
+        context.evaluate(Solution.fromBits(1, 1));
+        nanos.set(30);
+        context.evaluate(Solution.fromBits(1, 0));
+        nanos.set(40);
+        context.evaluate(Solution.fromBits(0, 1));
+
+        assertThat(context.trace()).containsExactly(
+                new TracePoint(1, 10, 3),
+                new TracePoint(4, 40, 5));
+    }
+
+    @Test
+    void emptySolutionIsAnImprovementOverNothing() {
+        RunContext context = new RunContext(instance, Budget.unlimited(), 1, () -> 0);
+
+        context.evaluate(Solution.empty(2));
+
+        assertThat(context.trace()).containsExactly(new TracePoint(1, 0, 0));
+    }
+
+    @Test
     void sameSeedGivesSameRandomSequence() {
         assertThat(firstLongs(42)).isEqualTo(firstLongs(42));
         assertThat(firstLongs(42)).isNotEqualTo(firstLongs(43));

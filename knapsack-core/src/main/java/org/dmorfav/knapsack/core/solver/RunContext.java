@@ -1,6 +1,8 @@
 package org.dmorfav.knapsack.core.solver;
 
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.function.LongSupplier;
 import java.util.random.RandomGenerator;
@@ -20,7 +22,9 @@ public final class RunContext implements SolverContext {
     private final RandomGenerator random;
     private final LongSupplier nanoClock;
     private final long startNanos;
+    private final List<TracePoint> trace = new ArrayList<>();
     private long evaluations;
+    private long bestFeasibleProfit = -1;
 
     public RunContext(Instance instance, Budget budget, long seed) {
         this(instance, budget, seed, System::nanoTime);
@@ -45,7 +49,17 @@ public final class RunContext implements SolverContext {
             throw new BudgetExhaustedException(budget, evaluations, elapsed());
         }
         evaluations++;
-        return instance.evaluate(solution);
+        Evaluation evaluation = instance.evaluate(solution);
+        if (evaluation.feasible() && evaluation.profit() > bestFeasibleProfit) {
+            bestFeasibleProfit = evaluation.profit();
+            trace.add(new TracePoint(evaluations, nanoClock.getAsLong() - startNanos, evaluation.profit()));
+        }
+        return evaluation;
+    }
+
+    /** Curva de convergencia: cada vez que una evaluación mejoró el mejor beneficio factible visto. */
+    public List<TracePoint> trace() {
+        return List.copyOf(trace);
     }
 
     @Override
