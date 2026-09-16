@@ -1,0 +1,3 @@
+org.dmorfav.knapsack.baselines.GreedySolver
+org.dmorfav.knapsack.baselines.GreedyBestItemSolver
+org.dmorfav.knapsack.baselines.DynamicProgrammingSolver
