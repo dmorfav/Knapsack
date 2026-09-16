@@ -1,0 +1,113 @@
+{
+  "repo_notes": [
+    {
+      "content": "Academic research project on metaheuristics for the 0/1 knapsack problem. Human authorship is the core rule: everything under knapsack-algorithms/src is written by hand without generative AI, while the surrounding ecosystem (knapsack-core, knapsack-bench, build, CI, docs) is developed with AI assistance. When documenting algorithms, describe what the code does as written, citing files and lines; state measured behaviour only when it comes from the bench output; leave assessments of correctness, fixes and improvement ideas out of the wiki, since they belong to the author. Java 25, Maven multi-module build with the Maven Wrapper. Code identifiers are English, project prose and CLI output are Spanish. The canonical documentation and experiment results are published with MkDocs on GitHub Pages at https://dmorfav.github.io/Knapsack/; link there for results instead of restating numbers."
+    }
+  ],
+  "pages": [
+    {
+      "title": "Overview",
+      "purpose": "Introduce the project as a test bench for hand-written metaheuristics on the 0/1 knapsack problem, and state the human-authorship policy for algorithms",
+      "page_notes": [
+        {
+          "content": "Lead with the problem definition and the split between human-authored algorithms and the AI-assisted ecosystem, as stated in README.md."
+        }
+      ]
+    },
+    {
+      "title": "Getting Started",
+      "purpose": "Guide users through the Java 25 toolchain, the Maven Wrapper, running tests and running the bench with its command-line options",
+      "page_notes": [
+        {
+          "content": "Commands run from the repository root. Bench options are parsed in knapsack-bench Options.java: --instance, --seed, --max-evaluations, --max-seconds."
+        }
+      ]
+    },
+    {
+      "title": "System Architecture",
+      "purpose": "Explain the three Maven modules, their dependency direction and how a solver is discovered, executed and validated",
+      "page_notes": [
+        {
+          "content": "Dependency direction: knapsack-algorithms depends only on knapsack-core; knapsack-bench depends on both. Solvers are discovered with java.util.ServiceLoader."
+        }
+      ]
+    },
+    {
+      "title": "Problem Model",
+      "purpose": "Document Instance, Item, Solution and Evaluation in knapsack-core",
+      "parent": "System Architecture",
+      "page_notes": [
+        {
+          "content": "Also cover the original model.Item and model.Knapsack classes, kept with their public API because the original algorithms import them."
+        }
+      ]
+    },
+    {
+      "title": "Solver Contract",
+      "purpose": "Document KnapsackSolver, SolverInfo, SolverContext, RunContext and Budget, including seeding, evaluation counting and budget exhaustion",
+      "parent": "System Architecture",
+      "page_notes": [
+        {
+          "content": "Explain the family/variant identity that allows several implementations of the same algorithm, and the steps to register a new solver."
+        }
+      ]
+    },
+    {
+      "title": "Instance Format",
+      "purpose": "Document the JSON instance format, validation rules and the instances shipped in the instances directory",
+      "parent": "System Architecture",
+      "page_notes": [
+        {
+          "content": "Source of truth is InstanceFiles.java. The legacy-* instances come from the original project and use capacity 100."
+        }
+      ]
+    },
+    {
+      "title": "Algorithms",
+      "purpose": "Overview of the hand-written metaheuristic implementations and how each is exposed to the bench",
+      "page_notes": [
+        {
+          "content": "Describe each algorithm as written. The original implementations run unmodified through legacy adapters, use Math.random and therefore ignore the run seed."
+        }
+      ]
+    },
+    {
+      "title": "Harmony Search Family",
+      "purpose": "Describe the Harmony Search, Improved Harmony Search and Discrete Binary Harmony Search implementations and their parameters",
+      "parent": "Algorithms",
+      "page_notes": [
+        {
+          "content": "Cover harmony memory, HMCR, PAR and bandwidth as implemented in knapsack-algorithms."
+        }
+      ]
+    },
+    {
+      "title": "Hill Climbing Family",
+      "purpose": "Describe the first-ascent and best-ascent hill climbing implementations",
+      "parent": "Algorithms",
+      "page_notes": [
+        {
+          "content": "Describe initial solution generation and neighbourhood exploration as implemented in knapsack-algorithms."
+        }
+      ]
+    },
+    {
+      "title": "Bench",
+      "purpose": "Document how the bench runs every discovered solver, validates its solution and reports profit, weight, evaluations and time",
+      "page_notes": [
+        {
+          "content": "Cover Main, SolverRun and the legacy adapters CountingKnapsack and LegacySolvers, which route every legacy model query through the counted, budgeted context."
+        }
+      ]
+    },
+    {
+      "title": "Development Workflow",
+      "purpose": "Document the build configuration, test suites, continuous integration and the authorship guardrails",
+      "page_notes": [
+        {
+          "content": "Include the Maven enforcer rules, JaCoCo coverage, the GitHub Actions workflows build.yml and qa.yml, and the Claude Code hooks in .claude/hooks that protect knapsack-algorithms/src and reserve commits for the author."
+        }
+      ]
+    }
+  ]
+}
