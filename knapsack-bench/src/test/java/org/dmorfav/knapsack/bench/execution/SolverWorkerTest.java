@@ -97,7 +97,9 @@ class SolverWorkerTest {
         ByteArrayOutputStream output = new ByteArrayOutputStream();
         SolverWorker.serve(solver, new ByteArrayInputStream(requests.getBytes(StandardCharsets.UTF_8)),
                 new PrintStream(output, true, StandardCharsets.UTF_8));
-        return output.toString(StandardCharsets.UTF_8).lines()
+        List<String> lines = output.toString(StandardCharsets.UTF_8).lines().toList();
+        assertThat(lines).first().isEqualTo(WorkerProtocol.READY);
+        return lines.stream().skip(1)
                 .map(line -> WorkerProtocol.MAPPER.readValue(line, WorkerProtocol.Response.class))
                 .toList();
     }

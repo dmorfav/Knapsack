@@ -70,6 +70,28 @@ class IsolatedExecutorTest {
     }
 
     @Test
+    void theHardLimitDoesNotCountTheStartupOfTheProcess() {
+        try (IsolatedExecutor executor = IsolatedExecutor.forCurrentJvm(GRACE)) {
+            SolverRun run = executor.execute(new SlowStartingSolver(), instance, SHORT, 1);
+
+            assertThat(run.failure()).isNull();
+            assertThat(run.elapsed()).isLessThan(Duration.ofMillis(SlowStartingSolver.STARTUP_MILLIS));
+        } catch (InterruptedException e) {
+            throw new AssertionError(e);
+        }
+    }
+
+    @Test
+    void reportsAProcessThatFailsToStart() {
+        try (IsolatedExecutor executor = IsolatedExecutor.forCurrentJvm(GRACE)) {
+            SolverRun run = executor.execute(new FailingConstructorSolver(), instance, SHORT, 1);
+
+            assertThat(run.succeeded()).isFalse();
+            assertThat(run.failure()).contains("terminó inesperadamente");
+        }
+    }
+
+    @Test
     void reportsAProcessThatDiesAndDisqualifiesItAfterRepeatedFailures() {
         try (IsolatedExecutor executor = IsolatedExecutor.forCurrentJvm(GRACE, 2)) {
             assertThat(executor.execute(new ExitingSolver(), instance, SHORT, 1).failure()).contains("código 3");

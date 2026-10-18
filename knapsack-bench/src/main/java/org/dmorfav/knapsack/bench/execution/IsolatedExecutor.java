@@ -42,6 +42,8 @@ public final class IsolatedExecutor implements SolverExecutor {
 
     public static final Duration DEFAULT_GRACE = Duration.ofSeconds(5);
     static final int DEFAULT_MAX_PROCESS_FAILURES = 3;
+    /** Tiempo para arrancar la JVM y construir el solver, aparte del límite duro de cada ejecución. */
+    static final Duration STARTUP_TIMEOUT = Duration.ofSeconds(60);
 
     private final List<String> launcher;
     private final Duration grace;
@@ -73,13 +75,20 @@ public final class IsolatedExecutor implements SolverExecutor {
             return SolverRun.of(solver.info(), seed, instance, SolverRun.Attempt.failed(
                     "descalificado: su proceso falló " + maxProcessFailures + " veces en este experimento", 0, Duration.ZERO));
         }
-        WorkerProcess process = processes.computeIfAbsent(solverClass, this::start);
         long startNanos = System.nanoTime();
         try {
+            WorkerProcess process = processes.get(solverClass);
+            if (process == null) {
+                process = start(solverClass);
+                processes.put(solverClass, process);
+                startNanos = System.nanoTime();
+            }
             return SolverRun.of(solver.info(), seed, instance, process.run(instance, budget, seed, hardLimit(budget)));
         } catch (ProcessFailure e) {
-            process.destroy();
-            processes.remove(solverClass);
+            WorkerProcess failed = processes.remove(solverClass);
+            if (failed != null) {
+                failed.destroy();
+            }
             processFailures.merge(solverClass, 1, Integer::sum);
             return SolverRun.of(solver.info(), seed, instance,
                     SolverRun.Attempt.failed(e.getMessage(), 0, Duration.ofNanos(System.nanoTime() - startNanos)));
@@ -101,14 +110,22 @@ public final class IsolatedExecutor implements SolverExecutor {
         return budget.limitsTime() ? budget.maxTime().plus(grace) : null;
     }
 
-    private WorkerProcess start(String solverClass) {
+    /** Lanza el proceso y espera a que construya el solver: el arranque en frío de la JVM no cuenta en el límite duro. */
+    private WorkerProcess start(String solverClass) throws ProcessFailure {
         List<String> command = new ArrayList<>(launcher);
         command.add("--solver-class=" + solverClass);
+        WorkerProcess worker;
         try {
-            Process process = new ProcessBuilder(command).redirectError(ProcessBuilder.Redirect.INHERIT).start();
-            return new WorkerProcess(process);
+            worker = new WorkerProcess(new ProcessBuilder(command).redirectError(ProcessBuilder.Redirect.INHERIT).start());
         } catch (IOException e) {
             throw new UncheckedIOException("no se pudo lanzar el proceso de " + solverClass, e);
+        }
+        try {
+            worker.awaitReady(STARTUP_TIMEOUT);
+            return worker;
+        } catch (ProcessFailure e) {
+            worker.destroy();
+            throw e;
         }
     }
 
@@ -165,6 +182,19 @@ public final class IsolatedExecutor implements SolverExecutor {
             this.process = process;
             this.requests = new BufferedWriter(new OutputStreamWriter(process.getOutputStream(), StandardCharsets.UTF_8));
             Thread.ofPlatform().daemon().name("worker-reader-" + process.pid()).start(this::readResponses);
+        }
+
+        void awaitReady(Duration timeout) throws ProcessFailure {
+            Optional<String> line = awaitResponse(timeout);
+            if (line == null) {
+                throw new ProcessFailure("su proceso no arrancó en " + describe(timeout));
+            }
+            if (line.isEmpty()) {
+                throw new ProcessFailure(crashMessage());
+            }
+            if (!line.get().equals(WorkerProtocol.READY)) {
+                throw new ProcessFailure("su proceso respondió algo inesperado al arrancar: " + line.get());
+            }
         }
 
         SolverRun.Attempt run(Instance instance, Budget budget, long seed, Duration hardLimit) throws ProcessFailure {

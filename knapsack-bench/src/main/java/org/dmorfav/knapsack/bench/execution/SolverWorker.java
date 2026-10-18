@@ -23,6 +23,8 @@ public final class SolverWorker {
     public static void serve(KnapsackSolver solver, InputStream requests, PrintStream responses) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(requests, StandardCharsets.UTF_8));
         Map<Integer, Instance> instances = new HashMap<>();
+        responses.println(WorkerProtocol.READY);
+        responses.flush();
         for (String line = reader.readLine(); line != null; line = reader.readLine()) {
             WorkerProtocol.Request request = WorkerProtocol.MAPPER.readValue(line, WorkerProtocol.Request.class);
             if (request.instance() != null) {

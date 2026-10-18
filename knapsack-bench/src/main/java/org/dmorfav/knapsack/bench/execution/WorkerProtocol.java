@@ -14,12 +14,16 @@ import org.dmorfav.knapsack.core.solver.TracePoint;
 import tools.jackson.databind.json.JsonMapper;
 
 /**
- * Mensajes entre el banco y un proceso aislado: una línea JSON por petición y por respuesta. Cada instancia se envía
- * una sola vez por proceso; las peticiones siguientes la citan por su id.
+ * Mensajes entre el banco y un proceso aislado: una línea JSON por petición y por respuesta. El proceso anuncia
+ * {@link #READY} cuando ha construido el solver, antes de la primera petición. Cada instancia se envía una sola vez
+ * por proceso; las peticiones siguientes la citan por su id.
  */
 final class WorkerProtocol {
 
     static final JsonMapper MAPPER = JsonMapper.builder().build();
+
+    /** Primera línea del proceso: a partir de aquí el límite duro solo mide ejecuciones, no el arranque de la JVM. */
+    static final String READY = "{\"ready\":true}";
 
     private WorkerProtocol() {
     }
