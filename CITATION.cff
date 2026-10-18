@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+message: "Si usas este banco de pruebas o sus resultados en un trabajo académico, cítalo con estos metadatos."
+type: software
+title: "Knapsack: banco de pruebas de metaheurísticas para el problema de la mochila 0/1"
+abstract: >-
+  Banco de pruebas reproducible para comparar metaheurísticas en el problema de la mochila 0/1: contrato común
+  de solvers con semilla y presupuesto, instancias de Pisinger con óptimo verificado, experimentos definidos en
+  YAML y comparación estadística con Friedman, Nemenyi y Wilcoxon con corrección de Holm.
+authors:
+  - family-names: "Morfa Vega"
+    given-names: "Daniel"
+    email: "danielmorfavega@gmail.com"
+  - family-names: "Herrera-Franklin"
+    given-names: "Jorge"
+repository-code: "https://github.com/dmorfav/Knapsack"
+url: "https://dmorfav.github.io/Knapsack/"
+license: GPL-3.0-or-later
+keywords:
+  - knapsack problem
+  - metaheuristics
+  - benchmarking
+  - combinatorial optimization
