@@ -52,7 +52,7 @@ jobs:
         if: matrix.os == 'ubuntu-latest'
         run: |
           for suite in instances/*/suite.yaml; do
-            ./mvnw -B -q exec:java -Dexec.args="suite --check $suite"
+            ./mvnw -B -q compile exec:java -Dexec.args="suite --check $suite"
           done
       - name: Run App
         run: ./mvnw -B compile exec:java
