@@ -39,6 +39,8 @@ El presupuesto solo detiene a un solver cuando consulta el contexto. Para que un
 | `StackOverflowError` u `OutOfMemoryError` | La ejecución falla como una excepción y el proceso sigue |
 | Tercer fallo de proceso del mismo solver | El solver queda **descalificado**: sus ejecuciones restantes fallan sin lanzarse |
 
+El límite duro empieza a contar cuando el proceso ya ha arrancado y ha construido el solver, así que el arranque en frío de la JVM no cuenta como tiempo de ejecución. El arranque tiene su propio límite de 60 s; si lo supera o el constructor del solver falla, cuenta como un fallo de proceso más.
+
 Tras un fallo de proceso, la siguiente ejecución arranca una JVM nueva, sin calentar. El manifiesto registra el modo de ejecución en `execution`. `run` y `experiment` aceptan `--in-process` para depurar en la misma JVM, sin límite duro.
 
 Cada experimento escribe en `results/<nombre>/<fecha UTC>/`:
