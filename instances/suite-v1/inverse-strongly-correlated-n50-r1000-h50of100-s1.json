@@ -1,0 +1,156 @@
+{
+  "name" : "inverse-strongly-correlated-n50-r1000-h50of100-s1",
+  "capacity" : 14847,
+  "optimum" : 13047,
+  "items" : [ {
+    "profit" : 424,
+    "weight" : 524
+  }, {
+    "profit" : 604,
+    "weight" : 704
+  }, {
+    "profit" : 294,
+    "weight" : 394
+  }, {
+    "profit" : 656,
+    "weight" : 756
+  }, {
+    "profit" : 809,
+    "weight" : 909
+  }, {
+    "profit" : 354,
+    "weight" : 454
+  }, {
+    "profit" : 415,
+    "weight" : 515
+  }, {
+    "profit" : 505,
+    "weight" : 605
+  }, {
+    "profit" : 416,
+    "weight" : 516
+  }, {
+    "profit" : 195,
+    "weight" : 295
+  }, {
+    "profit" : 252,
+    "weight" : 352
+  }, {
+    "profit" : 970,
+    "weight" : 1070
+  }, {
+    "profit" : 681,
+    "weight" : 781
+  }, {
+    "profit" : 504,
+    "weight" : 604
+  }, {
+    "profit" : 654,
+    "weight" : 754
+  }, {
+    "profit" : 476,
+    "weight" : 576
+  }, {
+    "profit" : 594,
+    "weight" : 694
+  }, {
+    "profit" : 735,
+    "weight" : 835
+  }, {
+    "profit" : 518,
+    "weight" : 618
+  }, {
+    "profit" : 203,
+    "weight" : 303
+  }, {
+    "profit" : 58,
+    "weight" : 158
+  }, {
+    "profit" : 636,
+    "weight" : 736
+  }, {
+    "profit" : 349,
+    "weight" : 449
+  }, {
+    "profit" : 331,
+    "weight" : 431
+  }, {
+    "profit" : 475,
+    "weight" : 575
+  }, {
+    "profit" : 642,
+    "weight" : 742
+  }, {
+    "profit" : 780,
+    "weight" : 880
+  }, {
+    "profit" : 735,
+    "weight" : 835
+  }, {
+    "profit" : 324,
+    "weight" : 424
+  }, {
+    "profit" : 48,
+    "weight" : 148
+  }, {
+    "profit" : 424,
+    "weight" : 524
+  }, {
+    "profit" : 687,
+    "weight" : 787
+  }, {
+    "profit" : 352,
+    "weight" : 452
+  }, {
+    "profit" : 582,
+    "weight" : 682
+  }, {
+    "profit" : 629,
+    "weight" : 729
+  }, {
+    "profit" : 433,
+    "weight" : 533
+  }, {
+    "profit" : 572,
+    "weight" : 672
+  }, {
+    "profit" : 530,
+    "weight" : 630
+  }, {
+    "profit" : 950,
+    "weight" : 1050
+  }, {
+    "profit" : 956,
+    "weight" : 1056
+  }, {
+    "profit" : 53,
+    "weight" : 153
+  }, {
+    "profit" : 939,
+    "weight" : 1039
+  }, {
+    "profit" : 696,
+    "weight" : 796
+  }, {
+    "profit" : 424,
+    "weight" : 524
+  }, {
+    "profit" : 387,
+    "weight" : 487
+  }, {
+    "profit" : 293,
+    "weight" : 393
+  }, {
+    "profit" : 107,
+    "weight" : 207
+  }, {
+    "profit" : 712,
+    "weight" : 812
+  }, {
+    "profit" : 578,
+    "weight" : 678
+  }, {
+    "profit" : 50,
+    "weight" : 150
+  } ]
+}

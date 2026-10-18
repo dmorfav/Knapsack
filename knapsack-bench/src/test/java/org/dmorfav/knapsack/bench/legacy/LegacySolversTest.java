@@ -43,7 +43,8 @@ class LegacySolversTest {
 
         assertThat(solution.size()).isEqualTo(LOOSE.size());
         assertThat(context.evaluations()).isPositive();
-        assertThat(solver.info().author()).isEqualTo("Daniel Morfa Vega");
+        assertThat(solver.info().author()).isEqualTo(solver.info().family().equals("hill-climbing-best-ascent")
+                ? "Daniel Morfa Vega" : "Jorge Herrera Franklin");
     }
 
     @Test

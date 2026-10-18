@@ -48,5 +48,11 @@ jobs:
       - name: Verify declared optima
         if: matrix.os == 'ubuntu-latest'
         run: ./mvnw -B -q compile exec:java -Dexec.args="optimum $(find instances -name '*.json' | sort | tr '\n' ' ')"
+      - name: Verify instance suites
+        if: matrix.os == 'ubuntu-latest'
+        run: |
+          for suite in instances/*/suite.yaml; do
+            ./mvnw -B -q exec:java -Dexec.args="suite --check $suite"
+          done
       - name: Run App
         run: ./mvnw -B compile exec:java

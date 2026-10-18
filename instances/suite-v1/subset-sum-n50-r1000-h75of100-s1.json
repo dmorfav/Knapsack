@@ -1,0 +1,156 @@
+{
+  "name" : "subset-sum-n50-r1000-h75of100-s1",
+  "capacity" : 18557,
+  "optimum" : 18557,
+  "items" : [ {
+    "profit" : 424,
+    "weight" : 424
+  }, {
+    "profit" : 604,
+    "weight" : 604
+  }, {
+    "profit" : 294,
+    "weight" : 294
+  }, {
+    "profit" : 656,
+    "weight" : 656
+  }, {
+    "profit" : 809,
+    "weight" : 809
+  }, {
+    "profit" : 354,
+    "weight" : 354
+  }, {
+    "profit" : 415,
+    "weight" : 415
+  }, {
+    "profit" : 505,
+    "weight" : 505
+  }, {
+    "profit" : 416,
+    "weight" : 416
+  }, {
+    "profit" : 195,
+    "weight" : 195
+  }, {
+    "profit" : 252,
+    "weight" : 252
+  }, {
+    "profit" : 970,
+    "weight" : 970
+  }, {
+    "profit" : 681,
+    "weight" : 681
+  }, {
+    "profit" : 504,
+    "weight" : 504
+  }, {
+    "profit" : 654,
+    "weight" : 654
+  }, {
+    "profit" : 476,
+    "weight" : 476
+  }, {
+    "profit" : 594,
+    "weight" : 594
+  }, {
+    "profit" : 735,
+    "weight" : 735
+  }, {
+    "profit" : 518,
+    "weight" : 518
+  }, {
+    "profit" : 203,
+    "weight" : 203
+  }, {
+    "profit" : 58,
+    "weight" : 58
+  }, {
+    "profit" : 636,
+    "weight" : 636
+  }, {
+    "profit" : 349,
+    "weight" : 349
+  }, {
+    "profit" : 331,
+    "weight" : 331
+  }, {
+    "profit" : 475,
+    "weight" : 475
+  }, {
+    "profit" : 642,
+    "weight" : 642
+  }, {
+    "profit" : 780,
+    "weight" : 780
+  }, {
+    "profit" : 735,
+    "weight" : 735
+  }, {
+    "profit" : 324,
+    "weight" : 324
+  }, {
+    "profit" : 48,
+    "weight" : 48
+  }, {
+    "profit" : 424,
+    "weight" : 424
+  }, {
+    "profit" : 687,
+    "weight" : 687
+  }, {
+    "profit" : 352,
+    "weight" : 352
+  }, {
+    "profit" : 582,
+    "weight" : 582
+  }, {
+    "profit" : 629,
+    "weight" : 629
+  }, {
+    "profit" : 433,
+    "weight" : 433
+  }, {
+    "profit" : 572,
+    "weight" : 572
+  }, {
+    "profit" : 530,
+    "weight" : 530
+  }, {
+    "profit" : 950,
+    "weight" : 950
+  }, {
+    "profit" : 956,
+    "weight" : 956
+  }, {
+    "profit" : 53,
+    "weight" : 53
+  }, {
+    "profit" : 939,
+    "weight" : 939
+  }, {
+    "profit" : 696,
+    "weight" : 696
+  }, {
+    "profit" : 424,
+    "weight" : 424
+  }, {
+    "profit" : 387,
+    "weight" : 387
+  }, {
+    "profit" : 293,
+    "weight" : 293
+  }, {
+    "profit" : 107,
+    "weight" : 107
+  }, {
+    "profit" : 712,
+    "weight" : 712
+  }, {
+    "profit" : 578,
+    "weight" : 578
+  }, {
+    "profit" : 50,
+    "weight" : 50
+  } ]
+}

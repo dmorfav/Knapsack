@@ -1,0 +1,606 @@
+{
+  "name" : "strongly-correlated-n200-r1000-h25of100-s1",
+  "capacity" : 25111,
+  "optimum" : 34511,
+  "items" : [ {
+    "profit" : 524,
+    "weight" : 424
+  }, {
+    "profit" : 704,
+    "weight" : 604
+  }, {
+    "profit" : 394,
+    "weight" : 294
+  }, {
+    "profit" : 756,
+    "weight" : 656
+  }, {
+    "profit" : 909,
+    "weight" : 809
+  }, {
+    "profit" : 454,
+    "weight" : 354
+  }, {
+    "profit" : 515,
+    "weight" : 415
+  }, {
+    "profit" : 605,
+    "weight" : 505
+  }, {
+    "profit" : 516,
+    "weight" : 416
+  }, {
+    "profit" : 295,
+    "weight" : 195
+  }, {
+    "profit" : 352,
+    "weight" : 252
+  }, {
+    "profit" : 1070,
+    "weight" : 970
+  }, {
+    "profit" : 781,
+    "weight" : 681
+  }, {
+    "profit" : 604,
+    "weight" : 504
+  }, {
+    "profit" : 754,
+    "weight" : 654
+  }, {
+    "profit" : 576,
+    "weight" : 476
+  }, {
+    "profit" : 694,
+    "weight" : 594
+  }, {
+    "profit" : 835,
+    "weight" : 735
+  }, {
+    "profit" : 618,
+    "weight" : 518
+  }, {
+    "profit" : 303,
+    "weight" : 203
+  }, {
+    "profit" : 158,
+    "weight" : 58
+  }, {
+    "profit" : 736,
+    "weight" : 636
+  }, {
+    "profit" : 449,
+    "weight" : 349
+  }, {
+    "profit" : 431,
+    "weight" : 331
+  }, {
+    "profit" : 575,
+    "weight" : 475
+  }, {
+    "profit" : 742,
+    "weight" : 642
+  }, {
+    "profit" : 880,
+    "weight" : 780
+  }, {
+    "profit" : 835,
+    "weight" : 735
+  }, {
+    "profit" : 424,
+    "weight" : 324
+  }, {
+    "profit" : 148,
+    "weight" : 48
+  }, {
+    "profit" : 524,
+    "weight" : 424
+  }, {
+    "profit" : 787,
+    "weight" : 687
+  }, {
+    "profit" : 452,
+    "weight" : 352
+  }, {
+    "profit" : 682,
+    "weight" : 582
+  }, {
+    "profit" : 729,
+    "weight" : 629
+  }, {
+    "profit" : 533,
+    "weight" : 433
+  }, {
+    "profit" : 672,
+    "weight" : 572
+  }, {
+    "profit" : 630,
+    "weight" : 530
+  }, {
+    "profit" : 1050,
+    "weight" : 950
+  }, {
+    "profit" : 1056,
+    "weight" : 956
+  }, {
+    "profit" : 153,
+    "weight" : 53
+  }, {
+    "profit" : 1039,
+    "weight" : 939
+  }, {
+    "profit" : 796,
+    "weight" : 696
+  }, {
+    "profit" : 524,
+    "weight" : 424
+  }, {
+    "profit" : 487,
+    "weight" : 387
+  }, {
+    "profit" : 393,
+    "weight" : 293
+  }, {
+    "profit" : 207,
+    "weight" : 107
+  }, {
+    "profit" : 812,
+    "weight" : 712
+  }, {
+    "profit" : 678,
+    "weight" : 578
+  }, {
+    "profit" : 150,
+    "weight" : 50
+  }, {
+    "profit" : 849,
+    "weight" : 749
+  }, {
+    "profit" : 496,
+    "weight" : 396
+  }, {
+    "profit" : 634,
+    "weight" : 534
+  }, {
+    "profit" : 267,
+    "weight" : 167
+  }, {
+    "profit" : 1062,
+    "weight" : 962
+  }, {
+    "profit" : 545,
+    "weight" : 445
+  }, {
+    "profit" : 237,
+    "weight" : 137
+  }, {
+    "profit" : 967,
+    "weight" : 867
+  }, {
+    "profit" : 955,
+    "weight" : 855
+  }, {
+    "profit" : 552,
+    "weight" : 452
+  }, {
+    "profit" : 591,
+    "weight" : 491
+  }, {
+    "profit" : 399,
+    "weight" : 299
+  }, {
+    "profit" : 635,
+    "weight" : 535
+  }, {
+    "profit" : 1010,
+    "weight" : 910
+  }, {
+    "profit" : 867,
+    "weight" : 767
+  }, {
+    "profit" : 687,
+    "weight" : 587
+  }, {
+    "profit" : 697,
+    "weight" : 597
+  }, {
+    "profit" : 193,
+    "weight" : 93
+  }, {
+    "profit" : 140,
+    "weight" : 40
+  }, {
+    "profit" : 605,
+    "weight" : 505
+  }, {
+    "profit" : 426,
+    "weight" : 326
+  }, {
+    "profit" : 312,
+    "weight" : 212
+  }, {
+    "profit" : 619,
+    "weight" : 519
+  }, {
+    "profit" : 316,
+    "weight" : 216
+  }, {
+    "profit" : 666,
+    "weight" : 566
+  }, {
+    "profit" : 428,
+    "weight" : 328
+  }, {
+    "profit" : 149,
+    "weight" : 49
+  }, {
+    "profit" : 536,
+    "weight" : 436
+  }, {
+    "profit" : 194,
+    "weight" : 94
+  }, {
+    "profit" : 981,
+    "weight" : 881
+  }, {
+    "profit" : 159,
+    "weight" : 59
+  }, {
+    "profit" : 696,
+    "weight" : 596
+  }, {
+    "profit" : 926,
+    "weight" : 826
+  }, {
+    "profit" : 242,
+    "weight" : 142
+  }, {
+    "profit" : 826,
+    "weight" : 726
+  }, {
+    "profit" : 850,
+    "weight" : 750
+  }, {
+    "profit" : 605,
+    "weight" : 505
+  }, {
+    "profit" : 705,
+    "weight" : 605
+  }, {
+    "profit" : 1036,
+    "weight" : 936
+  }, {
+    "profit" : 851,
+    "weight" : 751
+  }, {
+    "profit" : 342,
+    "weight" : 242
+  }, {
+    "profit" : 250,
+    "weight" : 150
+  }, {
+    "profit" : 540,
+    "weight" : 440
+  }, {
+    "profit" : 803,
+    "weight" : 703
+  }, {
+    "profit" : 103,
+    "weight" : 3
+  }, {
+    "profit" : 869,
+    "weight" : 769
+  }, {
+    "profit" : 1069,
+    "weight" : 969
+  }, {
+    "profit" : 109,
+    "weight" : 9
+  }, {
+    "profit" : 951,
+    "weight" : 851
+  }, {
+    "profit" : 809,
+    "weight" : 709
+  }, {
+    "profit" : 155,
+    "weight" : 55
+  }, {
+    "profit" : 697,
+    "weight" : 597
+  }, {
+    "profit" : 849,
+    "weight" : 749
+  }, {
+    "profit" : 602,
+    "weight" : 502
+  }, {
+    "profit" : 908,
+    "weight" : 808
+  }, {
+    "profit" : 890,
+    "weight" : 790
+  }, {
+    "profit" : 999,
+    "weight" : 899
+  }, {
+    "profit" : 274,
+    "weight" : 174
+  }, {
+    "profit" : 651,
+    "weight" : 551
+  }, {
+    "profit" : 1015,
+    "weight" : 915
+  }, {
+    "profit" : 722,
+    "weight" : 622
+  }, {
+    "profit" : 950,
+    "weight" : 850
+  }, {
+    "profit" : 261,
+    "weight" : 161
+  }, {
+    "profit" : 106,
+    "weight" : 6
+  }, {
+    "profit" : 867,
+    "weight" : 767
+  }, {
+    "profit" : 578,
+    "weight" : 478
+  }, {
+    "profit" : 770,
+    "weight" : 670
+  }, {
+    "profit" : 466,
+    "weight" : 366
+  }, {
+    "profit" : 454,
+    "weight" : 354
+  }, {
+    "profit" : 139,
+    "weight" : 39
+  }, {
+    "profit" : 631,
+    "weight" : 531
+  }, {
+    "profit" : 649,
+    "weight" : 549
+  }, {
+    "profit" : 491,
+    "weight" : 391
+  }, {
+    "profit" : 809,
+    "weight" : 709
+  }, {
+    "profit" : 393,
+    "weight" : 293
+  }, {
+    "profit" : 1077,
+    "weight" : 977
+  }, {
+    "profit" : 1035,
+    "weight" : 935
+  }, {
+    "profit" : 957,
+    "weight" : 857
+  }, {
+    "profit" : 183,
+    "weight" : 83
+  }, {
+    "profit" : 279,
+    "weight" : 179
+  }, {
+    "profit" : 521,
+    "weight" : 421
+  }, {
+    "profit" : 442,
+    "weight" : 342
+  }, {
+    "profit" : 926,
+    "weight" : 826
+  }, {
+    "profit" : 832,
+    "weight" : 732
+  }, {
+    "profit" : 262,
+    "weight" : 162
+  }, {
+    "profit" : 134,
+    "weight" : 34
+  }, {
+    "profit" : 424,
+    "weight" : 324
+  }, {
+    "profit" : 274,
+    "weight" : 174
+  }, {
+    "profit" : 909,
+    "weight" : 809
+  }, {
+    "profit" : 729,
+    "weight" : 629
+  }, {
+    "profit" : 783,
+    "weight" : 683
+  }, {
+    "profit" : 835,
+    "weight" : 735
+  }, {
+    "profit" : 948,
+    "weight" : 848
+  }, {
+    "profit" : 658,
+    "weight" : 558
+  }, {
+    "profit" : 818,
+    "weight" : 718
+  }, {
+    "profit" : 510,
+    "weight" : 410
+  }, {
+    "profit" : 921,
+    "weight" : 821
+  }, {
+    "profit" : 144,
+    "weight" : 44
+  }, {
+    "profit" : 655,
+    "weight" : 555
+  }, {
+    "profit" : 259,
+    "weight" : 159
+  }, {
+    "profit" : 581,
+    "weight" : 481
+  }, {
+    "profit" : 700,
+    "weight" : 600
+  }, {
+    "profit" : 856,
+    "weight" : 756
+  }, {
+    "profit" : 835,
+    "weight" : 735
+  }, {
+    "profit" : 326,
+    "weight" : 226
+  }, {
+    "profit" : 460,
+    "weight" : 360
+  }, {
+    "profit" : 852,
+    "weight" : 752
+  }, {
+    "profit" : 848,
+    "weight" : 748
+  }, {
+    "profit" : 550,
+    "weight" : 450
+  }, {
+    "profit" : 205,
+    "weight" : 105
+  }, {
+    "profit" : 1038,
+    "weight" : 938
+  }, {
+    "profit" : 467,
+    "weight" : 367
+  }, {
+    "profit" : 555,
+    "weight" : 455
+  }, {
+    "profit" : 943,
+    "weight" : 843
+  }, {
+    "profit" : 221,
+    "weight" : 121
+  }, {
+    "profit" : 527,
+    "weight" : 427
+  }, {
+    "profit" : 205,
+    "weight" : 105
+  }, {
+    "profit" : 155,
+    "weight" : 55
+  }, {
+    "profit" : 564,
+    "weight" : 464
+  }, {
+    "profit" : 713,
+    "weight" : 613
+  }, {
+    "profit" : 601,
+    "weight" : 501
+  }, {
+    "profit" : 309,
+    "weight" : 209
+  }, {
+    "profit" : 888,
+    "weight" : 788
+  }, {
+    "profit" : 270,
+    "weight" : 170
+  }, {
+    "profit" : 878,
+    "weight" : 778
+  }, {
+    "profit" : 429,
+    "weight" : 329
+  }, {
+    "profit" : 619,
+    "weight" : 519
+  }, {
+    "profit" : 148,
+    "weight" : 48
+  }, {
+    "profit" : 500,
+    "weight" : 400
+  }, {
+    "profit" : 568,
+    "weight" : 468
+  }, {
+    "profit" : 891,
+    "weight" : 791
+  }, {
+    "profit" : 802,
+    "weight" : 702
+  }, {
+    "profit" : 748,
+    "weight" : 648
+  }, {
+    "profit" : 727,
+    "weight" : 627
+  }, {
+    "profit" : 727,
+    "weight" : 627
+  }, {
+    "profit" : 490,
+    "weight" : 390
+  }, {
+    "profit" : 751,
+    "weight" : 651
+  }, {
+    "profit" : 937,
+    "weight" : 837
+  }, {
+    "profit" : 1093,
+    "weight" : 993
+  }, {
+    "profit" : 323,
+    "weight" : 223
+  }, {
+    "profit" : 893,
+    "weight" : 793
+  }, {
+    "profit" : 812,
+    "weight" : 712
+  }, {
+    "profit" : 889,
+    "weight" : 789
+  }, {
+    "profit" : 281,
+    "weight" : 181
+  }, {
+    "profit" : 933,
+    "weight" : 833
+  }, {
+    "profit" : 966,
+    "weight" : 866
+  }, {
+    "profit" : 286,
+    "weight" : 186
+  }, {
+    "profit" : 383,
+    "weight" : 283
+  }, {
+    "profit" : 711,
+    "weight" : 611
+  }, {
+    "profit" : 410,
+    "weight" : 310
+  } ]
+}

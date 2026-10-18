@@ -21,7 +21,9 @@ import org.dmorfav.knapsack.core.solver.SolverInfo;
 public final class LegacySolvers {
 
     static final String VARIANT = "legacy";
-    static final String AUTHOR = "Daniel Morfa Vega";
+    /** Autor de los tres Harmony Search y de la escalada de primera mejora: firmados como {@code @author geo}. */
+    static final String JORGE_HERRERA_FRANKLIN = "Jorge Herrera Franklin";
+    static final String DANIEL_MORFA_VEGA = "Daniel Morfa Vega";
 
     private LegacySolvers() {
     }
@@ -31,8 +33,8 @@ public final class LegacySolvers {
         private final SolverInfo info;
         private final Function<Knapsack, int[]> algorithm;
 
-        LegacySolver(String family, Function<Knapsack, int[]> algorithm) {
-            this.info = new SolverInfo(family, VARIANT, AUTHOR);
+        LegacySolver(String family, String author, Function<Knapsack, int[]> algorithm) {
+            this.info = new SolverInfo(family, VARIANT, author);
             this.algorithm = algorithm;
         }
 
@@ -50,32 +52,32 @@ public final class LegacySolvers {
 
     public static final class LegacyHarmonySearch extends LegacySolver {
         public LegacyHarmonySearch() {
-            super("harmony-search", knapsack -> new HarmonySearch(knapsack).HarmonySearchAlgorithm());
+            super("harmony-search", JORGE_HERRERA_FRANKLIN, knapsack -> new HarmonySearch(knapsack).HarmonySearchAlgorithm());
         }
     }
 
     public static final class LegacyImprovedHarmonySearch extends LegacySolver {
         public LegacyImprovedHarmonySearch() {
-            super("improved-harmony-search", knapsack -> new ImprovedHarmonySearch(knapsack).HarmonySearchAlgorithm());
+            super("improved-harmony-search", JORGE_HERRERA_FRANKLIN, knapsack -> new ImprovedHarmonySearch(knapsack).HarmonySearchAlgorithm());
         }
     }
 
     public static final class LegacyDiscreteBinaryHarmonySearch extends LegacySolver {
         public LegacyDiscreteBinaryHarmonySearch() {
-            super("discrete-binary-harmony-search",
+            super("discrete-binary-harmony-search", JORGE_HERRERA_FRANKLIN,
                     knapsack -> new DiscreteBinaryHarmonySearch(knapsack).HarmonySearchAlgorithm());
         }
     }
 
     public static final class LegacyHillClimbingFirstAscent extends LegacySolver {
         public LegacyHillClimbingFirstAscent() {
-            super("hill-climbing-first-ascent", knapsack -> new HillClimbingFirstAscent(knapsack).climbTheHill());
+            super("hill-climbing-first-ascent", JORGE_HERRERA_FRANKLIN, knapsack -> new HillClimbingFirstAscent(knapsack).climbTheHill());
         }
     }
 
     public static final class LegacyHillClimbingBestAscent extends LegacySolver {
         public LegacyHillClimbingBestAscent() {
-            super("hill-climbing-best-ascent", knapsack -> new HillClimbingBestAscent(knapsack).climbTheHill());
+            super("hill-climbing-best-ascent", DANIEL_MORFA_VEGA, knapsack -> new HillClimbingBestAscent(knapsack).climbTheHill());
         }
     }
 }

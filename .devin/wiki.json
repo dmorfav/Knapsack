@@ -58,7 +58,7 @@
       "parent": "System Architecture",
       "page_notes": [
         {
-          "content": "Sources of truth: InstanceFiles.java for the format, PisingerGenerator.java and InstanceClass.java for generation. The legacy-* instances come from the original project and use capacity 100. Capacity of generated instances is floor(h * sum(w) / (H + 1)). Declared optima are computed by the optimum and generate commands and verified in CI."
+          "content": "Sources of truth: InstanceFiles.java for the format, PisingerGenerator.java and InstanceClass.java for generation. The legacy-* instances come from the original project and use capacity 100. Capacity of generated instances is floor(h * sum(w) / (H + 1)). Declared optima are computed by the optimum and generate commands and verified in CI. Suites (InstanceSuite and the suite subcommand) define instance sets as a YAML cartesian product of generator parameters; suite --check, run in CI, verifies the folder is exactly the generator output. instances/suite-v1 is the weekly suite: 6 Pisinger classes × n in {50, 200, 1000} × capacity h in {25, 50, 75} of 100, R = 1000, all with exact optima; the canonical description is docs/metodologia/instancias.md."
         }
       ]
     },

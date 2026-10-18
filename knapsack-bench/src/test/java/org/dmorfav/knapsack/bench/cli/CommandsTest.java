@@ -37,7 +37,7 @@ class CommandsTest {
         assertThat(result.out())
                 .contains("Instancia cli: 6 objetos, capacidad 15, óptimo desconocido (cota de Dantzig")
                 .contains("exact/dynamic-programming (baseline)", "greedy/ratio (baseline)", "greedy/ratio-best-item (baseline)")
-                .contains("harmony-search/legacy (Daniel Morfa Vega)")
+                .contains("harmony-search/legacy (Jorge Herrera Franklin)", "hill-climbing-best-ascent/legacy (Daniel Morfa Vega)")
                 .contains("gap ≤");
     }
 
@@ -100,6 +100,63 @@ class CommandsTest {
         assertThat(written.out()).contains("guardado");
         assertThat(checked.exitCode()).isEqualTo(1);
         assertThat(checked.out()).contains("coincide", "DISCREPANCIA, declara 99 y el óptimo es 11");
+    }
+
+    @Test
+    void suiteGeneratesTheCartesianProductWithOptimaAndChecksIt() throws IOException {
+        Path suite = writeSuite("pequena", "[uncorrelated, subset-sum]", "[10]", "[25, 75]");
+
+        CliResult generated = CliResult.execute("suite", suite.toString());
+        CliResult checked = CliResult.execute("suite", "--check", suite.toString());
+
+        assertThat(generated.exitCode()).isZero();
+        assertThat(generated.out()).contains("Suite pequena: 4 instancias generadas");
+        Path file = suite.resolveSibling("subset-sum-n10-r100-h75of100-s3.json");
+        assertThat(InstanceFiles.read(file).knownOptimum()).isPresent();
+        assertThat(checked.exitCode()).isZero();
+        assertThat(checked.out()).contains("4 instancias comprobadas").doesNotContain("problemas");
+    }
+
+    @Test
+    void suiteCheckDetectsEditedMissingAndExtraFiles() throws IOException {
+        Path suite = writeSuite("vigilada", "[uncorrelated]", "[10]", "[25, 75]");
+        CliResult.execute("suite", suite.toString());
+        Path edited = suite.resolveSibling("uncorrelated-n10-r100-h25of100-s3.json");
+        Instance original = InstanceFiles.read(edited);
+        InstanceFiles.write(original.withKnownOptimum(original.knownOptimum().getAsLong() + 1), edited);
+        Files.delete(suite.resolveSibling("uncorrelated-n10-r100-h75of100-s3.json"));
+        Files.writeString(suite.resolveSibling("intrusa.json"), "{}");
+
+        CliResult checked = CliResult.execute("suite", "--check", suite.toString());
+
+        assertThat(checked.exitCode()).isEqualTo(1);
+        assertThat(checked.out()).contains("uncorrelated-n10-r100-h25of100-s3.json: no coincide con la salida del generador",
+                "uncorrelated-n10-r100-h75of100-s3.json: falta el fichero", "intrusa.json: sobra", "3 problemas");
+    }
+
+    @Test
+    void suiteRequiresAnOptimumForEveryInstance() throws IOException {
+        Path suite = writeSuite("sin-optimo", "[uncorrelated-similar-weights]", "[200]", "[50]");
+
+        CliResult result = CliResult.execute("suite", suite.toString());
+
+        assertThat(result.exitCode()).isEqualTo(1);
+        assertThat(result.out()).contains("sin óptimo calculable");
+    }
+
+    private Path writeSuite(String name, String classes, String items, String instanceNumbers) throws IOException {
+        Path directory = Files.createDirectories(tempDir.resolve(name));
+        Path suite = directory.resolve("suite.yaml");
+        Files.writeString(suite, """
+                name: %s
+                classes: %s
+                items: %s
+                range: 100
+                instanceNumbers: %s
+                series: 100
+                seeds: [3]
+                """.formatted(name, classes, items, instanceNumbers));
+        return suite;
     }
 
     @Test

@@ -23,6 +23,7 @@ Los subcomandos se pasan con `-Dexec.args="..."`, por ejemplo `./mvnw -q compile
 | `summarize` | Regenera el resumen y la comparación estadística de una carpeta de resultados | `summarize results/smoke/20260916-180840` |
 | `report` | Genera las páginas de resultados de esta web a partir de `results/` | `report --results=results --output=docs/resultados` |
 | `generate` | Genera una [instancia](../metodologia/instancias.md) de Pisinger y calcula su óptimo | `generate --class=strongly-correlated --items=200 --range=1000 --seed=3` |
+| `suite` | Genera o comprueba (`--check`) las instancias de una [suite](../metodologia/instancias.md#suites) | `suite --check instances/suite-v1/suite.yaml` |
 | `optimum` | Calcula el óptimo exacto de instancias existentes y lo contrasta con el declarado | `optimum --write instances/legacy-20.json` |
 
 ## Documentación en local

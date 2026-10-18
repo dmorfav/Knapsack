@@ -94,7 +94,8 @@ Las pruebas están validadas contra scipy en los tests.
 ## Limitaciones
 
 !!! warning "Léelo antes de sacar conclusiones"
-    - **Pocas instancias dan poca potencia.** Con 8 instancias y 28 pares, ningún par puede salir significativo tras Holm aunque las diferencias sean claras. Las conclusiones necesitan más instancias.
+    - **La potencia depende del número de instancias.** Con las 8 del experimento `smoke` y 28 pares, ningún par puede salir significativo tras Holm aunque las diferencias sean claras: úsalo solo para comprobar que todo funciona. Las conclusiones salen del experimento semanal sobre la [suite v1](instancias.md#suite-v1), con 54 instancias.
+    - **Las conclusiones valen para la suite.** Instancias de Pisinger con $R = 1000$ y hasta 1000 objetos: no se extrapolan a instancias más grandes ni a otras familias.
     - **Los tiempos dependen de la máquina.** Solo son comparables dentro de una misma ejecución. Los runners de GitHub Actions son compartidos y cambian de CPU, así que la medida principal de esfuerzo son las evaluaciones.
     - **Las evaluaciones se pueden eludir.** Un algoritmo puede leer pesos y beneficios y sumar por su cuenta sin llamar a `evaluate`. El contador mide lo que declara el algoritmo, no lo que hace.
     - **Los algoritmos `legacy` no son reproducibles**, porque ignoran la semilla. Además cuentan evaluaciones de otra forma: ver [Añadir un algoritmo](../guia/anadir-un-algoritmo.md#algoritmos-originales).

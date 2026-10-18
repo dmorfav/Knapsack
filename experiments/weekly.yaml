@@ -1,10 +1,9 @@
-# Ejecución semanal en GitHub Actions. Cambiar las instancias cambia el "conjunto de instancias" y rompe la
-# comparabilidad de la evolución: hazlo de forma deliberada.
+# Ejecución semanal en GitHub Actions sobre la suite v1 (instances/suite-v1/suite.yaml). Cambiar las instancias
+# cambia el "conjunto de instancias" y rompe la comparabilidad de la evolución: hazlo de forma deliberada.
 name: weekly
-description: Ejecución semanal de todos los solvers registrados sobre las instancias del repositorio.
+description: Ejecución semanal de todos los solvers registrados sobre la suite v1 (54 instancias de Pisinger con óptimo).
 instances:
-  - instances/legacy-20.json
-  - instances/pisinger/*.json
+  - instances/suite-v1/*.json
 solvers:
   - "*"
 runs: 30

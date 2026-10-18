@@ -1,0 +1,17 @@
+# Suite v1: diseño factorial completo sobre las clases de Pisinger (2005) con óptimo exacto calculable.
+# Los .json de esta carpeta son la salida de `suite instances/suite-v1/suite.yaml` y el CI lo comprueba con --check.
+# Cambiar esta definición crea otra suite: los resultados dejan de ser comparables con los anteriores.
+name: v1
+description: 6 clases de Pisinger × 3 tamaños × 3 capacidades (25 %, 50 % y 75 % del peso total), R = 1000.
+classes:
+  - uncorrelated
+  - weakly-correlated
+  - strongly-correlated
+  - inverse-strongly-correlated
+  - almost-strongly-correlated
+  - subset-sum
+items: [50, 200, 1000]
+range: 1000
+instanceNumbers: [25, 50, 75]
+series: 100
+seeds: [1]
