@@ -27,3 +27,9 @@ La formulación es sencilla, pero resolverlo no lo es. Por eso es un buen terren
 - [Añadir un algoritmo](guia/anadir-un-algoritmo.md)
 - [Cómo se mide](metodologia/experimentos.md)
 - [Arquitectura](arquitectura.md)
+
+## Licencia y cita
+
+El código se distribuye bajo la [GNU GPL v3 o posterior](https://github.com/dmorfav/Knapsack/blob/main/LICENSE): puedes usarlo, modificarlo y redistribuirlo, siempre que lo que distribuyas a partir de él mantenga la misma licencia y su código fuente.
+
+Si usas el banco de pruebas o sus resultados en un trabajo académico, cítalo con los metadatos de [`CITATION.cff`](https://github.com/dmorfav/Knapsack/blob/main/CITATION.cff). GitHub los ofrece en BibTeX y APA con el botón *Cite this repository*.

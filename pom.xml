@@ -11,6 +11,13 @@
     <name>Knapsack</name>
     <url>https://github.com/dmorfav/Knapsack</url>
 
+    <licenses>
+        <license>
+            <name>GPL-3.0-or-later</name>
+            <url>https://www.gnu.org/licenses/gpl-3.0.html</url>
+        </license>
+    </licenses>
+
     <modules>
         <module>knapsack-core</module>
         <module>knapsack-algorithms</module>

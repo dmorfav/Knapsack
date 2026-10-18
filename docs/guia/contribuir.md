@@ -11,6 +11,8 @@ Knapsack acepta algoritmos de otras personas con una condición: que los escriba
 
 Los cambios de ecosistema (core, baselines, bench, instancias, CI o documentación) van en PRs aparte.
 
+Toda contribución se publica bajo la [licencia del proyecto](../index.md#licencia-y-cita), la GNU GPL v3 o posterior: enviar una PR implica aceptarlo.
+
 ## Qué se comprueba automáticamente
 
 | Comprobación | Dónde | Qué garantiza |

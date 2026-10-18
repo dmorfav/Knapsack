@@ -42,3 +42,5 @@ Requiere **Java 25**. Desde la raíz del repositorio:
 | `knapsack-bench` | Línea de comandos, experimentos, estadística e informes | Ecosistema |
 
 Todo lo demás, desde cómo añadir un algoritmo hasta cómo se mide y qué limitaciones tienen las métricas, está en la [documentación](https://dmorfav.github.io/Knapsack/).
+
+Licencia: [GNU GPL v3 o posterior](LICENSE). Para citarlo, usa [`CITATION.cff`](CITATION.cff).
