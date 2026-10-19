@@ -1,0 +1,532 @@
+{
+  "experiment" : "weekly",
+  "description" : "Ejecución semanal de todos los solvers registrados sobre la suite v1 (54 instancias de Pisinger con óptimo).",
+  "startedAt" : "2026-10-19T08:38:36Z",
+  "finishedAt" : "2026-10-19T08:46:24Z",
+  "runs" : 30,
+  "firstSeed" : 1,
+  "warmupRuns" : 2,
+  "maxEvaluations" : 50000,
+  "maxSeconds" : 10,
+  "runOrder" : "barajado con semilla 1",
+  "execution" : "un proceso por solver; límite duro: presupuesto de tiempo + 5 s",
+  "totalRuns" : 12960,
+  "instances" : [ {
+    "name" : "almost-strongly-correlated-n1000-r1000-h25of100-s1",
+    "file" : "instances/suite-v1/almost-strongly-correlated-n1000-r1000-h25of100-s1.json",
+    "sha256" : "651957ce8c612d128d4aeea7e203a2561ae22f3468f978a1f3c1503418c2255b",
+    "items" : 1000,
+    "capacity" : 128820,
+    "reference" : 177316,
+    "referenceKind" : "OPTIMUM"
+  }, {
+    "name" : "almost-strongly-correlated-n1000-r1000-h50of100-s1",
+    "file" : "instances/suite-v1/almost-strongly-correlated-n1000-r1000-h50of100-s1.json",
+    "sha256" : "425b4684feb665f2d16d58ecc3aa55fb021379f0bb8313aeaa7e05f313ee3014",
+    "items" : 1000,
+    "capacity" : 257641,
+    "reference" : 327165,
+    "referenceKind" : "OPTIMUM"
+  }, {
+    "name" : "almost-strongly-correlated-n1000-r1000-h75of100-s1",
+    "file" : "instances/suite-v1/almost-strongly-correlated-n1000-r1000-h75of100-s1.json",
+    "sha256" : "e74ffab61b9d50dcf76221662dcd0d49dcc5ed7c696bdac7e67800c3f970fffd",
+    "items" : 1000,
+    "capacity" : 386462,
+    "reference" : 472189,
+    "referenceKind" : "OPTIMUM"
+  }, {
+    "name" : "almost-strongly-correlated-n200-r1000-h25of100-s1",
+    "file" : "instances/suite-v1/almost-strongly-correlated-n200-r1000-h25of100-s1.json",
+    "sha256" : "b549d9621d59e0d63c99184428acb959c5a34f4ef5a13bf139ab9fe7eb2125a2",
+    "items" : 200,
+    "capacity" : 25292,
+    "reference" : 34824,
+    "referenceKind" : "OPTIMUM"
+  }, {
+    "name" : "almost-strongly-correlated-n200-r1000-h50of100-s1",
+    "file" : "instances/suite-v1/almost-strongly-correlated-n200-r1000-h50of100-s1.json",
+    "sha256" : "5c610e95b7adfc2ac9b72cc1ef0bd1dfa6bc79e52873243366a4b66e7dab17b6",
+    "items" : 200,
+    "capacity" : 50585,
+    "reference" : 64435,
+    "referenceKind" : "OPTIMUM"
+  }, {
+    "name" : "almost-strongly-correlated-n200-r1000-h75of100-s1",
+    "file" : "instances/suite-v1/almost-strongly-correlated-n200-r1000-h75of100-s1.json",
+    "sha256" : "f5565a2910eb2f3c7a88569acd4a14bc8200966ad9114dd9c4d703ba1cee1a8d",
+    "items" : 200,
+    "capacity" : 75878,
+    "reference" : 93021,
+    "referenceKind" : "OPTIMUM"
+  }, {
+    "name" : "almost-strongly-correlated-n50-r1000-h25of100-s1",
+    "file" : "instances/suite-v1/almost-strongly-correlated-n50-r1000-h25of100-s1.json",
+    "sha256" : "775e238030d0b70250487d4961d71e0d3d327af0b1945854c1ebaf07e5c4fb63",
+    "items" : 50,
+    "capacity" : 6081,
+    "reference" : 8385,
+    "referenceKind" : "OPTIMUM"
+  }, {
+    "name" : "almost-strongly-correlated-n50-r1000-h50of100-s1",
+    "file" : "instances/suite-v1/almost-strongly-correlated-n50-r1000-h50of100-s1.json",
+    "sha256" : "698888e5ac3987e59456dfc86801c16362c05a250b4574d42b56359e6d73abb5",
+    "items" : 50,
+    "capacity" : 12162,
+    "reference" : 15570,
+    "referenceKind" : "OPTIMUM"
+  }, {
+    "name" : "almost-strongly-correlated-n50-r1000-h75of100-s1",
+    "file" : "instances/suite-v1/almost-strongly-correlated-n50-r1000-h75of100-s1.json",
+    "sha256" : "bf95f1becbe287b08204a9d3ff1d8b96a25bcc1ea7d83b28bf1caa3a7edb8d3a",
+    "items" : 50,
+    "capacity" : 18244,
+    "reference" : 22540,
+    "referenceKind" : "OPTIMUM"
+  }, {
+    "name" : "inverse-strongly-correlated-n1000-r1000-h25of100-s1",
+    "file" : "instances/suite-v1/inverse-strongly-correlated-n1000-r1000-h25of100-s1.json",
+    "sha256" : "f3c6ff20fcb82bde8baf205f3b8665841be8404d7f45d7a50868477b056d962a",
+    "items" : 1000,
+    "capacity" : 149990,
+    "reference" : 135190,
+    "referenceKind" : "OPTIMUM"
+  }, {
+    "name" : "inverse-strongly-correlated-n1000-r1000-h50of100-s1",
+    "file" : "instances/suite-v1/inverse-strongly-correlated-n1000-r1000-h50of100-s1.json",
+    "sha256" : "c1964ff0f769eeb697bc2a214ed9817b8cf84a56bc77e829f61d5a470b3d7157",
+    "items" : 1000,
+    "capacity" : 299981,
+    "reference" : 267881,
+    "referenceKind" : "OPTIMUM"
+  }, {
+    "name" : "inverse-strongly-correlated-n1000-r1000-h75of100-s1",
+    "file" : "instances/suite-v1/inverse-strongly-correlated-n1000-r1000-h75of100-s1.json",
+    "sha256" : "ea17daf29710a215a58d22546def62aa51107e6407985a7ca1dc679f481418d7",
+    "items" : 1000,
+    "capacity" : 449972,
+    "reference" : 395572,
+    "referenceKind" : "OPTIMUM"
+  }, {
+    "name" : "inverse-strongly-correlated-n200-r1000-h25of100-s1",
+    "file" : "instances/suite-v1/inverse-strongly-correlated-n200-r1000-h25of100-s1.json",
+    "sha256" : "2caabc2b4e8e1d7b312b3bb7e31014b7e24d59b6c3828f371a8c4e1869d983db",
+    "items" : 200,
+    "capacity" : 30062,
+    "reference" : 26962,
+    "referenceKind" : "OPTIMUM"
+  }, {
+    "name" : "inverse-strongly-correlated-n200-r1000-h50of100-s1",
+    "file" : "instances/suite-v1/inverse-strongly-correlated-n200-r1000-h50of100-s1.json",
+    "sha256" : "4d7fa4ae25a31ff32ce57ff01226f7a37050d30ab7fcc074f58ee38446fb2147",
+    "items" : 200,
+    "capacity" : 60124,
+    "reference" : 53424,
+    "referenceKind" : "OPTIMUM"
+  }, {
+    "name" : "inverse-strongly-correlated-n200-r1000-h75of100-s1",
+    "file" : "instances/suite-v1/inverse-strongly-correlated-n200-r1000-h75of100-s1.json",
+    "sha256" : "0c9f9ac87f914af07ac1dfc4062a7c2926ed68345112d8560473e87d16bcc297",
+    "items" : 200,
+    "capacity" : 90187,
+    "reference" : 79077,
+    "referenceKind" : "OPTIMUM"
+  }, {
+    "name" : "inverse-strongly-correlated-n50-r1000-h25of100-s1",
+    "file" : "instances/suite-v1/inverse-strongly-correlated-n50-r1000-h25of100-s1.json",
+    "sha256" : "208f79b57b30b79375e242808395f7b3091e0222da11f94bb9cd53f5ab7abe63",
+    "items" : 50,
+    "capacity" : 7423,
+    "reference" : 6623,
+    "referenceKind" : "OPTIMUM"
+  }, {
+    "name" : "inverse-strongly-correlated-n50-r1000-h50of100-s1",
+    "file" : "instances/suite-v1/inverse-strongly-correlated-n50-r1000-h50of100-s1.json",
+    "sha256" : "e97cfff0511f72c9a020f911431c1b4f224b7feee647e268819d33388d7af493",
+    "items" : 50,
+    "capacity" : 14847,
+    "reference" : 13047,
+    "referenceKind" : "OPTIMUM"
+  }, {
+    "name" : "inverse-strongly-correlated-n50-r1000-h75of100-s1",
+    "file" : "instances/suite-v1/inverse-strongly-correlated-n50-r1000-h75of100-s1.json",
+    "sha256" : "d9da483a2215df8b6d8c6645f583266cb1f228e53051a7e50b6485f526e33144",
+    "items" : 50,
+    "capacity" : 22270,
+    "reference" : 19270,
+    "referenceKind" : "OPTIMUM"
+  }, {
+    "name" : "strongly-correlated-n1000-r1000-h25of100-s1",
+    "file" : "instances/suite-v1/strongly-correlated-n1000-r1000-h25of100-s1.json",
+    "sha256" : "dec573f3121e463e89389d5a6f140e2a5715013861169b19b440294c9078fbeb",
+    "items" : 1000,
+    "capacity" : 125238,
+    "reference" : 173938,
+    "referenceKind" : "OPTIMUM"
+  }, {
+    "name" : "strongly-correlated-n1000-r1000-h50of100-s1",
+    "file" : "instances/suite-v1/strongly-correlated-n1000-r1000-h50of100-s1.json",
+    "sha256" : "871fd89c629530ed2ee750356011dc5169fa9bab8f19b36182fec5ce0e4a61a5",
+    "items" : 1000,
+    "capacity" : 250476,
+    "reference" : 320176,
+    "referenceKind" : "OPTIMUM"
+  }, {
+    "name" : "strongly-correlated-n1000-r1000-h75of100-s1",
+    "file" : "instances/suite-v1/strongly-correlated-n1000-r1000-h75of100-s1.json",
+    "sha256" : "2b02a3ca4858c42e9d5404133f93f55e4c0c69091cb0e9cb3b5be379e5c461f6",
+    "items" : 1000,
+    "capacity" : 375715,
+    "reference" : 461515,
+    "referenceKind" : "OPTIMUM"
+  }, {
+    "name" : "strongly-correlated-n200-r1000-h25of100-s1",
+    "file" : "instances/suite-v1/strongly-correlated-n200-r1000-h25of100-s1.json",
+    "sha256" : "fb694e0a20107f1046c5e0ca2bd62f9d6e4c2ccc8d8c7bd1cc701b074d1e6a47",
+    "items" : 200,
+    "capacity" : 25111,
+    "reference" : 34511,
+    "referenceKind" : "OPTIMUM"
+  }, {
+    "name" : "strongly-correlated-n200-r1000-h50of100-s1",
+    "file" : "instances/suite-v1/strongly-correlated-n200-r1000-h50of100-s1.json",
+    "sha256" : "8f79c32dccc7df4901c5db3e3c678407b326fcef50a58df9c0166c50c336c5a0",
+    "items" : 200,
+    "capacity" : 50223,
+    "reference" : 63923,
+    "referenceKind" : "OPTIMUM"
+  }, {
+    "name" : "strongly-correlated-n200-r1000-h75of100-s1",
+    "file" : "instances/suite-v1/strongly-correlated-n200-r1000-h75of100-s1.json",
+    "sha256" : "26b7c2b96563cb082530a4278472c3feee0d18f803d333f23e9805b845b8fdab",
+    "items" : 200,
+    "capacity" : 75335,
+    "reference" : 92335,
+    "referenceKind" : "OPTIMUM"
+  }, {
+    "name" : "strongly-correlated-n50-r1000-h25of100-s1",
+    "file" : "instances/suite-v1/strongly-correlated-n50-r1000-h25of100-s1.json",
+    "sha256" : "0fa3ca6d934d77a9d6bd4f550ba613bcd876f44d4d7a31e3537d5c4a15d52de4",
+    "items" : 50,
+    "capacity" : 6185,
+    "reference" : 8285,
+    "referenceKind" : "OPTIMUM"
+  }, {
+    "name" : "strongly-correlated-n50-r1000-h50of100-s1",
+    "file" : "instances/suite-v1/strongly-correlated-n50-r1000-h50of100-s1.json",
+    "sha256" : "422146f6bf4d1a685f3020c7c0900c8a03e60f12463ca428a539f4d3d9b41415",
+    "items" : 50,
+    "capacity" : 12371,
+    "reference" : 15671,
+    "referenceKind" : "OPTIMUM"
+  }, {
+    "name" : "strongly-correlated-n50-r1000-h75of100-s1",
+    "file" : "instances/suite-v1/strongly-correlated-n50-r1000-h75of100-s1.json",
+    "sha256" : "d8c13b9e5aaae23778c64787ccea38cc636e77d6bdbcdb19b4f401ac377d847d",
+    "items" : 50,
+    "capacity" : 18557,
+    "reference" : 22757,
+    "referenceKind" : "OPTIMUM"
+  }, {
+    "name" : "subset-sum-n1000-r1000-h25of100-s1",
+    "file" : "instances/suite-v1/subset-sum-n1000-r1000-h25of100-s1.json",
+    "sha256" : "42efce56125ec46e799ffd25aa51b52f11fcc26a2146eab5bfd07ce5ee2c6bbc",
+    "items" : 1000,
+    "capacity" : 125238,
+    "reference" : 125238,
+    "referenceKind" : "OPTIMUM"
+  }, {
+    "name" : "subset-sum-n1000-r1000-h50of100-s1",
+    "file" : "instances/suite-v1/subset-sum-n1000-r1000-h50of100-s1.json",
+    "sha256" : "54fb52811894f72cb6a4ace19f1f4d3fc4377986a3e8c56acea524db519fee43",
+    "items" : 1000,
+    "capacity" : 250476,
+    "reference" : 250476,
+    "referenceKind" : "OPTIMUM"
+  }, {
+    "name" : "subset-sum-n1000-r1000-h75of100-s1",
+    "file" : "instances/suite-v1/subset-sum-n1000-r1000-h75of100-s1.json",
+    "sha256" : "17c6e2816e2887d2a47d600076aa2ead1b1f2a2bdcf21a5fedc97c4d884fe14f",
+    "items" : 1000,
+    "capacity" : 375715,
+    "reference" : 375715,
+    "referenceKind" : "OPTIMUM"
+  }, {
+    "name" : "subset-sum-n200-r1000-h25of100-s1",
+    "file" : "instances/suite-v1/subset-sum-n200-r1000-h25of100-s1.json",
+    "sha256" : "9657f842d001a6998962b95d7937d2ce92fd70014d8c87c686d2e7dd6b9761c7",
+    "items" : 200,
+    "capacity" : 25111,
+    "reference" : 25111,
+    "referenceKind" : "OPTIMUM"
+  }, {
+    "name" : "subset-sum-n200-r1000-h50of100-s1",
+    "file" : "instances/suite-v1/subset-sum-n200-r1000-h50of100-s1.json",
+    "sha256" : "21c00682a3c18d1f1cb227eccd7283c396663982551dbfd7def07b2fbbb80f9b",
+    "items" : 200,
+    "capacity" : 50223,
+    "reference" : 50223,
+    "referenceKind" : "OPTIMUM"
+  }, {
+    "name" : "subset-sum-n200-r1000-h75of100-s1",
+    "file" : "instances/suite-v1/subset-sum-n200-r1000-h75of100-s1.json",
+    "sha256" : "63292f3e27444041ef5da4d713ad84498ede51ce57fe7f96f14fce70f6def7d4",
+    "items" : 200,
+    "capacity" : 75335,
+    "reference" : 75335,
+    "referenceKind" : "OPTIMUM"
+  }, {
+    "name" : "subset-sum-n50-r1000-h25of100-s1",
+    "file" : "instances/suite-v1/subset-sum-n50-r1000-h25of100-s1.json",
+    "sha256" : "fa8ab0bd72489e773edde2420362152bf3b583111c3dfdc73b3fbece0bab1f7b",
+    "items" : 50,
+    "capacity" : 6185,
+    "reference" : 6185,
+    "referenceKind" : "OPTIMUM"
+  }, {
+    "name" : "subset-sum-n50-r1000-h50of100-s1",
+    "file" : "instances/suite-v1/subset-sum-n50-r1000-h50of100-s1.json",
+    "sha256" : "4ab3521f31548749e4491f42694e0a1434f6a80ef5c9eea66e471f30c7160ad5",
+    "items" : 50,
+    "capacity" : 12371,
+    "reference" : 12371,
+    "referenceKind" : "OPTIMUM"
+  }, {
+    "name" : "subset-sum-n50-r1000-h75of100-s1",
+    "file" : "instances/suite-v1/subset-sum-n50-r1000-h75of100-s1.json",
+    "sha256" : "6c3ea71f4dc549d41195c49acf3c11a3533409242dd3aec85942c065d99eab28",
+    "items" : 50,
+    "capacity" : 18557,
+    "reference" : 18557,
+    "referenceKind" : "OPTIMUM"
+  }, {
+    "name" : "uncorrelated-n1000-r1000-h25of100-s1",
+    "file" : "instances/suite-v1/uncorrelated-n1000-r1000-h25of100-s1.json",
+    "sha256" : "e0e00ce2255471dcbbbbfe7a449cc01effbfb7325af40b8ea1060fbb6c06ff0c",
+    "items" : 1000,
+    "capacity" : 128820,
+    "reference" : 282852,
+    "referenceKind" : "OPTIMUM"
+  }, {
+    "name" : "uncorrelated-n1000-r1000-h50of100-s1",
+    "file" : "instances/suite-v1/uncorrelated-n1000-r1000-h50of100-s1.json",
+    "sha256" : "dae172b361a7a401884d16ce937ca0945f5d741a903530fae4c2a40a72273a50",
+    "items" : 1000,
+    "capacity" : 257641,
+    "reference" : 402019,
+    "referenceKind" : "OPTIMUM"
+  }, {
+    "name" : "uncorrelated-n1000-r1000-h75of100-s1",
+    "file" : "instances/suite-v1/uncorrelated-n1000-r1000-h75of100-s1.json",
+    "sha256" : "15d9a64fdf4a3d847538becf22d34ddaa6ab8d8b049f1b9f8c0e4cc8177c5e79",
+    "items" : 1000,
+    "capacity" : 386462,
+    "reference" : 469370,
+    "referenceKind" : "OPTIMUM"
+  }, {
+    "name" : "uncorrelated-n200-r1000-h25of100-s1",
+    "file" : "instances/suite-v1/uncorrelated-n200-r1000-h25of100-s1.json",
+    "sha256" : "59e3de302dd0b636e94a14373d30b9cf123086fc5e2ca36fb673ce55905bd6c8",
+    "items" : 200,
+    "capacity" : 25292,
+    "reference" : 54126,
+    "referenceKind" : "OPTIMUM"
+  }, {
+    "name" : "uncorrelated-n200-r1000-h50of100-s1",
+    "file" : "instances/suite-v1/uncorrelated-n200-r1000-h50of100-s1.json",
+    "sha256" : "16847534b55b82b18c0361ebd1a6912d900f48a5168c773383c14bef48fd3ec3",
+    "items" : 200,
+    "capacity" : 50585,
+    "reference" : 76358,
+    "referenceKind" : "OPTIMUM"
+  }, {
+    "name" : "uncorrelated-n200-r1000-h75of100-s1",
+    "file" : "instances/suite-v1/uncorrelated-n200-r1000-h75of100-s1.json",
+    "sha256" : "36aef547678160209d3c32ccdd0faab47d93cb48ee0ca38536dacff4188aec8a",
+    "items" : 200,
+    "capacity" : 75878,
+    "reference" : 89172,
+    "referenceKind" : "OPTIMUM"
+  }, {
+    "name" : "uncorrelated-n50-r1000-h25of100-s1",
+    "file" : "instances/suite-v1/uncorrelated-n50-r1000-h25of100-s1.json",
+    "sha256" : "c6b4ed6ea7deb3aff13a711c48599bfb95cc3c734a6b18250b8fa58ed82c1b89",
+    "items" : 50,
+    "capacity" : 6081,
+    "reference" : 14690,
+    "referenceKind" : "OPTIMUM"
+  }, {
+    "name" : "uncorrelated-n50-r1000-h50of100-s1",
+    "file" : "instances/suite-v1/uncorrelated-n50-r1000-h50of100-s1.json",
+    "sha256" : "f1c070064ac781b2c8f7661ae788609c07bed8e1eb62cceda7a5d269b4aae444",
+    "items" : 50,
+    "capacity" : 12162,
+    "reference" : 19915,
+    "referenceKind" : "OPTIMUM"
+  }, {
+    "name" : "uncorrelated-n50-r1000-h75of100-s1",
+    "file" : "instances/suite-v1/uncorrelated-n50-r1000-h75of100-s1.json",
+    "sha256" : "12c51b8d0fcf9462e50d0b6781f6dfe5032ee5b671e4f370d39fa6a7ec277fa0",
+    "items" : 50,
+    "capacity" : 18244,
+    "reference" : 23551,
+    "referenceKind" : "OPTIMUM"
+  }, {
+    "name" : "weakly-correlated-n1000-r1000-h25of100-s1",
+    "file" : "instances/suite-v1/weakly-correlated-n1000-r1000-h25of100-s1.json",
+    "sha256" : "8ce0faf5d1e41be64e06af5ade004f531940a694608279c5c40a1fdf62824e84",
+    "items" : 1000,
+    "capacity" : 128820,
+    "reference" : 150569,
+    "referenceKind" : "OPTIMUM"
+  }, {
+    "name" : "weakly-correlated-n1000-r1000-h50of100-s1",
+    "file" : "instances/suite-v1/weakly-correlated-n1000-r1000-h50of100-s1.json",
+    "sha256" : "ea9e98dd566b941e2a976f2b9c06a2301fca211ec0f6dbbb714694e35eb79d68",
+    "items" : 1000,
+    "capacity" : 257641,
+    "reference" : 284888,
+    "referenceKind" : "OPTIMUM"
+  }, {
+    "name" : "weakly-correlated-n1000-r1000-h75of100-s1",
+    "file" : "instances/suite-v1/weakly-correlated-n1000-r1000-h75of100-s1.json",
+    "sha256" : "106d7c55b05aa38621d2ac36547f68be457900bf20fbff7196dac453f79c3bca",
+    "items" : 1000,
+    "capacity" : 386462,
+    "reference" : 409104,
+    "referenceKind" : "OPTIMUM"
+  }, {
+    "name" : "weakly-correlated-n200-r1000-h25of100-s1",
+    "file" : "instances/suite-v1/weakly-correlated-n200-r1000-h25of100-s1.json",
+    "sha256" : "984f728ab1b67764bf9e96014ea6060a11d7748410148a5fb854d4a8f063cb1f",
+    "items" : 200,
+    "capacity" : 25292,
+    "reference" : 29526,
+    "referenceKind" : "OPTIMUM"
+  }, {
+    "name" : "weakly-correlated-n200-r1000-h50of100-s1",
+    "file" : "instances/suite-v1/weakly-correlated-n200-r1000-h50of100-s1.json",
+    "sha256" : "3bb4d2dd5faa4c1de8063c2a95b8c988fbf0410e752c8ce8f2a69f4028fb0428",
+    "items" : 200,
+    "capacity" : 50585,
+    "reference" : 56025,
+    "referenceKind" : "OPTIMUM"
+  }, {
+    "name" : "weakly-correlated-n200-r1000-h75of100-s1",
+    "file" : "instances/suite-v1/weakly-correlated-n200-r1000-h75of100-s1.json",
+    "sha256" : "c6a6a92b7200658c930028337d8ab769c571de71ef49268da21a7d9bc8ed3be1",
+    "items" : 200,
+    "capacity" : 75878,
+    "reference" : 80271,
+    "referenceKind" : "OPTIMUM"
+  }, {
+    "name" : "weakly-correlated-n50-r1000-h25of100-s1",
+    "file" : "instances/suite-v1/weakly-correlated-n50-r1000-h25of100-s1.json",
+    "sha256" : "1287656aad5e863aeff1ebc23944f526f74761be6c16214820146d35051a64bc",
+    "items" : 50,
+    "capacity" : 6081,
+    "reference" : 7000,
+    "referenceKind" : "OPTIMUM"
+  }, {
+    "name" : "weakly-correlated-n50-r1000-h50of100-s1",
+    "file" : "instances/suite-v1/weakly-correlated-n50-r1000-h50of100-s1.json",
+    "sha256" : "fb5332196bf7b2db49b5245b11e732d0054211e54ed7683163192714b3de4ab7",
+    "items" : 50,
+    "capacity" : 12162,
+    "reference" : 13290,
+    "referenceKind" : "OPTIMUM"
+  }, {
+    "name" : "weakly-correlated-n50-r1000-h75of100-s1",
+    "file" : "instances/suite-v1/weakly-correlated-n50-r1000-h75of100-s1.json",
+    "sha256" : "72f51827f58c59990f893325b4a286f4e3cf4136492d29e49e70b1d1659029da",
+    "items" : 50,
+    "capacity" : 18244,
+    "reference" : 19069,
+    "referenceKind" : "OPTIMUM"
+  } ],
+  "solvers" : [ {
+    "id" : "discrete-binary-harmony-search/legacy",
+    "family" : "discrete-binary-harmony-search",
+    "variant" : "legacy",
+    "author" : "Jorge Herrera Franklin",
+    "codeHash" : "57ca2dc5fc1a9ac7746a8aaf99c12809e79f1708ca28a741ebb662e4c542e073",
+    "sources" : [ "knapsack-algorithms/src/main/java/algorithms/DiscreteBinaryHarmonySearch.java", "knapsack-bench/src/main/java/org/dmorfav/knapsack/bench/legacy/CountingKnapsack.java", "knapsack-bench/src/main/java/org/dmorfav/knapsack/bench/legacy/LegacySolvers.java", "knapsack-core/src/main/java/model/Item.java", "knapsack-core/src/main/java/model/Knapsack.java", "knapsack-core/src/main/java/org/dmorfav/knapsack/core/Evaluation.java", "knapsack-core/src/main/java/org/dmorfav/knapsack/core/Instance.java", "knapsack-core/src/main/java/org/dmorfav/knapsack/core/Item.java", "knapsack-core/src/main/java/org/dmorfav/knapsack/core/Solution.java", "knapsack-core/src/main/java/org/dmorfav/knapsack/core/solver/Budget.java", "knapsack-core/src/main/java/org/dmorfav/knapsack/core/solver/KnapsackSolver.java", "knapsack-core/src/main/java/org/dmorfav/knapsack/core/solver/SolverContext.java", "knapsack-core/src/main/java/org/dmorfav/knapsack/core/solver/SolverInfo.java" ],
+    "gitAuthors" : [ "Daniel Morfa Vega" ],
+    "uncommittedChanges" : false
+  }, {
+    "id" : "exact/dynamic-programming",
+    "family" : "exact",
+    "variant" : "dynamic-programming",
+    "author" : "baseline",
+    "codeHash" : "22c0a2e599ec11f0a185aa5d28e058b24b724e3d59a72ef8d47729f04a9cd9c2",
+    "sources" : [ "knapsack-baselines/src/main/java/org/dmorfav/knapsack/baselines/DynamicProgrammingSolver.java", "knapsack-core/src/main/java/org/dmorfav/knapsack/core/Evaluation.java", "knapsack-core/src/main/java/org/dmorfav/knapsack/core/Instance.java", "knapsack-core/src/main/java/org/dmorfav/knapsack/core/Item.java", "knapsack-core/src/main/java/org/dmorfav/knapsack/core/Solution.java", "knapsack-core/src/main/java/org/dmorfav/knapsack/core/solver/Budget.java", "knapsack-core/src/main/java/org/dmorfav/knapsack/core/solver/BudgetExhaustedException.java", "knapsack-core/src/main/java/org/dmorfav/knapsack/core/solver/KnapsackSolver.java", "knapsack-core/src/main/java/org/dmorfav/knapsack/core/solver/SolverContext.java", "knapsack-core/src/main/java/org/dmorfav/knapsack/core/solver/SolverInfo.java" ],
+    "gitAuthors" : [ "Daniel Morfa Vega" ],
+    "uncommittedChanges" : false
+  }, {
+    "id" : "greedy/ratio",
+    "family" : "greedy",
+    "variant" : "ratio",
+    "author" : "baseline",
+    "codeHash" : "94498bdc4200b3fcead5010a34bcdbddaf44f872525b64746f2a4d5d01330bee",
+    "sources" : [ "knapsack-baselines/src/main/java/org/dmorfav/knapsack/baselines/GreedySolver.java", "knapsack-baselines/src/main/java/org/dmorfav/knapsack/baselines/RatioOrder.java", "knapsack-core/src/main/java/org/dmorfav/knapsack/core/Evaluation.java", "knapsack-core/src/main/java/org/dmorfav/knapsack/core/Instance.java", "knapsack-core/src/main/java/org/dmorfav/knapsack/core/Item.java", "knapsack-core/src/main/java/org/dmorfav/knapsack/core/Solution.java", "knapsack-core/src/main/java/org/dmorfav/knapsack/core/solver/Budget.java", "knapsack-core/src/main/java/org/dmorfav/knapsack/core/solver/KnapsackSolver.java", "knapsack-core/src/main/java/org/dmorfav/knapsack/core/solver/SolverContext.java", "knapsack-core/src/main/java/org/dmorfav/knapsack/core/solver/SolverInfo.java" ],
+    "gitAuthors" : [ "Daniel Morfa Vega" ],
+    "uncommittedChanges" : false
+  }, {
+    "id" : "greedy/ratio-best-item",
+    "family" : "greedy",
+    "variant" : "ratio-best-item",
+    "author" : "baseline",
+    "codeHash" : "8133d093d72f36965016e0422c36bfd3d7dba5437dd659645e5fd7246fde9acc",
+    "sources" : [ "knapsack-baselines/src/main/java/org/dmorfav/knapsack/baselines/GreedyBestItemSolver.java", "knapsack-baselines/src/main/java/org/dmorfav/knapsack/baselines/GreedySolver.java", "knapsack-baselines/src/main/java/org/dmorfav/knapsack/baselines/RatioOrder.java", "knapsack-core/src/main/java/org/dmorfav/knapsack/core/Evaluation.java", "knapsack-core/src/main/java/org/dmorfav/knapsack/core/Instance.java", "knapsack-core/src/main/java/org/dmorfav/knapsack/core/Item.java", "knapsack-core/src/main/java/org/dmorfav/knapsack/core/Solution.java", "knapsack-core/src/main/java/org/dmorfav/knapsack/core/solver/Budget.java", "knapsack-core/src/main/java/org/dmorfav/knapsack/core/solver/KnapsackSolver.java", "knapsack-core/src/main/java/org/dmorfav/knapsack/core/solver/SolverContext.java", "knapsack-core/src/main/java/org/dmorfav/knapsack/core/solver/SolverInfo.java" ],
+    "gitAuthors" : [ "Daniel Morfa Vega" ],
+    "uncommittedChanges" : false
+  }, {
+    "id" : "harmony-search/legacy",
+    "family" : "harmony-search",
+    "variant" : "legacy",
+    "author" : "Jorge Herrera Franklin",
+    "codeHash" : "e21c9708cd4f9740d4a2a122303d98f6a25bfbc2ae245f8d8526dd0ff315f542",
+    "sources" : [ "knapsack-algorithms/src/main/java/algorithms/HarmonySearch.java", "knapsack-bench/src/main/java/org/dmorfav/knapsack/bench/legacy/CountingKnapsack.java", "knapsack-bench/src/main/java/org/dmorfav/knapsack/bench/legacy/LegacySolvers.java", "knapsack-core/src/main/java/model/Item.java", "knapsack-core/src/main/java/model/Knapsack.java", "knapsack-core/src/main/java/org/dmorfav/knapsack/core/Evaluation.java", "knapsack-core/src/main/java/org/dmorfav/knapsack/core/Instance.java", "knapsack-core/src/main/java/org/dmorfav/knapsack/core/Item.java", "knapsack-core/src/main/java/org/dmorfav/knapsack/core/Solution.java", "knapsack-core/src/main/java/org/dmorfav/knapsack/core/solver/Budget.java", "knapsack-core/src/main/java/org/dmorfav/knapsack/core/solver/KnapsackSolver.java", "knapsack-core/src/main/java/org/dmorfav/knapsack/core/solver/SolverContext.java", "knapsack-core/src/main/java/org/dmorfav/knapsack/core/solver/SolverInfo.java" ],
+    "gitAuthors" : [ "Daniel Morfa Vega" ],
+    "uncommittedChanges" : false
+  }, {
+    "id" : "hill-climbing-best-ascent/legacy",
+    "family" : "hill-climbing-best-ascent",
+    "variant" : "legacy",
+    "author" : "Daniel Morfa Vega",
+    "codeHash" : "957f17a5d13a4312a6808dbe6a4b39d3b459afbf5b833c6b838c81d0bdf5d15a",
+    "sources" : [ "knapsack-algorithms/src/main/java/algorithms/HillClimbingBestAscent.java", "knapsack-bench/src/main/java/org/dmorfav/knapsack/bench/legacy/CountingKnapsack.java", "knapsack-bench/src/main/java/org/dmorfav/knapsack/bench/legacy/LegacySolvers.java", "knapsack-core/src/main/java/model/Item.java", "knapsack-core/src/main/java/model/Knapsack.java", "knapsack-core/src/main/java/org/dmorfav/knapsack/core/Evaluation.java", "knapsack-core/src/main/java/org/dmorfav/knapsack/core/Instance.java", "knapsack-core/src/main/java/org/dmorfav/knapsack/core/Item.java", "knapsack-core/src/main/java/org/dmorfav/knapsack/core/Solution.java", "knapsack-core/src/main/java/org/dmorfav/knapsack/core/solver/Budget.java", "knapsack-core/src/main/java/org/dmorfav/knapsack/core/solver/KnapsackSolver.java", "knapsack-core/src/main/java/org/dmorfav/knapsack/core/solver/SolverContext.java", "knapsack-core/src/main/java/org/dmorfav/knapsack/core/solver/SolverInfo.java" ],
+    "gitAuthors" : [ "Daniel Morfa Vega" ],
+    "uncommittedChanges" : false
+  }, {
+    "id" : "hill-climbing-first-ascent/legacy",
+    "family" : "hill-climbing-first-ascent",
+    "variant" : "legacy",
+    "author" : "Jorge Herrera Franklin",
+    "codeHash" : "ac530ff5eddcc8df2ea82e6ca3ff2be424e938b74738f78d1bbc1a383386af41",
+    "sources" : [ "knapsack-algorithms/src/main/java/algorithms/HillClimbingFirstAscent.java", "knapsack-bench/src/main/java/org/dmorfav/knapsack/bench/legacy/CountingKnapsack.java", "knapsack-bench/src/main/java/org/dmorfav/knapsack/bench/legacy/LegacySolvers.java", "knapsack-core/src/main/java/model/Item.java", "knapsack-core/src/main/java/model/Knapsack.java", "knapsack-core/src/main/java/org/dmorfav/knapsack/core/Evaluation.java", "knapsack-core/src/main/java/org/dmorfav/knapsack/core/Instance.java", "knapsack-core/src/main/java/org/dmorfav/knapsack/core/Item.java", "knapsack-core/src/main/java/org/dmorfav/knapsack/core/Solution.java", "knapsack-core/src/main/java/org/dmorfav/knapsack/core/solver/Budget.java", "knapsack-core/src/main/java/org/dmorfav/knapsack/core/solver/KnapsackSolver.java", "knapsack-core/src/main/java/org/dmorfav/knapsack/core/solver/SolverContext.java", "knapsack-core/src/main/java/org/dmorfav/knapsack/core/solver/SolverInfo.java" ],
+    "gitAuthors" : [ "Daniel Morfa Vega" ],
+    "uncommittedChanges" : false
+  }, {
+    "id" : "improved-harmony-search/legacy",
+    "family" : "improved-harmony-search",
+    "variant" : "legacy",
+    "author" : "Jorge Herrera Franklin",
+    "codeHash" : "24bc55f9ae1e830e9883a8a3846a56c2e44be1e07bcfd6530c179a120f50b33e",
+    "sources" : [ "knapsack-algorithms/src/main/java/algorithms/ImprovedHarmonySearch.java", "knapsack-bench/src/main/java/org/dmorfav/knapsack/bench/legacy/CountingKnapsack.java", "knapsack-bench/src/main/java/org/dmorfav/knapsack/bench/legacy/LegacySolvers.java", "knapsack-core/src/main/java/model/Item.java", "knapsack-core/src/main/java/model/Knapsack.java", "knapsack-core/src/main/java/org/dmorfav/knapsack/core/Evaluation.java", "knapsack-core/src/main/java/org/dmorfav/knapsack/core/Instance.java", "knapsack-core/src/main/java/org/dmorfav/knapsack/core/Item.java", "knapsack-core/src/main/java/org/dmorfav/knapsack/core/Solution.java", "knapsack-core/src/main/java/org/dmorfav/knapsack/core/solver/Budget.java", "knapsack-core/src/main/java/org/dmorfav/knapsack/core/solver/KnapsackSolver.java", "knapsack-core/src/main/java/org/dmorfav/knapsack/core/solver/SolverContext.java", "knapsack-core/src/main/java/org/dmorfav/knapsack/core/solver/SolverInfo.java" ],
+    "gitAuthors" : [ "Daniel Morfa Vega" ],
+    "uncommittedChanges" : false
+  } ],
+  "environment" : {
+    "javaVersion" : "25.0.4.1",
+    "javaVendor" : "Eclipse Adoptium",
+    "javaVm" : "OpenJDK 64-Bit Server VM 25.0.4.1+1-LTS",
+    "os" : "Linux 6.17.0-1022-azure",
+    "arch" : "amd64",
+    "availableProcessors" : 4,
+    "maxMemoryBytes" : 4192206848,
+    "cpuModel" : "Intel(R) Xeon(R) 6973P-C",
+    "gitCommit" : "85fe5abb8cfe7411eb3f2d6439ffdd615dac5e57",
+    "gitDirty" : false
+  }
+}
